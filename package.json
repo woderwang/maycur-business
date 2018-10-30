@@ -1,0 +1,20 @@
+{
+  "name": "maycur-web-business",
+  "version": "1.0.0",
+  "description": "maycur businuess react components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "maycur",
+    "business",
+    "react"
+  ],
+  "author": "woder",
+  "license": "MIT",
+  "devDependencies": {
+    "react": "^16.6.0",
+    "webpack": "^4.23.1"
+  }
+}
