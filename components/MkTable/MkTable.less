@@ -1,0 +1,44 @@
+@import '~root/less/variables.less';
+@table-cell-padding: 20px;
+.container {
+    table>thead {
+        th {
+            padding-left: @table-cell-padding;
+            padding-right: @table-cell-padding;
+        }
+    }
+    table>tbody {
+        td {
+            padding-left: @table-cell-padding;
+            padding-right: @table-cell-padding;
+        }
+    }
+    :global {
+        .react-resizable {
+            position: relative;
+        }
+        .react-resizable-handle {
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            bottom: 0;
+            right: -5px;
+            cursor: col-resize;
+        }
+        .mk-table-filter-selected.mkicon-filter-o{
+            color:@maycur-color;
+        }
+    }
+    .data-emtpy{
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        :global{
+            .fm-prompt{
+                font-size: 20px;
+                margin-right:8px;
+            }
+        }
+    }
+}
