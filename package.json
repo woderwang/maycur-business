@@ -4,13 +4,10 @@
   "description": "maycur businuess react components of web",
   "main": "lib/index.js",  
   "module": "es/index.js",
-  "scripts": {
-    "start": "webpack-dev-server",
-    "start:dev": "node tools/start.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel components -d lib --copy-files --delete-dir-on-start && cp -R lib es",
+  "scripts": {    
+    "start": "npx styleguidist server",
     "compile": "node tools/build.js",
-    "guide": "npx styleguidist server"
+    "build": "babel components -d lib --copy-files --delete-dir-on-start && rm -rf es && cp -R lib es"       
   },
   "keywords": [
     "maycur",

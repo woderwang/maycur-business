@@ -21,7 +21,7 @@ let plugins = [
 ]
 
 let config = {
-	entry: ['./index.js'],
+	entry: ['components/index.js'],
 	output: {
 		filename: 'js/bundle.[hash:16].js',		
 		path: path.resolve(rootPath, 'dist')
