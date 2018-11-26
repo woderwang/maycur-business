@@ -50,7 +50,7 @@ class FilterStateBar extends Component {
         if (theFilters && theFilters.length > 0) {
             node = (
                 <div className={styles['bar']}>
-                    <span className={styles['label']}>筛选条件：</span>
+                    <span className={styles['label']}>筛选条件3：</span>
                     <div className={'flex-1'}>
                         <div className={styles['filter-wrapper']}>
                             {theFilters.map((filter) => {

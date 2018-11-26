@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './FuzzFilter.less';
-import { Input, Button } from 'mkui';
+import { Input, Button } from 'maycur-antd';
 class FuzzFilter extends Component {
     constructor(props) {
         super(props);
