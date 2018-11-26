@@ -6,7 +6,6 @@ import { Resizable } from 'react-resizable';
 import _ from 'lodash';
 import { DateFilter, FuzzFilter } from './FilterDropDown';
 import FilterStateBar from './FilterStateBar';
-import styles from './MkTable.less';
 
 /* title 宽度变动 */
 const ResizeableTitle = (props) => {
@@ -190,6 +189,7 @@ let MkTable = (option) => WrapperComponent => {
         generateTable(params) {
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock,loadProps } = this.state;
             const { rowKey, onRow } = params;
+            let prefix = 'mkbs';
             const resizeColumns = columns.map((col, index) => ({
                 ...col,
                 onHeaderCell: column => ({
@@ -209,7 +209,7 @@ let MkTable = (option) => WrapperComponent => {
                 selectedRowKeys: selectedRowKeys,
             };
             return (
-                <div className={styles['container']}>
+                <div className={`${prefix}-mktable-container`}>
                     <Table
                         // bordered
                         rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
@@ -224,7 +224,7 @@ let MkTable = (option) => WrapperComponent => {
                         loading={{...loadProps,spinning:loading}}
                         locale={
                             {
-                                emptyText: () => (<div className={styles['data-emtpy']}>
+                                emptyText: () => (<div className={'data-emtpy'}>
                                     <span className={'fm fm-prompt'}></span>
                                     <span>暂无数据</span>
                                 </div>)

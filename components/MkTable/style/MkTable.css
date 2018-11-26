@@ -22,24 +22,24 @@
   color: #3296FA;
   line-height: 50px;
 }
-.container {
+.mkbs-mktable-container {
   position: relative;
 }
-.container table > thead th {
+.mkbs-mktable-container table > thead th {
   padding-left: 20px;
   padding-right: 20px;
   font-size: 14px !important;
   font-weight: 200 !important;
   color: #000 !important;
 }
-.container table > tbody td {
+.mkbs-mktable-container table > tbody td {
   padding-left: 20px;
   padding-right: 20px;
 }
-.container :global .react-resizable {
+.mkbs-mktable-container .react-resizable {
   position: relative;
 }
-.container :global .react-resizable-handle {
+.mkbs-mktable-container .react-resizable-handle {
   position: absolute;
   width: 10px;
   height: 100%;
@@ -47,31 +47,31 @@
   right: -5px;
   cursor: col-resize;
 }
-.container :global .mk-table-filter-selected.mkicon-filter-o {
+.mkbs-mktable-container .mk-table-filter-selected.mkicon-filter-o {
   color: #1199ff;
 }
-.container :global .ant-table-empty .ant-table-body {
-  overflow-x: hidden!important;
+.mkbs-mktable-container .ant-table-empty .ant-table-body {
+  overflow-x: hidden !important;
 }
-.container :global .ant-spin-nested-loading > div > .ant-spin {
+.mkbs-mktable-container .ant-spin-nested-loading > div > .ant-spin {
   height: 360px;
 }
-.container :global .ant-table-placeholder {
+.mkbs-mktable-container .ant-table-placeholder {
   border-bottom: none;
 }
-.container .data-emtpy {
+.mkbs-mktable-container .data-emtpy {
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.container .data-emtpy :global .fm-prompt {
+.mkbs-mktable-container .data-emtpy .fm-prompt {
   font-size: 20px;
   margin-right: 8px;
 }
-.custom-pop {
+.mkbs-mktable-custom-pop {
   padding: 0;
 }
-.custom-pop :global .ant-popover-arrow {
+.mkbs-mktable-custom-pop .ant-popover-arrow {
   display: none;
 }
