@@ -1,4 +1,4 @@
-### MkTabl
+### MkTable
 >每刻业务table HOC组件
 
 #### props

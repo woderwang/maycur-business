@@ -1,0 +1,57 @@
+@import '../../style/variables.less';
+@orange: #ff5401;
+.@{prefix}-avatar-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.@{prefix}-avatar {
+    flex-shrink: 0;
+    text-align: center;
+    height: 36px;
+    width: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #efefef;
+    color: #fff;
+    font-size: 12px;
+    display: inline-block;
+    &-img{
+        -img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+    }
+    &.c1 {
+        color: @maycur-color;
+    }
+    &.c2 {
+        color: darken(@orange, 10%);
+    }
+    &.c3 {
+        color: @orange;
+    }
+    &.c4 {
+        color: @icon-fee-blue-light3;
+    }
+    &.c5 {
+        color: darken(@icon-fee-green-light1, 10%);
+    }
+    &.c6 {
+        color: darken(@icon-fee-blue-light3, 20%);
+    }
+    &.c7 {
+        color: @icon-fee-green-light1;
+    }
+    &.c8 {
+        color: @icon-fee-orange;
+    }
+    &.c9 {
+        color: darken(@icon-fee-orange, 20%);
+    }
+}
