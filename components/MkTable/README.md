@@ -1,6 +1,6 @@
 ### MkTable
->每刻业务table HOC组件
->代码维护者:刀马
+> 每刻业务table HOC组件
+> 代码维护者:刀马
 
 #### props
 |name|type|description|参数说明|
@@ -29,7 +29,8 @@
 |firstDisplayColumns|array|首次显示的字段dataIndex集合,不传默认全部显示|[]|
 ----------
 #### columns
->扩展antd table中columns
+> 扩展antd table中columns
+
 |name|type|description|default|
 |:--|:--|:--|:--|
 |meanLess|boolean|无意义字段,用户放置动作条等信息|false|

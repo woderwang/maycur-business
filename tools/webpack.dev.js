@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-console.log(__dirname);
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const rootPath = path.resolve(__dirname, '../');
 // let isDevServer = process.env.WEBPACK_SERVE ? true : false;
 let plugins = [
@@ -18,6 +18,9 @@ let plugins = [
 		inject: 'head'
 	}),		
 	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),	
+	new MiniCssExtractPlugin({
+		filename: 'mkbs-style.css',		
+	})
 ]
 
 let config = {
@@ -42,9 +45,10 @@ let config = {
 			{
 				test: /\.less$/,
 				use: [		
-					{
-						loader: 'style-loader'
-					},			
+					// {
+					// 	loader: 'style-loader'
+					// },
+					MiniCssExtractPlugin.loader,			
 					{
 						loader: 'css-loader', // translates CSS into CommonJS						
 					},

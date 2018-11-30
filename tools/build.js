@@ -1,6 +1,8 @@
 /* transform less to css */
+const minifyCss = require('gulp-minify-css');
 const gulp = require('gulp');
 const fs = require('fs');
+const concat = require('gulp-concat');
 const through2 = require('through2');
 const path = require('path');
 const transformLess = require('./transformLess');
@@ -21,6 +23,10 @@ gulp.task('less', () => {
         }))    
         .pipe(gulp.dest(
             path.resolve(currentCwd,targeFolderName)
-        ));        
+        ))
+        .pipe(concat('mkbs.css'))
+        .pipe(minifyCss())
+        .pipe(gulp.dest('./style'));
 });
+
 gulp.start('less');

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button } from 'mkui';
+import { Input, Button } from 'maycur-antd';
 let prefix = 'mkbs';
 class FuzzFilter extends Component {
     constructor(props) {

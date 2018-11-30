@@ -1,0 +1,60 @@
+/* base variables */
+/* text-color */
+/* pin */
+/* 字体大小 */
+/* tab-bar */
+/* 提示颜色 */
+/* fee type color 引用自主版本 */
+/* mix-in class */
+#mixin-ios-scroll {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+#mixin-pick-bar {
+  display: flex;
+  background: #fff;
+  font-weight: normal;
+  font-size: 16px;
+}
+#mixin-pick-bar > div {
+  flex: 1;
+  text-align: center;
+  color: #3296FA;
+  line-height: 50px;
+}
+.mkbs-select-popover.ant-popover {
+  padding-top: 0 !important;
+}
+.mkbs-select-popover.ant-popover .ant-popover-arrow {
+  display: none;
+}
+.mkbs-select-popover.ant-popover .ant-popover-inner-content {
+  padding: 0;
+}
+.mkbs-select-popover.ant-popover .ant-popover-inner-content .search-input-wrap {
+  padding: 10px;
+  background-color: #f7f7f7;
+  position: relative;
+  border-radius: 2px;
+}
+.mkbs-select-popover.ant-popover .ant-popover-inner-content .search-input-wrap .search-input {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  padding: 6px 8px;
+}
+.mkbs-select-popover.ant-popover .ant-popover-inner-content .search-input-wrap .search {
+  position: absolute;
+  right: 20px;
+  top: 14px;
+}
+.mkbs-popcontent {
+  min-width: 150px;
+  max-width: 500px;
+  max-height: 450px;
+  overflow: auto;
+  padding: 16px;
+}
+.mkbs-popcontent .mkbs-option-child + .mkbs-option-child {
+  margin-top: 8px;
+}
