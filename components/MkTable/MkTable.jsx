@@ -13,9 +13,9 @@ import { Resizable } from 'react-resizable';
 import _ from 'lodash';
 import { DateFilter, FuzzFilter, CheckFilter } from './FilterDropDown';
 import FilterStateBar from './FilterStateBar';
-import PopPicker from 'components/PopPicker/PopPicker';
+import PopSelect from './PopSelect/PopSelect';
 // import styles from './MkTable.less';
-let prefix='mkbs';
+let prefix = 'mkbs';
 /* title 宽度变动 */
 const ResizeableTitle = (props) => {
     const { onResize, width, ...restProps } = props;
@@ -60,7 +60,6 @@ let MkTable = (option) => WrapperComponent => {
                 selectAble: false,
                 selectAbleLock: false,
                 sorter: {},
-                customColumnsVisible: false,
                 hideColumnCodeList: []
             };
             this.components = {
@@ -94,7 +93,7 @@ let MkTable = (option) => WrapperComponent => {
                                 <FuzzFilter />
                             )
                         };
-                    }  else if (col.filterOption.type === 'checkbox') {
+                    } else if (col.filterOption.type === 'checkbox') {
                         col.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => {
                             return (
                                 <CheckFilter
@@ -203,18 +202,18 @@ let MkTable = (option) => WrapperComponent => {
         /* 生成table */
         generateTable = (params) => {
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
-            const { rowKey,rowSelection:rowSelectionOption } = params;
+            const { rowKey, rowSelection: rowSelectionOption } = params;
             this.rowKey = rowKey;
             let rowSelection = {
                 ...rowSelectionOption,
                 onChange: (selectedRowKeys, selectedRows) => {
                     this.setState({ selectedRows, selectedRowKeys });
-                },               
+                },
                 selectedRowKeys: selectedRowKeys
             };
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
-            })            
+            })
             return (
                 <div className={`${prefix}-mktable-container`}>
                     <Table
@@ -305,11 +304,11 @@ let MkTable = (option) => WrapperComponent => {
             let fnExe = this.fetchDataSourceFn(filters,
                 { pageSize: pagination.pageSize, current: pagination.current ? pagination.current : 1 },
                 { field: sorter.field, order: sorter.order === 'descend' ? 'desc' : 'asc' });
-            let dataSource;            
+            let dataSource;
             if (fnExe && fnExe.then) {
                 this.setLoadStatus(true);
                 fnExe.then((resp) => {
-                    this.setLoadStatus(false);                    
+                    this.setLoadStatus(false);
                     if (resp.code === 'success') {
                         dataSource = resp.data;
                         this.setState(({ pagination, selectedRows }) => {
@@ -340,9 +339,9 @@ let MkTable = (option) => WrapperComponent => {
                 })
             } else {
                 dataSource = fnExe;
-                if(dataSource && _.isArray(dataSource)){
+                if (dataSource && _.isArray(dataSource)) {
                     this.setState({ dataSource });
-                }                
+                }
             }
         }
 
@@ -384,7 +383,7 @@ let MkTable = (option) => WrapperComponent => {
         }
 
         customColumns = () => {
-            const { customColumnsVisible, columns, hideColumnCodeList } = this.state;
+            const { columns, hideColumnCodeList } = this.state;
             let columnsTreeData = [], defaultChecked = [];
             _.forEach(columns, col => {
                 if (!col.meanLess) {
@@ -395,26 +394,13 @@ let MkTable = (option) => WrapperComponent => {
                 }
             });
             return (
-                <PopPicker
-                    treeData={columnsTreeData}
-                    defaultChecked={defaultChecked}
-                    code="code"
-                    name="name"
-                    params={{}}
-                    visible={customColumnsVisible}
-                    overlayClassName={'mk-select-default'}
-                    // searchApi={reimburseService.fetchEmployees}
-                    searchAble={false}
-                    autoAdjustOverflow={true}
-                    onVisibleChange={() => this.setState(({ customColumnsVisible }) => ({ customColumnsVisible: !customColumnsVisible }))}
-                    placeholder="字段搜索"
-                    onCheckItem={this.setHideColumnCodeList}
-                    withAvatar={false}
+                <PopSelect
+                    options={columnsTreeData}
+                    defaultValue={defaultChecked}
+                    close={this.setHideColumnCodeList}
                 >
                     <Button size='default' type='default'>字段显示</Button>
-                </PopPicker>
-
-
+                </PopSelect>
             )
         }
 
