@@ -29,7 +29,7 @@
         cursor: col-resize;
     }
     .mk-table-filter-selected.mkicon-filter-o {
-        color: #1199ff;
+        color: @maycur-color;
     }
     .ant-table-empty .ant-table-body {
         overflow-x: hidden !important;
@@ -45,9 +45,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        .fm-prompt {
-            font-size: 20px;
-            margin-right: 8px;
+        :global {
+            .fm-prompt {
+                font-size: 20px;
+                margin-right: 8px;
+            }
         }
     }
 }

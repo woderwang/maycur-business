@@ -1,0 +1,45 @@
+@import '../../../../style/variables.less';
+.@{prefix}-check-filter {
+    width: 160px;
+    background: #fff;
+    border: 1px solid @border-color;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    .pin-search {
+        margin: 5px 5px 0 5px;
+    }
+    .ant-radio-group,
+    .ant-checkbox-group {
+        display: block;
+        max-height: 300px;
+        overflow: auto;
+    }
+    &_box,
+    .pin-radio-box {
+        padding: 5px 0;
+    }
+    .pin-item,
+    .pin-all {
+        padding: 7px 10px;
+        margin: 0;
+        width: 100%;
+        overflow: hidden;
+        display: block;
+    }
+    .pin-item:hover {
+        background-color: @lighter-background;
+    }
+    .pin-footer {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid @border-color;
+        padding: 7px 0;
+        .footer-item {
+            flex: 1;
+            text-align: center;
+            color: @maycur-color;
+            cursor: pointer;
+        }
+    }
+}

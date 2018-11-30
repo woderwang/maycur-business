@@ -1,7 +1,0 @@
-.pin :global .mk-btn {
-  margin-left: 10px;
-}
-.pin :global table.rc-calendar-table > tbody td,
-.pin :global table.rc-calendar-table > thead th {
-  padding: 0;
-}

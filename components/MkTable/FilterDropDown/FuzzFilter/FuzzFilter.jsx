@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styles from './FuzzFilter.less';
-import { Input, Button } from 'maycur-antd';
+import { Input, Button } from 'mkui';
+let prefix = 'mkbs';
 class FuzzFilter extends Component {
     constructor(props) {
         super(props);
@@ -8,7 +8,7 @@ class FuzzFilter extends Component {
     }
     render() {
         return (
-            <div className={styles['pin']}>
+            <div className={`${prefix}-fuzz-filter`}>
                 <Input />
                 <Button type="primary">确定</Button>
             </div>

@@ -2,24 +2,24 @@
   "name": "maycur-business",
   "version": "0.0.2",
   "description": "maycur businuess react components of web",
-  "main": "lib/index.js",  
+  "main": "lib/index.js",
   "module": "es/index.js",
-  "scripts": {    
+  "scripts": {
     "start": "npx styleguidist server",
     "compile": "node tools/build.js",
-    "build": "babel components -d lib --copy-files --delete-dir-on-start && rm -rf es && cp -R lib es"       
+    "build": "babel components -d lib --copy-files --delete-dir-on-start && rm -rf es && cp -R lib es"
   },
   "keywords": [
     "maycur",
     "business",
     "react"
   ],
-  "files": [    
+  "files": [
     "lib",
     "es"
   ],
   "author": "woder",
-  "license": "MIT", 
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
@@ -30,12 +30,13 @@
     "babel-plugin-import": "^1.11.0",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
+    "eslint": "^5.9.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "gulp": "^3.9.1",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
-    "less-plugin-npm-import": "^2.1.0",    
+    "less-plugin-npm-import": "^2.1.0",
     "mini-css-extract-plugin": "^0.4.5",
     "opn": "^5.4.0",
     "react": "^16.6.0",
@@ -56,6 +57,7 @@
     "rc-calendar": "^9.7.11",
     "rc-time-picker": "^3.4.0",
     "lodash": "^4.17.11",
-    "maycur-antd": "^1.1.2"
+    "maycur-antd": "^1.1.2",
+    "moment": "^2.22.2"
   }
 }

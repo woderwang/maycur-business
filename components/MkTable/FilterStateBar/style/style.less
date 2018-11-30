@@ -1,0 +1,39 @@
+@import '../../../style/variables.less';
+.@{prefix}-mktable-filterbar {
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+    .filter-wrapper {
+        display: flex;
+        
+        .filter {
+            padding: 3px 25px 3px 10px;
+            border: 1px solid @border-color;
+            border-radius: 4px;
+            background: @page-background;
+            position: relative;
+            &-label {
+                color: @weak-text-color;
+                margin-right: 5px;
+                font-weight: normal;
+            }
+            &-close {
+                position: absolute;
+                cursor: pointer;
+                width: 20px;
+                height: 20px;
+                right: 0;
+                font-weight: 700;
+                top: 0;
+                bottom: 0;
+                margin: auto 0;
+                line-height: 20px;
+                font-size: 10px;
+                text-align: center;
+            }
+        }
+        .filter+.filter {
+            margin-left: 10px;
+        }
+    }
+}
