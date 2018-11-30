@@ -1,0 +1,76 @@
+/* base variables */
+/* text-color */
+/* pin */
+/* 字体大小 */
+/* tab-bar */
+/* 提示颜色 */
+/* fee type color 引用自主版本 */
+/* mix-in class */
+#mixin-ios-scroll {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+#mixin-pick-bar {
+  display: flex;
+  background: #fff;
+  font-weight: normal;
+  font-size: 16px;
+}
+#mixin-pick-bar > div {
+  flex: 1;
+  text-align: center;
+  color: #3296FA;
+  line-height: 50px;
+}
+.mkbs-avatar-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.mkbs-avatar {
+  flex-shrink: 0;
+  text-align: center;
+  height: 36px;
+  width: 36px;
+  line-height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #efefef;
+  color: #fff;
+  font-size: 12px;
+  display: inline-block;
+}
+.mkbs-avatar-img -img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.mkbs-avatar.c1 {
+  color: #3296FA;
+}
+.mkbs-avatar.c2 {
+  color: #cd4300;
+}
+.mkbs-avatar.c3 {
+  color: #ff5401;
+}
+.mkbs-avatar.c4 {
+  color: #03a9f4;
+}
+.mkbs-avatar.c5 {
+  color: #167f2a;
+}
+.mkbs-avatar.c6 {
+  color: #02638f;
+}
+.mkbs-avatar.c7 {
+  color: #1eaa39;
+}
+.mkbs-avatar.c8 {
+  color: #ff9800;
+}
+.mkbs-avatar.c9 {
+  color: #995b00;
+}

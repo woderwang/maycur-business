@@ -48,7 +48,7 @@
   cursor: col-resize;
 }
 .mkbs-mktable-container .mk-table-filter-selected.mkicon-filter-o {
-  color: #1199ff;
+  color: #3296FA;
 }
 .mkbs-mktable-container .ant-table-empty .ant-table-body {
   overflow-x: hidden !important;
@@ -65,7 +65,7 @@
   justify-content: center;
   align-items: center;
 }
-.mkbs-mktable-container .data-emtpy .fm-prompt {
+.mkbs-mktable-container .data-emtpy :global .fm-prompt {
   font-size: 20px;
   margin-right: 8px;
 }

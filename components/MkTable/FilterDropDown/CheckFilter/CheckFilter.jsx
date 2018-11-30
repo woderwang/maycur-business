@@ -8,7 +8,6 @@
 import React, { Component } from 'react';
 import { Checkbox, Radio, Input } from 'maycur-antd';
 import _ from 'lodash';
-import './CheckFilter.less';
 const Search = Input.Search;
 let prefix='mkbs';
 class CheckFilter extends Component {

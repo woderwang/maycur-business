@@ -1,0 +1,68 @@
+/* base variables */
+/* text-color */
+/* pin */
+/* 字体大小 */
+/* tab-bar */
+/* 提示颜色 */
+/* fee type color 引用自主版本 */
+/* mix-in class */
+#mixin-ios-scroll {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+#mixin-pick-bar {
+  display: flex;
+  background: #fff;
+  font-weight: normal;
+  font-size: 16px;
+}
+#mixin-pick-bar > div {
+  flex: 1;
+  text-align: center;
+  color: #3296FA;
+  line-height: 50px;
+}
+.mkbs-check-filter {
+  width: 160px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+.mkbs-check-filter .pin-search {
+  margin: 5px 5px 0 5px;
+}
+.mkbs-check-filter .ant-radio-group,
+.mkbs-check-filter .ant-checkbox-group {
+  display: block;
+  max-height: 300px;
+  overflow: auto;
+}
+.mkbs-check-filter_box,
+.mkbs-check-filter .pin-radio-box {
+  padding: 5px 0;
+}
+.mkbs-check-filter .pin-item,
+.mkbs-check-filter .pin-all {
+  padding: 7px 10px;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+}
+.mkbs-check-filter .pin-item:hover {
+  background-color: #fafafa;
+}
+.mkbs-check-filter .pin-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding: 7px 0;
+}
+.mkbs-check-filter .pin-footer .footer-item {
+  flex: 1;
+  text-align: center;
+  color: #3296FA;
+  cursor: pointer;
+}
