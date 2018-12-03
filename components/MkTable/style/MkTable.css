@@ -22,6 +22,140 @@
   color: #3296FA;
   line-height: 50px;
 }
+.mkbs-select-popover.ant-popover {
+  padding-top: 0 !important;
+}
+.mkbs-select-popover.ant-popover .ant-popover-arrow {
+  display: none;
+}
+.mkbs-select-popover.ant-popover .ant-popover-inner-content {
+  padding: 0;
+}
+.mkbs-select-popover.ant-popover .ant-popover-inner-content .search-input-wrap {
+  padding: 10px;
+  background-color: #f7f7f7;
+  position: relative;
+  border-radius: 2px;
+}
+.mkbs-select-popover.ant-popover .ant-popover-inner-content .search-input-wrap .search-input {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  padding: 6px 8px;
+}
+.mkbs-select-popover.ant-popover .ant-popover-inner-content .search-input-wrap .search {
+  position: absolute;
+  right: 20px;
+  top: 14px;
+}
+.mkbs-popcontent {
+  min-width: 150px;
+  max-width: 500px;
+  max-height: 450px;
+  overflow: auto;
+  padding: 16px;
+}
+.mkbs-popcontent .mkbs-option-child + .mkbs-option-child {
+  margin-top: 8px;
+}
+.mkbs-mktable-filterbar {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+}
+.mkbs-mktable-filterbar .filter-wrapper {
+  display: flex;
+}
+.mkbs-mktable-filterbar .filter-wrapper .filter {
+  padding: 3px 25px 3px 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #f7f7f7;
+  position: relative;
+}
+.mkbs-mktable-filterbar .filter-wrapper .filter-label {
+  color: #999;
+  margin-right: 5px;
+  font-weight: normal;
+}
+.mkbs-mktable-filterbar .filter-wrapper .filter-close {
+  position: absolute;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  right: 0;
+  font-weight: 700;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  line-height: 20px;
+  font-size: 10px;
+  text-align: center;
+}
+.mkbs-mktable-filterbar .filter-wrapper .filter + .filter {
+  margin-left: 10px;
+}
+.mkbs-check-filter {
+  width: 160px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+.mkbs-check-filter .pin-search {
+  margin: 5px 5px 0 5px;
+}
+.mkbs-check-filter .ant-radio-group,
+.mkbs-check-filter .ant-checkbox-group {
+  display: block;
+  max-height: 300px;
+  overflow: auto;
+}
+.mkbs-check-filter_box,
+.mkbs-check-filter .pin-radio-box {
+  padding: 5px 0;
+}
+.mkbs-check-filter .pin-item,
+.mkbs-check-filter .pin-all {
+  padding: 7px 10px;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+}
+.mkbs-check-filter .pin-item:hover {
+  background-color: #fafafa;
+}
+.mkbs-check-filter .pin-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding: 7px 0;
+}
+.mkbs-check-filter .pin-footer .footer-item {
+  flex: 1;
+  text-align: center;
+  color: #3296FA;
+  cursor: pointer;
+}
+.mkbs-date-filter .mk-btn {
+  margin-left: 10px;
+}
+.mkbs-date-filter table.rc-calendar-table > tbody td,
+.mkbs-date-filter table.rc-calendar-table > thead th {
+  padding: 0;
+}
+.mkbs-fuzz-filter {
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  display: flex;
+}
+.mkbs-fuzz-filter :global .mk-btn {
+  margin-left: 10px;
+}
 .mkbs-mktable-container {
   position: relative;
 }
