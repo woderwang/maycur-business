@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { Layout, Menu, Icon } from 'maycur-antd';
 import classNames from 'classnames';
-// import logo from 'assets/maycur-logo.png';
-// import './style.less';
 
 const { Header } = Layout;
 
@@ -40,8 +38,6 @@ const MkHeader = (props) => {
       <div className={logoAreaClassName}>
         {/* logo */}
         <div className="logo-content">
-          {/* <span className="fm fm-maycur"></span>
-          <span className="logo-text">每刻报</span> */}
           <span><img src={logoUrl} alt="每刻报" /></span>
         </div>
         {/* 收缩按钮 */}

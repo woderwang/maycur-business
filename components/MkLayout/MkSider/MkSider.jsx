@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { Layout, Menu } from 'maycur-antd';
-// import './MkSider.less';
 
 const { Sider } = Layout;
 

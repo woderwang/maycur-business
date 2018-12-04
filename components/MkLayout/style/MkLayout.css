@@ -22,13 +22,13 @@
   color: #3296FA;
   line-height: 50px;
 }
-.mk-header {
+.mk-header.ant-layout-header {
   display: flex;
   height: 56px;
   padding: 0 40px 0 0;
   background-color: #3296FA;
 }
-.mk-header .mk-logo {
+.mk-header.ant-layout-header .mk-logo {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,48 +38,48 @@
   font-size: 20px;
   transition: all 0.2s;
 }
-.mk-header .mk-logo .logo-content {
+.mk-header.ant-layout-header .mk-logo .logo-content {
   display: flex;
   align-items: center;
 }
-.mk-header .mk-logo .logo-content img {
+.mk-header.ant-layout-header .mk-logo .logo-content img {
   height: 22px;
 }
-.mk-header .mk-logo .anticon {
+.mk-header.ant-layout-header .mk-logo .anticon {
   margin-right: 22px;
   cursor: pointer;
 }
-.mk-header .mk-logo.mk-logo-collapsed {
+.mk-header.ant-layout-header .mk-logo.mk-logo-collapsed {
   width: 56px;
   justify-content: center;
   padding: 0;
 }
-.mk-header .mk-logo.mk-logo-collapsed .logo-content {
+.mk-header.ant-layout-header .mk-logo.mk-logo-collapsed .logo-content {
   display: none;
 }
-.mk-header .mk-logo.mk-logo-collapsed .anticon {
+.mk-header.ant-layout-header .mk-logo.mk-logo-collapsed .anticon {
   margin: 0;
 }
-.mk-header .mk-menus {
+.mk-header.ant-layout-header .mk-menus {
   display: flex;
   flex: 1;
   justify-content: space-between;
 }
-.mk-header .ant-menu {
+.mk-header.ant-layout-header .ant-menu {
   flex-grow: 1;
   background-color: transparent;
   line-height: 56px;
 }
-.mk-header .ant-menu .ant-menu-item.ant-menu-item-selected {
+.mk-header.ant-layout-header .ant-menu .ant-menu-item.ant-menu-item-selected {
   background-color: #2074D4;
 }
-.mk-header .ant-menu .ant-menu-item-group-title {
+.mk-header.ant-layout-header .ant-menu .ant-menu-item-group-title {
   display: none;
 }
-.mk-header .ant-menu .ant-menu-item-group-list {
+.mk-header.ant-layout-header .ant-menu .ant-menu-item-group-list {
   display: flex;
 }
-.mk-header .ant-menu .ant-menu-item-group-list .ant-menu-item {
+.mk-header.ant-layout-header .ant-menu .ant-menu-item-group-list .ant-menu-item {
   padding: 0 16px;
 }
 .mk-sider {
@@ -99,10 +99,13 @@
   font-size: 18px;
 }
 .mk-sider .ant-menu-inline-collapsed {
+  width: 56px;
+}
+.mk-sider .ant-menu-inline-collapsed .ant-menu-item {
   padding: 0 20px !important;
   border-left: 3px solid transparent;
 }
-.mk-sider .ant-menu-inline-collapsed.ant-menu-item-selected {
+.mk-sider .ant-menu-inline-collapsed .ant-menu-item.ant-menu-item-selected {
   border-left-color: #3296FA;
 }
 .mk-sider .ant-menu-inline-collapsed .ant-menu-item .fm + span {
