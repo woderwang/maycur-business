@@ -88,9 +88,9 @@ class Avatar extends Component {
             <React.Fragment>
                 {avatarUrl ?
                     <img className={`${prefix}-avatar-img`} src={avatarUrl} alt="头像"></img> :
-                    <a onClick={this.onClickAvatar} className={`${prefix}-avatar ${this.state.color}`} style={{ ...customStyle }}>
+                    <span onClick={this.onClickAvatar} className={`${prefix}-avatar ${this.state.color}`} style={{ ...customStyle }}>
                         <span>{this.state.abbrName}</span>
-                    </a>}
+                    </span>}
             </React.Fragment>
 
         )
