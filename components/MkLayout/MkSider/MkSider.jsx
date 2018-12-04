@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Layout, Menu } from 'maycur-antd';
 
 const { Sider } = Layout;
+const { SubMenu } = Menu;
 
 const MkSider = (props) => {
   const { menus, pathname, collapsed, onToggleCollapsed } = props;
