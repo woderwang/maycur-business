@@ -23,7 +23,7 @@
   line-height: 50px;
 }
 .mk-sider {
-  box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, 0.6);
+  box-shadow: 0 0 4px 0 rgba(150, 150, 150, 0.6);
   z-index: 10;
   background-color: #fff;
 }
@@ -42,7 +42,7 @@
   width: 56px;
 }
 .mk-sider .ant-menu-inline-collapsed .ant-menu-item {
-  padding: 0 20px !important;
+  padding: 0 18px !important;
   border-left: 3px solid transparent;
 }
 .mk-sider .ant-menu-inline-collapsed .ant-menu-item.ant-menu-item-selected {
