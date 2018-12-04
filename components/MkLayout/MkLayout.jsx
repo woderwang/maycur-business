@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { Layout } from 'maycur-antd';
 import MkHeader from './MkHeader';
 import MkSider from './MkSider';
