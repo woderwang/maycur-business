@@ -39,6 +39,7 @@ class MkLayout extends Component {
           {noSider ? null :
             <MkSider
               collapsed={collapsed}
+              onToggleCollapsed={this.onToggleCollapsed}
               pathname={pathname}
               menus={siderMenus}
               renderMenu={renderSiderMenu} />}
