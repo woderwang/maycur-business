@@ -102,7 +102,7 @@
   width: 56px;
 }
 .mk-sider .ant-menu-inline-collapsed .ant-menu-item {
-  padding: 0 20px !important;
+  padding: 0 18px !important;
   border-left: 3px solid transparent;
 }
 .mk-sider .ant-menu-inline-collapsed .ant-menu-item.ant-menu-item-selected {
