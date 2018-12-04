@@ -1,0 +1,44 @@
+@import "../../../style/variables.less";
+
+.mk-sider {
+  box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, .6);
+  z-index: 10;
+  background-color: #fff;
+
+  .ant-menu {
+    .ant-menu-item {
+      >a {
+        font-size: 16px;
+      }
+      
+      .fm {
+        margin-right: 10px;
+        color: #a3abbe;
+      }
+
+      &.ant-menu-item-selected {
+        .fm {
+          color: @maycur-color;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .ant-menu-inline-collapsed {
+    padding: 0 20px !important;
+    border-left: 3px solid transparent;
+
+    &.ant-menu-item-selected {
+      border-left-color: @maycur-color;
+    }
+
+    .ant-menu-item {
+      .fm+span {
+        max-width: 0;
+        display: inline-block;
+        opacity: 0;
+      }
+    }
+  }
+}

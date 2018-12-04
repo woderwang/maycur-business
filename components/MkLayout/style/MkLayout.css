@@ -1,0 +1,112 @@
+/* base variables */
+/* text-color */
+/* pin */
+/* 字体大小 */
+/* tab-bar */
+/* 提示颜色 */
+/* fee type color 引用自主版本 */
+/* mix-in class */
+#mixin-ios-scroll {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+#mixin-pick-bar {
+  display: flex;
+  background: #fff;
+  font-weight: normal;
+  font-size: 16px;
+}
+#mixin-pick-bar > div {
+  flex: 1;
+  text-align: center;
+  color: #3296FA;
+  line-height: 50px;
+}
+.mk-header {
+  display: flex;
+  height: 56px;
+  padding: 0 40px 0 0;
+  background-color: #3296FA;
+}
+.mk-header .mk-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 240px;
+  padding-left: 40px;
+  color: #fff;
+  font-size: 20px;
+  transition: all 0.2s;
+}
+.mk-header .mk-logo .logo-content {
+  display: flex;
+  align-items: center;
+}
+.mk-header .mk-logo .logo-content img {
+  height: 22px;
+}
+.mk-header .mk-logo .anticon {
+  margin-right: 22px;
+  cursor: pointer;
+}
+.mk-header .mk-logo.mk-logo-collapsed {
+  width: 80px;
+  justify-content: center;
+  padding: 0;
+}
+.mk-header .mk-logo.mk-logo-collapsed .logo-content {
+  display: none;
+}
+.mk-header .mk-logo.mk-logo-collapsed .anticon {
+  margin: 0;
+}
+.mk-header .mk-menus {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+.mk-header .ant-menu {
+  flex-grow: 1;
+  background-color: transparent;
+  line-height: 56px;
+}
+.mk-header .ant-menu .ant-menu-item.ant-menu-item-selected {
+  background-color: #2074D4;
+}
+.mk-header .ant-menu .ant-menu-item-group-title {
+  display: none;
+}
+.mk-header .ant-menu .ant-menu-item-group-list {
+  display: flex;
+}
+.mk-header .ant-menu .ant-menu-item-group-list .ant-menu-item {
+  padding: 0 16px;
+}
+.mk-sider {
+  box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, 0.6);
+  z-index: 10;
+  background-color: #fff;
+}
+.mk-sider .ant-menu .ant-menu-item .fm {
+  margin-right: 10px;
+  color: #a3abbe;
+}
+.mk-sider .ant-menu .ant-menu-item.ant-menu-item-selected .fm {
+  color: #3296FA;
+}
+.mk-sider .ant-menu-inline-collapsed .ant-menu-item .fm + span {
+  max-width: 0;
+  display: inline-block;
+  opacity: 0;
+}
+.page-container .section {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+.page-container .section .content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #fff;
+}
