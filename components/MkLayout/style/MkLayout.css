@@ -50,7 +50,7 @@
   cursor: pointer;
 }
 .mk-header .mk-logo.mk-logo-collapsed {
-  width: 80px;
+  width: 56px;
   justify-content: center;
   padding: 0;
 }
@@ -87,12 +87,23 @@
   z-index: 10;
   background-color: #fff;
 }
+.mk-sider .ant-menu .ant-menu-item > a {
+  font-size: 16px;
+}
 .mk-sider .ant-menu .ant-menu-item .fm {
   margin-right: 10px;
   color: #a3abbe;
 }
 .mk-sider .ant-menu .ant-menu-item.ant-menu-item-selected .fm {
   color: #3296FA;
+  font-size: 18px;
+}
+.mk-sider .ant-menu-inline-collapsed {
+  padding: 0 20px !important;
+  border-left: 3px solid transparent;
+}
+.mk-sider .ant-menu-inline-collapsed.ant-menu-item-selected {
+  border-left-color: #3296FA;
 }
 .mk-sider .ant-menu-inline-collapsed .ant-menu-item .fm + span {
   max-width: 0;
