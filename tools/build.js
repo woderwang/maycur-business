@@ -1,32 +1,95 @@
-/* transform less to css */
-const minifyCss = require('gulp-minify-css');
+const babel = require("@babel/core");
+const yargs = require('yargs').argv;
+const cleanCss = require('gulp-clean-css');
+const rmfr = require('rmfr')
 const gulp = require('gulp');
+const ncp = require('ncp');
 const fs = require('fs');
 const concat = require('gulp-concat');
 const through2 = require('through2');
 const path = require('path');
 const transformLess = require('./transformLess');
+const bsConfig = require(path.resolve(process.cwd(),'package.json'))
 let currentCwd = process.cwd();
+let targeFolderName = 'components';
+let devDestination = path.resolve(currentCwd, 'libdev/lib');
+let esDestination = path.resolve(currentCwd, 'es');
+let libDestination = path.resolve(currentCwd, 'lib');
+let mode = yargs.dev === 'true'?'dev':'build';
+let developDir = bsConfig.developDir;
 gulp.task('less', () => {
-    console.log('start to compile .less file');
-    let targeFolderName = 'components';
+    console.log('step1.start to compile .less file');
+
     gulp.src([path.resolve(currentCwd, `${targeFolderName}/**/*.less`)])
-        .pipe(through2.obj(function(file, encoding, next){            
+        .pipe(through2.obj(function (file, encoding, next) {
             transformLess(file.path).then((css) => {
                 file.contents = Buffer.from(css);
-                file.path = file.path.replace(/\.less$/, '.css');                
+                file.path = file.path.replace(/\.less$/, '.css');
                 this.push(file)
                 next();
             }).catch((e) => {
                 console.error(e);
             });
-        }))    
+        }))
         .pipe(gulp.dest(
-            path.resolve(currentCwd,targeFolderName)
+            path.resolve(currentCwd, targeFolderName)
         ))
         .pipe(concat('mkbs.css'))
-        .pipe(minifyCss())
-        .pipe(gulp.dest('./style'));
+        .pipe(cleanCss())
+        .pipe(gulp.dest(devDestination));
+});
+gulp.task('copy', ['less'], () => {
+    console.log('step2.copy less,css files to target folder');
+    gulp.src([path.resolve(currentCwd, `${targeFolderName}/**/*.{less,css,md}`)])
+        .pipe(gulp.dest(
+            path.resolve(esDestination)
+        ))
+        .pipe(gulp.dest(
+            path.resolve(libDestination)
+        ))
+        .pipe(gulp.dest(
+            path.resolve(devDestination)
+        ))
 });
 
-gulp.start('less');
+gulp.task('babel', ['copy'], () => {
+    console.log('step3.start compile jsx')
+    gulp.src([path.resolve(currentCwd, `${targeFolderName}/**/*.{jsx,js}`)])
+        .pipe(
+            through2.obj(function (file, encoding, next) {
+                let jsContent = babel.transformFileSync(file.path, {});
+                file.contents = Buffer.from(jsContent.code);
+                this.push(file);
+                next();
+            })
+        )
+        .pipe(gulp.dest(
+            esDestination
+        ))
+        .pipe(gulp.dest(
+            libDestination
+        ))
+        .pipe(gulp.dest(
+            devDestination
+        ))
+        .on('end',function(){
+            if(mode==='dev' && !!developDir){
+                ncp(devDestination,developDir,function(err){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        console.log(`${developDir} 目录下的文件已经同步!`);
+                    }
+                });
+            }
+        });
+});
+(async function () {
+    await rmfr(devDestination);
+    console.log(`remove ${devDestination}`)
+    await rmfr(esDestination);
+    console.log(`remove ${esDestination}`)
+    await rmfr(libDestination);
+    console.log(`remove ${libDestination}`)
+    gulp.start('babel');        
+})()
