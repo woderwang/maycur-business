@@ -6,20 +6,31 @@
   background-color: #fff;
 
   .ant-menu {
-    .ant-menu-item {
+    .ant-menu-item,
+    .ant-menu-submenu-title {
       >a {
         font-size: 16px;
-      }
-      
-      .fm {
-        margin-right: 10px;
-        color: #a3abbe;
+        color: #757575;
+
+        .fm {
+          font-size: 18px;
+          margin-right: 10px;
+          color: #a3abbe;
+        }
+
+        &:focus {
+          text-decoration: none;
+        }
       }
 
-      &.ant-menu-item-selected {
-        .fm {
+      &.ant-menu-item-selected,
+      &:hover {
+        >a {
           color: @maycur-color;
-          font-size: 18px;
+
+          .fm {
+            color: @maycur-color;
+          }
         }
       }
     }
@@ -27,6 +38,28 @@
 
   .ant-menu-inline-collapsed {
     width: 56px;
+
+    >.ant-menu-submenu {
+      &.ant-menu-submenu-selected {
+        >.ant-menu-submenu-title {
+          border-left-color: @maycur-color;
+          .fm {
+            color: @maycur-color;
+          }
+        }
+      }
+
+      >.ant-menu-submenu-title {
+        padding: 0 18px !important;
+        border-left: 3px solid transparent;
+
+        .fm+span {
+          max-width: 0;
+          display: inline-block;
+          opacity: 0;
+        }
+      }
+    }
     
     .ant-menu-item {
       padding: 0 18px !important;

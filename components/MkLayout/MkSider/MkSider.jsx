@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Layout, Menu } from 'maycur-antd';
 
 const { Sider } = Layout;
+const { SubMenu } = Menu;
 
 const MkSider = (props) => {
   const { menus, pathname, collapsed, onToggleCollapsed } = props;
@@ -29,11 +30,22 @@ const MkSider = (props) => {
       >
         {menus.map(menu => {
           menu.menuName = menu.meta.name;
-          return (
-            <Menu.Item key={menu.path}>
-              {props.renderMenu(menu)}
-            </Menu.Item>
-          )
+          if (menu.routes) {
+            return (
+              <SubMenu key={menu.path} title={props.renderMenu(menu)}>
+                {menu.routes.map(route => {
+                  route.menuName = route.meta.name;
+                  return <Menu.Item key={route.path}>{props.renderMenu(route)}</Menu.Item>
+                })}
+              </SubMenu>
+            )
+          } else {
+            return (
+              <Menu.Item key={menu.path}>
+                {props.renderMenu(menu)}
+              </Menu.Item>
+            )
+          }
         })}
       </Menu>
     </Sider>
