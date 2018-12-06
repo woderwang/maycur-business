@@ -46,7 +46,7 @@ const MkHeader = (props) => {
       </div>
 
       {/* menu area */}
-      <div className={`${prefix}-header-menus"`}>
+      <div className={`${prefix}-header-menus`}>
         <div className="left-menu">
           <Menu
             theme="dark"
