@@ -26,7 +26,6 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  margin-right: 15px;
 }
 .mkbs-avatar {
   flex-shrink: 0;
@@ -35,7 +34,6 @@
   width: 36px;
   line-height: 36px;
   border-radius: 50%;
-  overflow: hidden;
   background-color: #efefef;
   color: #fff;
   font-size: 12px;
@@ -45,7 +43,6 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  margin-right: 15px;
 }
 .mkbs-avatar.c1 {
   color: #3296FA;
