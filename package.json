@@ -9,7 +9,7 @@
     "build:dev": "node tools/build.js --dev true",
     "build": "node tools/build.js",
     "build:backup": "babel components -d lib --copy-files --delete-dir-on-start && rm -rf es && cp -R lib es"
-  },  
+  },
   "keywords": [
     "maycur",
     "business",
