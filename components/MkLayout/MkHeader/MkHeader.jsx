@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Layout, Menu, Icon } from 'maycur-antd';
 import classNames from 'classnames';
 
+const prefix = 'mkbs';
 const { Header } = Layout;
 
 const MkHeader = (props) => {
@@ -28,12 +29,12 @@ const MkHeader = (props) => {
     }
   };
 
-  const logoAreaClassName = classNames('mk-logo', {
-    'mk-logo-collapsed': collapsed
+  const logoAreaClassName = classNames(`${prefix}-header-logo`, {
+    [`${prefix}-header-logo-collapsed`]: collapsed
   });
 
   return (
-    <Header className="mk-header">
+    <Header className={`${prefix}-header`}>
       {/* logo area */}
       <div className={logoAreaClassName}>
         {/* logo */}
@@ -45,7 +46,7 @@ const MkHeader = (props) => {
       </div>
 
       {/* menu area */}
-      <div className="mk-menus">
+      <div className={`${prefix}-header-menus"`}>
         <div className="left-menu">
           <Menu
             theme="dark"

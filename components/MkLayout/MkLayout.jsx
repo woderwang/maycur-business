@@ -4,6 +4,8 @@ import MkHeader from './MkHeader';
 import MkSider from './MkSider';
 import PropTypes from 'prop-types';
 
+const prefix = 'mkbs';
+
 class MkLayout extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ class MkLayout extends Component {
     const menus = setMenus();
     const siderMenus = setSiderMenus();
     return (
-      <Layout className="page-container">
+      <Layout className={`${prefix}-page-container`}>
         <MkHeader
           collapsed={collapsed}
           onToggleCollapsed={this.onToggleCollapsed}

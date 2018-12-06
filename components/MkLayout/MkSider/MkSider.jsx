@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Layout, Menu, Divider } from 'maycur-antd';
 
+const prefix = 'mkbs';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -14,7 +15,7 @@ const MkSider = (props) => {
 	return (
 		<Sider
 			breakpoint="xl"
-			className="mk-sider"
+			className={`${prefix}-sider`}
 			width={240}
 			trigger={null}
 			collapsible
@@ -30,7 +31,8 @@ const MkSider = (props) => {
 			>
 				{menus.map((menu, index) => {
 					if (menu.split) {
-						return <Divider />
+						// return <Divider key={index} />
+						return null;
 					}
 					menu.menuName = menu.meta.name;
 					if (menu.routes) {
@@ -43,9 +45,8 @@ const MkSider = (props) => {
 							</SubMenu>
 						)
 					} else {
-						const style = menu.split ? { marginTop: '20px', borderTop: '1px solid #eee' } : null;
 						return (
-							<Menu.Item key={menu.path} style={style}>
+							<Menu.Item key={menu.path}>
 								{props.renderMenu(menu)}
 							</Menu.Item>
 						)
