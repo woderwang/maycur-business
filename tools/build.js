@@ -9,13 +9,13 @@ const concat = require('gulp-concat');
 const through2 = require('through2');
 const path = require('path');
 const transformLess = require('./transformLess');
-const bsConfig = require(path.resolve(process.cwd(),'package.json'))
+const bsConfig = require('./tool.config');
 let currentCwd = process.cwd();
 let targeFolderName = 'components';
 let devDestination = path.resolve(currentCwd, 'libdev/lib');
 let esDestination = path.resolve(currentCwd, 'es');
 let libDestination = path.resolve(currentCwd, 'lib');
-let mode = yargs.dev === 'true'?'dev':'build';
+let mode = yargs.dev === 'true' ? 'dev' : 'build';
 let developDir = bsConfig.developDir;
 gulp.task('less', () => {
     console.log('step1.start to compile .less file');
@@ -72,12 +72,12 @@ gulp.task('babel', ['copy'], () => {
         .pipe(gulp.dest(
             devDestination
         ))
-        .on('end',function(){
-            if(mode==='dev' && !!developDir){
-                ncp(devDestination,developDir,function(err){
-                    if(err){
+        .on('end', function () {
+            if (mode === 'dev' && !!developDir) {
+                ncp(devDestination, developDir, function (err) {
+                    if (err) {
                         console.log(err);
-                    }else{
+                    } else {
                         console.log(`${developDir} 目录下的文件已经同步!`);
                     }
                 });
@@ -91,5 +91,5 @@ gulp.task('babel', ['copy'], () => {
     console.log(`remove ${esDestination}`)
     await rmfr(libDestination);
     console.log(`remove ${libDestination}`)
-    gulp.start('babel');        
+    gulp.start('babel');
 })()

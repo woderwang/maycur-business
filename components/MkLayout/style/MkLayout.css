@@ -69,6 +69,7 @@
   flex-grow: 1;
   background-color: transparent;
   line-height: 56px;
+  font-size: 16px;
 }
 .mk-header.ant-layout-header .ant-menu .ant-menu-item.ant-menu-item-selected {
   background-color: #2074D4;
@@ -87,31 +88,39 @@
   z-index: 10;
   background-color: #fff;
 }
-.mk-sider .ant-menu .ant-menu-item > a,
-.mk-sider .ant-menu .ant-menu-submenu-title > a {
+.mk-sider .ant-menu.ant-menu-root {
+  padding: 20px 0;
+  overflow: auto;
+}
+.mk-sider .ant-menu.ant-menu-root .ant-menu-item,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-submenu-title {
+  width: 100%;
+}
+.mk-sider .ant-menu.ant-menu-root .ant-menu-item > a,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a {
   font-size: 16px;
   color: #757575;
 }
-.mk-sider .ant-menu .ant-menu-item > a .fm,
-.mk-sider .ant-menu .ant-menu-submenu-title > a .fm {
+.mk-sider .ant-menu.ant-menu-root .ant-menu-item > a .fm,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a .fm {
   font-size: 18px;
   margin-right: 10px;
   color: #a3abbe;
 }
-.mk-sider .ant-menu .ant-menu-item > a:focus,
-.mk-sider .ant-menu .ant-menu-submenu-title > a:focus {
+.mk-sider .ant-menu.ant-menu-root .ant-menu-item > a:focus,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a:focus {
   text-decoration: none;
 }
-.mk-sider .ant-menu .ant-menu-item.ant-menu-item-selected > a,
-.mk-sider .ant-menu .ant-menu-submenu-title.ant-menu-item-selected > a,
-.mk-sider .ant-menu .ant-menu-item:hover > a,
-.mk-sider .ant-menu .ant-menu-submenu-title:hover > a {
+.mk-sider .ant-menu.ant-menu-root .ant-menu-item.ant-menu-item-selected > a,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-submenu-title.ant-menu-item-selected > a,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-item:hover > a,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-submenu-title:hover > a {
   color: #3296FA;
 }
-.mk-sider .ant-menu .ant-menu-item.ant-menu-item-selected > a .fm,
-.mk-sider .ant-menu .ant-menu-submenu-title.ant-menu-item-selected > a .fm,
-.mk-sider .ant-menu .ant-menu-item:hover > a .fm,
-.mk-sider .ant-menu .ant-menu-submenu-title:hover > a .fm {
+.mk-sider .ant-menu.ant-menu-root .ant-menu-item.ant-menu-item-selected > a .fm,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-submenu-title.ant-menu-item-selected > a .fm,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-item:hover > a .fm,
+.mk-sider .ant-menu.ant-menu-root .ant-menu-submenu-title:hover > a .fm {
   color: #3296FA;
 }
 .mk-sider .ant-menu-inline-collapsed {
