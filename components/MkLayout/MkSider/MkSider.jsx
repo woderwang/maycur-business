@@ -15,6 +15,7 @@ const MkSider = (props) => {
 	return (
 		<Sider
 			breakpoint="xl"
+			theme="light"
 			className={`${prefix}-sider`}
 			width={240}
 			trigger={null}
