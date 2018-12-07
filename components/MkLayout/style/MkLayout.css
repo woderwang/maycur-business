@@ -38,7 +38,7 @@
   font-size: 20px;
   transition: all 0.2s;
 }
-.mkbs-header-logo .logo-content {
+.mkbs-header-logo .logo-content > span {
   display: flex;
   align-items: center;
 }
