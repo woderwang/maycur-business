@@ -69,7 +69,6 @@
   flex-grow: 1;
   background-color: transparent;
   line-height: 56px;
-  font-size: 16px;
 }
 .mkbs-header .ant-menu .ant-menu-item.ant-menu-item-selected {
   background-color: #2074D4;
@@ -98,7 +97,6 @@
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a,
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a {
-  font-size: 16px;
   color: #757575;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a .fm,

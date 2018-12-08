@@ -3,7 +3,7 @@ const yargs = require('yargs').argv;
 const cleanCss = require('gulp-clean-css');
 const rmfr = require('rmfr')
 const gulp = require('gulp');
-const ncp = require('cpy');
+const ncp = require('ncp');
 const fs = require('fs');
 const concat = require('gulp-concat');
 const through2 = require('through2');
@@ -71,9 +71,14 @@ gulp.task('babel', ['copy'], () => {
         .pipe(gulp.dest(devDestination))
         .on('end', function () {
             if (mode === 'dev' && !!developDir) {
-                ncp(devDestination, developDir).then(() => {
-                    console.log(`${developDir} 目录下的文件已经同步!`);
-                })
+                ncp(devDestination, developDir, function (err) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(`${developDir} 目录下的文件已经同步!`);
+                    }
+
+                });
             }
         })
 });
