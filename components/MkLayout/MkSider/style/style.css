@@ -23,7 +23,7 @@
   line-height: 50px;
 }
 .mkbs-sider {
-  box-shadow: 0 0 4px 0 rgba(150, 150, 150, 0.6);
+  box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, 0.6);
   z-index: 10;
   background-color: #fff;
 }
@@ -41,7 +41,7 @@
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a .fm,
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a .fm {
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 10px;
   color: #a3abbe;
 }
@@ -62,7 +62,7 @@
   color: #3296FA;
 }
 .mkbs-sider .ant-menu-inline-collapsed {
-  width: 56px;
+  width: 50px;
 }
 .mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu.ant-menu-submenu-selected > .ant-menu-submenu-title {
   border-left-color: #3296FA;
@@ -71,7 +71,7 @@
   color: #3296FA;
 }
 .mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
-  padding: 0 18px !important;
+  padding: 0 16px !important;
   border-left: 3px solid transparent;
 }
 .mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .fm + span {
@@ -80,7 +80,7 @@
   opacity: 0;
 }
 .mkbs-sider .ant-menu-inline-collapsed .ant-menu-item {
-  padding: 0 18px !important;
+  padding: 0 16px !important;
   border-left: 3px solid transparent;
 }
 .mkbs-sider .ant-menu-inline-collapsed .ant-menu-item.ant-menu-item-selected {
