@@ -21,7 +21,7 @@ const MkSider = (props) => {
 			trigger={null}
 			collapsible
 			collapsed={collapsed}
-			collapsedWidth={56}
+			collapsedWidth={50}
 			onCollapse={onToggleCollapsed}>
 			<Menu
 				theme="light"
