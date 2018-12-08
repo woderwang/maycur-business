@@ -36,6 +36,7 @@ gulp.task('less', () => {
         ))
         .pipe(concat('mkbs.css'))
         .pipe(cleanCss())
+        .pipe(gulp.dest('style'))
         .pipe(gulp.dest(devDestination));
 });
 gulp.task('copy', ['less'], () => {

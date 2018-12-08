@@ -1,0 +1,32 @@
+@import '../../style/variables.less';
+
+@prefix-cls:~"@{prefix}-empty";
+
+.@{prefix-cls}{
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+   
+      &-circle{
+        width:100px;
+        height:100px;
+        border-radius:100%;
+        background:#f7f7f7;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+      }
+      &-text{
+        font-size:14px;
+        color:#bcbcbc;
+        margin-top:8px;
+      }
+
+    :global{
+      .fm{
+        font-size:48px;
+        color:#c0c3cc;
+      }
+    }
+  }
