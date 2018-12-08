@@ -92,7 +92,6 @@ class Avatar extends Component {
                         <span>{this.state.abbrName}</span>
                     </span>}
             </React.Fragment>
-
         )
     }
 }
