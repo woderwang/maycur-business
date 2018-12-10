@@ -65,6 +65,11 @@
   flex: 1;
   justify-content: space-between;
 }
+.mkbs-header .right-menu .ant-menu .ant-menu-item {
+  padding: 0;
+  width: 50px;
+  text-align: center;
+}
 .mkbs-header .ant-menu {
   flex-grow: 1;
   background-color: transparent;
