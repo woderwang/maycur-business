@@ -1,13 +1,12 @@
 @import "../../../style/variables.less";
 
-@menu-padding: 40px;
-@menu-height: 50px;
+
 
 .@{prefix}-header {
   &.ant-layout-header {
     display: flex;
-    height: @menu-height;
-    padding: 0 @menu-padding 0 0;
+    height: @header-menu-height;
+    padding: 0 16px 0 0;
     background-color: @maycur-color;
   }
 
@@ -16,7 +15,7 @@
     align-items: center;
     justify-content: space-between;
     width: @menu-width;
-    padding-left: @menu-padding;
+    padding-left: @header-menu-left-padding;
     color: #fff;
     font-size: 20px;
     transition: all .2s;
@@ -38,7 +37,7 @@
     }
 
     &-collapsed {
-      width: @menu-height;
+      width: @menu-collapsed-width;
       justify-content: center;
       padding: 0;
 
@@ -62,7 +61,7 @@
     .ant-menu {
       .ant-menu-item {
         padding: 0;
-        width: @menu-height;
+        width: @header-menu-height;
         text-align: center;
       }
     }
@@ -71,7 +70,7 @@
   .ant-menu {
     flex-grow: 1;
     background-color: transparent;
-    line-height: @menu-height;
+    line-height: @header-menu-height;
 
     .ant-menu-item {
       padding: 0 26px;

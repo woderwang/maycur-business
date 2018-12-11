@@ -12,12 +12,15 @@
     .ant-menu-item,
     .ant-menu-submenu-title {
       width: 100%;
+      height: @sider-menu-height;
+      line-height: @sider-menu-height;
 
       >a {
+        display: flex;
         color: #757575;
 
         .fm {
-          font-size: 16px;
+          font-size: 18px;
           margin-right: 10px;
           color: #a3abbe;
         }
@@ -41,7 +44,7 @@
   }
 
   .ant-menu-inline-collapsed {
-    width: 50px;
+    width: @menu-collapsed-width;
 
     >.ant-menu-submenu {
       &.ant-menu-submenu-selected {

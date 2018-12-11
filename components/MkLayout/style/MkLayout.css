@@ -25,7 +25,7 @@
 .mkbs-header.ant-layout-header {
   display: flex;
   height: 50px;
-  padding: 0 40px 0 0;
+  padding: 0 16px 0 0;
   background-color: #3296FA;
 }
 .mkbs-header-logo {
@@ -33,7 +33,7 @@
   align-items: center;
   justify-content: space-between;
   width: 240px;
-  padding-left: 40px;
+  padding-left: 44px;
   color: #fff;
   font-size: 20px;
   transition: all 0.2s;
@@ -50,7 +50,7 @@
   cursor: pointer;
 }
 .mkbs-header-logo-collapsed {
-  width: 50px;
+  width: 56px;
   justify-content: center;
   padding: 0;
 }
@@ -102,14 +102,17 @@
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item,
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title {
   width: 100%;
+  height: 44px;
+  line-height: 44px;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a,
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a {
+  display: flex;
   color: #757575;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a .fm,
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a .fm {
-  font-size: 16px;
+  font-size: 18px;
   margin-right: 10px;
   color: #a3abbe;
 }
@@ -130,7 +133,7 @@
   color: #3296FA;
 }
 .mkbs-sider .ant-menu-inline-collapsed {
-  width: 50px;
+  width: 56px;
 }
 .mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu.ant-menu-submenu-selected > .ant-menu-submenu-title {
   border-left-color: #3296FA;

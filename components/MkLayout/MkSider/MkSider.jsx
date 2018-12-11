@@ -21,12 +21,12 @@ const MkSider = (props) => {
 			trigger={null}
 			collapsible
 			collapsed={collapsed}
-			collapsedWidth={50}
+			collapsedWidth={56}
 			onCollapse={onToggleCollapsed}>
 			<Menu
 				theme="light"
 				mode="inline"
-				inlineIndent="40"
+				inlineIndent="44"
 				selectedKeys={selectedKeys}
 				style={{ height: '100%', borderRight: 0 }}
 			>
