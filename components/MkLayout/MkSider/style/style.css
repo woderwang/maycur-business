@@ -68,6 +68,9 @@
   margin-top: 4px;
   margin-bottom: 8px;
 }
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu .ant-menu-item {
+  padding-left: 72px !important;
+}
 .mkbs-sider .ant-menu-inline-collapsed {
   width: 56px;
 }
