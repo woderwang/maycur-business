@@ -23,7 +23,7 @@
   line-height: 50px;
 }
 .mkbs-sider {
-  box-shadow: 0 0 4px 0 rgba(150, 150, 150, 0.6);
+  box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, 0.6);
   z-index: 10;
   background-color: #fff;
 }
@@ -63,6 +63,10 @@
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item:hover > a .fm,
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title:hover > a .fm {
   color: #3296FA;
+}
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu {
+  margin-top: 4px;
+  margin-bottom: 8px;
 }
 .mkbs-sider .ant-menu-inline-collapsed {
   width: 56px;
