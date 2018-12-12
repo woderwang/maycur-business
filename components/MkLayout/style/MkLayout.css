@@ -78,8 +78,14 @@
 .mkbs-header .ant-menu .ant-menu-item {
   padding: 0 26px;
 }
+.mkbs-header .ant-menu .ant-menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.mkbs-header .ant-menu .ant-menu-item > a {
+  color: #fff;
+}
 .mkbs-header .ant-menu .ant-menu-item.ant-menu-item-selected {
-  background-color: #2074D4;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .mkbs-header .ant-menu .ant-menu-item-group-title {
   display: none;

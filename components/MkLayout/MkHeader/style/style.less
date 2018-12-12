@@ -74,9 +74,17 @@
 
     .ant-menu-item {
       padding: 0 26px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .05);
+      }
+
+      > a {
+        color: #fff;
+      }
       
       &.ant-menu-item-selected {
-        background-color: #2074D4;
+        background-color: rgba(0, 0, 0, .1);
       }
     }
 
