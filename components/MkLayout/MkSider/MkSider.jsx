@@ -36,6 +36,10 @@ const MkSider = (props) => {
 						return null;
 					}
 					menu.menuName = menu.meta.name;
+					const content = props.renderMenu(menu);
+					if (!content) {
+						return null;
+					}
 					if (menu.routes) {
 						return (
 							<SubMenu key={menu.path} title={props.renderMenu(menu)}>
@@ -48,7 +52,7 @@ const MkSider = (props) => {
 					} else {
 						return (
 							<Menu.Item key={menu.path}>
-								{props.renderMenu(menu)}
+								{content}
 							</Menu.Item>
 						)
 					}

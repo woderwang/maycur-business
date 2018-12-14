@@ -56,9 +56,13 @@ const MkHeader = (props) => {
           >
             {leftMenus.map(menu => {
               const formattedMenus = formatMenus(menu);
+              const content = props.renderMenu(formattedMenus);
+              if (!content) {
+                return null;
+              }
               return (
                 <Menu.Item key={menu.path}>
-                  {props.renderMenu(formattedMenus)}
+                  {content}
                 </Menu.Item>
               )
             })}

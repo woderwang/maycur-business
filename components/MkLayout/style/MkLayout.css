@@ -115,6 +115,7 @@
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a {
   display: flex;
   color: #757575;
+  align-items: center;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a .fm,
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a .fm {
@@ -144,6 +145,13 @@
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu .ant-menu-item {
   padding-left: 72px !important;
+}
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu .ant-menu-item .ant-badge-multiple-words {
+  padding: 0 5px;
+}
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu .ant-menu-item .ant-badge-count {
+  height: 18px;
+  line-height: 18px;
 }
 .mkbs-sider .ant-menu-inline-collapsed {
   width: 56px;
