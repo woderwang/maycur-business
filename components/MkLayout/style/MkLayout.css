@@ -112,19 +112,25 @@
   line-height: 44px;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a,
-.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a {
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > span,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > span {
   display: flex;
   color: #757575;
   align-items: center;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a .fm,
-.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a .fm {
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a .fm,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > span .fm,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > span .fm {
   font-size: 18px;
   margin-right: 10px;
   color: #a3abbe;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a:focus,
-.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a:focus {
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a:focus,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > span:focus,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > span:focus {
   text-decoration: none;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item.ant-menu-item-selected > a,
@@ -139,19 +145,22 @@
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title:hover > a .fm {
   color: #3296FA;
 }
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item .ant-badge-multiple-words {
+  padding: 0 5px;
+}
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item .ant-badge-count {
+  height: 18px;
+  line-height: 18px;
+}
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item-divider {
+  margin: 10px 0;
+}
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu {
   margin-top: 4px;
   margin-bottom: 8px;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu .ant-menu-item {
   padding-left: 72px !important;
-}
-.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu .ant-menu-item .ant-badge-multiple-words {
-  padding: 0 5px;
-}
-.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu .ant-menu-item .ant-badge-count {
-  height: 18px;
-  line-height: 18px;
 }
 .mkbs-sider .ant-menu-inline-collapsed {
   width: 56px;

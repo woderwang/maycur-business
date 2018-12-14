@@ -7,16 +7,11 @@ const prefix = 'mkbs';
 const { Header } = Layout;
 
 const MkHeader = (props) => {
-  const { collapsed, pathname, onToggleCollapsed, leftMenus, rightMenus, logoUrl } = props;
+  const { collapsed, pathArr, onToggleCollapsed, leftMenus, rightMenus } = props;
 
-  let selectedKeys = [];
+
   const menus = leftMenus.concat(rightMenus);
-  _.forEach(menus, item => {
-    let routeReg = new RegExp(`^${item.path}`);
-    if (routeReg.test(pathname)) {
-      selectedKeys.push(item.path);
-    }
-  });
+  const selectedKeys = pathArr.length > 1 ? [`/${pathArr[1]}`] : [menus[0].path];
 
   const formatMenus = (menu) => {
     const menuName = menu.meta && menu.meta.name || '';
@@ -39,7 +34,7 @@ const MkHeader = (props) => {
       <div className={logoAreaClassName}>
         {/* logo */}
         <div className="logo-content">
-          <span><img src={logoUrl} alt="每刻报" /></span>
+          <span><img src="https://dt-prod.oss-cn-hangzhou.aliyuncs.com/MK/maycur-logo.png?Expires=4699823897&OSSAccessKeyId=LTAIW3TdsFRisDtO&Signature=Zt%2FTp0ueRbZeUQN9xOQjZjI5iNI%3D" alt="每刻报" /></span>
         </div>
         {/* 收缩按钮 */}
         <Icon onClick={toggleCollapsed} className="trigger" type={collapsed ? 'menu-unfold' : 'menu-fold'} />
@@ -47,6 +42,7 @@ const MkHeader = (props) => {
 
       {/* menu area */}
       <div className={`${prefix}-header-menus`}>
+        {/*  头部左侧菜单 */}
         <div className="left-menu">
           <Menu
             theme="dark"
@@ -54,7 +50,7 @@ const MkHeader = (props) => {
             defaultSelectedKeys={[menus[0].path]}
             selectedKeys={selectedKeys}
           >
-            {leftMenus.map(menu => {
+            {leftMenus.map((menu, index) => {
               const formattedMenus = formatMenus(menu);
               const content = props.renderMenu(formattedMenus);
               if (!content) {
@@ -68,6 +64,8 @@ const MkHeader = (props) => {
             })}
           </Menu>
         </div>
+
+        {/* 头部右侧菜单 */}
         {rightMenus && rightMenus.length ?
           <div className="right-menu">
             <Menu
@@ -76,7 +74,7 @@ const MkHeader = (props) => {
               defaultSelectedKeys={[menus[0].path]}
               selectedKeys={selectedKeys}
             >
-              {rightMenus.map(menu => {
+              {rightMenus.map((menu, index) => {
                 const formattedMenus = formatMenus(menu);
                 return (
                   <Menu.Item key={menu.path}>
