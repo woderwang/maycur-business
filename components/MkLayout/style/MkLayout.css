@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 240px;
+  width: 220px;
   padding-left: 44px;
   color: #fff;
   font-size: 20px;
@@ -175,7 +175,8 @@
   padding: 0 16px !important;
   border-left: 3px solid transparent;
 }
-.mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .fm + span {
+.mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .fm + span,
+.mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .ant-badge {
   max-width: 0;
   display: inline-block;
   opacity: 0;
@@ -201,5 +202,4 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  background-color: #fff;
 }
