@@ -158,6 +158,8 @@
 }
 .mkbs-mktable-container {
   position: relative;
+  flex: 1;
+  /* 覆盖antd样式 */
 }
 .mkbs-mktable-container table > thead th {
   padding-left: 20px;
@@ -202,6 +204,41 @@
 .mkbs-mktable-container .data-emtpy :global .fm-prompt {
   font-size: 20px;
   margin-right: 8px;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading {
+  height: 100%;
+  display: flex;
+  flex: 1;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table {
+  flex: 1;
+  display: flex;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content {
+  flex: 1;
+  display: flex;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll .ant-table-body {
+  flex: 1;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-pagination.ant-table-pagination {
+  display: flex;
+  justify-content: flex-end;
 }
 .mkbs-mktable-custom-pop {
   padding: 0;

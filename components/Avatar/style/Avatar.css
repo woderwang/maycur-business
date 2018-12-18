@@ -37,12 +37,14 @@
   background-color: #efefef;
   color: #fff;
   font-size: 12px;
-  display: inline-block;
 }
 .mkbs-avatar-img -img {
   width: 36px;
   height: 36px;
   border-radius: 50%;
+}
+.mkbs-avatar.c0 {
+  color: #3296FA;
 }
 .mkbs-avatar.c1 {
   color: #3296FA;

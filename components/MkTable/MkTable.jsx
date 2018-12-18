@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2018-11-29 17:55:18
+ * @Last Modified time: 2018-12-18 19:10:23
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -14,8 +14,9 @@ import _ from 'lodash';
 import { DateFilter, FuzzFilter, CheckFilter } from './FilterDropDown';
 import FilterStateBar from './FilterStateBar';
 import PopSelect from './PopSelect/PopSelect';
-// import styles from './MkTable.less';
-let prefix = 'mkbs';
+import utils from '../utils/utils';
+
+let prefix = utils.prefixCls;
 /* title 宽度变动 */
 const ResizeableTitle = (props) => {
     const { onResize, width, ...restProps } = props;
@@ -60,7 +61,7 @@ let MkTable = (option) => WrapperComponent => {
                 selectAble: false,
                 selectAbleLock: false,
                 sorter: {},
-                hideColumnCodeList: []
+                hideColumnCodeList: [],
             };
             this.components = {
                 header: {
@@ -68,6 +69,7 @@ let MkTable = (option) => WrapperComponent => {
                 },
             };
             this.fetchDataSourceFn = null;
+            this.tableRef = null;
         }
 
         /* column转化，用于自定义的filter dropdown效果 */
@@ -204,6 +206,7 @@ let MkTable = (option) => WrapperComponent => {
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
             const { rowKey, rowSelection: rowSelectionOption } = params;
             this.rowKey = rowKey;
+            let parentNodeHeight;
             let rowSelection = {
                 ...rowSelectionOption,
                 onChange: (selectedRowKeys, selectedRows) => {
@@ -214,14 +217,21 @@ let MkTable = (option) => WrapperComponent => {
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
             })
+            if (this.tableRef) {
+                let parentNode = this.tableRef.parentNode;
+                if (parentNode) {
+                    parentNodeHeight = parentNode.clientHeight;
+                }
+            }
+
             return (
-                <div className={`${prefix}-mktable-container`}>
+                <div className={`${prefix}-mktable-container ${option.isFixHeader ? 'fix-header' : 'fix-header'}`} ref={(ref) => { this.tableRef = ref; }} >
                     <Table
                         {...params}
                         rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
                         components={this.components}
                         columns={visibleColumns}
-                        scroll={option.isFixHeader ? { y: 500 } : undefined}
+                        scroll={{ y: true }}
                         pagination={option.hidePagination ? false : pagination}
                         dataSource={dataSource}
                         onChange={this.onChange}
@@ -404,7 +414,6 @@ let MkTable = (option) => WrapperComponent => {
             )
         }
 
-        /*  */
         setHideColumnCodeList = (data) => {
             const { columns } = this.state;
             let hideColumnCodeList = [];
