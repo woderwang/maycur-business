@@ -7,6 +7,7 @@
 @table-cell-padding: 20px;
 .@{prefix}-mktable-container {
     position: relative;
+    flex: 1;
     table>thead {
         th {
             padding-left: @table-cell-padding;
@@ -54,6 +55,44 @@
             .fm-prompt {
                 font-size: 20px;
                 margin-right: 8px;
+            }
+        }
+    }
+    /* 覆盖antd样式 */
+    &.fix-header {
+        .ant-table-wrapper {
+            display: flex;
+            flex: 1;
+            height: 100%;
+            .ant-spin-nested-loading {
+                height: 100%;
+                display: flex;
+                flex: 1;
+                .ant-spin-container {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    .ant-table {
+                        flex: 1;
+                        display: flex;
+                        .ant-table-content {
+                            flex: 1;
+                            display: flex;                            
+                            .ant-table-scroll {
+                                display: flex;
+                                flex: 1;
+                                flex-direction: column;
+                                .ant-table-body{
+                                    flex:1;
+                                }
+                            }
+                        }
+                    }
+                    .ant-pagination.ant-table-pagination {
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+                }
             }
         }
     }
