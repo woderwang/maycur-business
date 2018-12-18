@@ -15,7 +15,7 @@ const MkSider = (props) => {
 			breakpoint="xl"
 			theme="light"
 			className={`${prefix}-sider`}
-			width={240}
+			width={220}
 			trigger={null}
 			collapsible
 			collapsed={collapsed}
