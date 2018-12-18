@@ -66,8 +66,8 @@ gulp.task('babel', ['copy'], () => {
                 next();
             })
         )
-        .pipe(gulp.dest(esDestination))
-        .pipe(gulp.dest(libDestination))
+        // .pipe(gulp.dest(esDestination))
+        // .pipe(gulp.dest(libDestination))
         .pipe(gulp.dest(devDestination))
         .on('end', function () {
             if (mode === 'dev' && !!developDir) {
@@ -94,7 +94,7 @@ async function build() {
 };
 build().then(() => {
     if (mode === 'dev') {
-        gulp.watch([lessPath, jsPath], build);
+        gulp.watch([lessPath, jsPath], ['babel']);
     }
 });
 

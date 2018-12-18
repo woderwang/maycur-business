@@ -7,55 +7,15 @@
 @table-cell-padding: 20px;
 .@{prefix}-mktable-container {
     position: relative;
-    flex: 1;
-    table>thead {
-        th {
-            padding-left: @table-cell-padding;
-            padding-right: @table-cell-padding;
-            font-size: 14px !important;
-            font-weight: 200 !important;
-            color: #000 !important;
-        }
-    }
-    table>tbody {
-        td {
-            padding-left: @table-cell-padding;
-            padding-right: @table-cell-padding;
-        }
-    }
-    .react-resizable {
-        position: relative;
-    }
-    .react-resizable-handle {
-        position: absolute;
-        width: 10px;
-        height: 100%;
-        bottom: 0;
-        right: -5px;
-        cursor: col-resize;
-    }
-    .mk-table-filter-selected.mkicon-filter-o {
-        color: @maycur-color;
-    }
-    .ant-table-empty .ant-table-body {
-        overflow-x: hidden !important;
-    } //固定table loading位置
-    .ant-spin-nested-loading>div>.ant-spin {
-        height: 360px;
-    }
-    .ant-table-placeholder {
-        border-bottom: none;
-    }
+    flex: 1;     
     .data-emtpy {
         height: 300px;
         display: flex;
         justify-content: center;
         align-items: center;
-        :global {
-            .fm-prompt {
-                font-size: 20px;
-                margin-right: 8px;
-            }
+        .fm-prompt {
+            font-size: 20px;
+            margin-right: 8px;
         }
     }
     /* 覆盖antd样式 */
@@ -77,13 +37,13 @@
                         display: flex;
                         .ant-table-content {
                             flex: 1;
-                            display: flex;                            
+                            display: flex;
                             .ant-table-scroll {
                                 display: flex;
                                 flex: 1;
                                 flex-direction: column;
-                                .ant-table-body{
-                                    flex:1;
+                                .ant-table-body {
+                                    flex: 1;
                                 }
                             }
                         }
@@ -91,9 +51,18 @@
                     .ant-pagination.ant-table-pagination {
                         display: flex;
                         justify-content: flex-end;
+                        align-items: center;
                     }
                 }
             }
+        }
+    }
+    .ant-pagination-options{
+        display: flex;
+        align-items: center;
+        .ant-select-selection__rendered{
+            padding-right:8px;
+            padding-left:8px;
         }
     }
 }

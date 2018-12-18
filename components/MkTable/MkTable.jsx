@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2018-12-18 19:10:23
+ * @Last Modified time: 2018-12-18 21:32:26
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import { Table, Icon, Button } from 'maycur-antd';
 import { Resizable } from 'react-resizable';
 import _ from 'lodash';
+import classnames from 'classnames';
 import { DateFilter, FuzzFilter, CheckFilter } from './FilterDropDown';
 import FilterStateBar from './FilterStateBar';
 import PopSelect from './PopSelect/PopSelect';
@@ -40,6 +41,14 @@ let MkTable = (option) => WrapperComponent => {
         firstDisplayColumns: []
     }
     option = Object.assign(defaultOption, option);
+    let defaultPageSizeOptions = [10, 20, 30, 40];
+    if(option.pageSize){
+        defaultPageSizeOptions.push(option.pageSize);
+        defaultPageSizeOptions.sort((a,b)=>{return a-b});
+    }
+    _.forEach(defaultPageSizeOptions,(val,index)=>{
+        defaultPageSizeOptions[index] = val+'';
+    });
     return class extends Component {
         constructor(props) {
             super(props);
@@ -50,10 +59,13 @@ let MkTable = (option) => WrapperComponent => {
                 loading: false,
                 loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
                 pagination: {
-                    pageSize: option && option.pageSize ? option.pageSize : 10,
+                    pageSize: option && option.pageSize ? option.pageSize : 10,      
+                    defaultPageSize:option && option.pageSize ? option.pageSize : 10,
                     showTotal: (total) => {
                         return <span>总数{total}条</span>
                     },
+                    pageSizeOptions: defaultPageSizeOptions,
+                    showSizeChanger: true,
                     total: 0,
                 },
                 selectedRows: [],
@@ -205,27 +217,33 @@ let MkTable = (option) => WrapperComponent => {
         generateTable = (params) => {
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
             const { rowKey, rowSelection: rowSelectionOption } = params;
+            const { onSelectionChange, ...restRowSelection } = rowSelection || {};
             this.rowKey = rowKey;
-            let parentNodeHeight;
+            // let parentNodeHeight;
             let rowSelection = {
                 ...rowSelectionOption,
                 onChange: (selectedRowKeys, selectedRows) => {
                     this.setState({ selectedRows, selectedRowKeys });
+                    onSelectionChange && onSelectionChange(selectedRowKeys);
                 },
-                selectedRowKeys: selectedRowKeys
+                selectedRowKeys: selectedRowKeys,
+                ...restRowSelection
             };
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
+            });
+            // if (this.tableRef) {
+            //     let parentNode = this.tableRef.parentNode;
+            //     if (parentNode) {
+            //         parentNodeHeight = parentNode.clientHeight;
+            //     }
+            // }            
+            let tableCls = classnames(`${prefix}-mktable-container fix-header`, {
+                'empty': !dataSource || (dataSource && dataSource.length === 0)
             })
-            if (this.tableRef) {
-                let parentNode = this.tableRef.parentNode;
-                if (parentNode) {
-                    parentNodeHeight = parentNode.clientHeight;
-                }
-            }
 
             return (
-                <div className={`${prefix}-mktable-container ${option.isFixHeader ? 'fix-header' : 'fix-header'}`} ref={(ref) => { this.tableRef = ref; }} >
+                <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                     <Table
                         {...params}
                         rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
@@ -339,6 +357,7 @@ let MkTable = (option) => WrapperComponent => {
                                 selectedRowKeys: rebuildSelectedRowKeys,
                                 pagination: {
                                     ...pagination,
+                                    showQuickJumper: pagination.pageSize < resp.total,
                                     total: resp.total
                                 }
                             }
