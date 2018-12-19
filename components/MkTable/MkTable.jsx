@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2018-12-18 21:32:26
+ * @Last Modified time: 2018-12-19 15:28:59
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -217,27 +217,19 @@ let MkTable = (option) => WrapperComponent => {
         generateTable = (params) => {
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
             const { rowKey, rowSelection: rowSelectionOption } = params;
-            const { onSelectionChange, ...restRowSelection } = rowSelection || {};
-            this.rowKey = rowKey;
-            // let parentNodeHeight;
+            const { onSelectionChange} = rowSelectionOption || {};
+            this.rowKey = rowKey;            
             let rowSelection = {
                 ...rowSelectionOption,
                 onChange: (selectedRowKeys, selectedRows) => {
                     this.setState({ selectedRows, selectedRowKeys });
                     onSelectionChange && onSelectionChange(selectedRowKeys);
                 },
-                selectedRowKeys: selectedRowKeys,
-                ...restRowSelection
+                selectedRowKeys: selectedRowKeys,                
             };
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
-            });
-            // if (this.tableRef) {
-            //     let parentNode = this.tableRef.parentNode;
-            //     if (parentNode) {
-            //         parentNodeHeight = parentNode.clientHeight;
-            //     }
-            // }            
+            });                     
             let tableCls = classnames(`${prefix}-mktable-container fix-header`, {
                 'empty': !dataSource || (dataSource && dataSource.length === 0)
             })
