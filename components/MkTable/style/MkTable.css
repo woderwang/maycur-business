@@ -159,6 +159,7 @@
 .mkbs-mktable-container {
   position: relative;
   flex: 1;
+  overflow: auto;
   /* 覆盖antd样式 */
 }
 .mkbs-mktable-container .data-emtpy {
@@ -175,24 +176,31 @@
   display: flex;
   flex: 1;
   height: 100%;
+  overflow: auto;
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading {
   height: 100%;
   display: flex;
   flex: 1;
+  overflow: auto;
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table {
   flex: 1;
   display: flex;
 }
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table.ant-table-fixed-header {
+  overflow: auto;
+}
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content {
   flex: 1;
   display: flex;
+  overflow: auto;
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll {
   display: flex;
@@ -201,17 +209,21 @@
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll .ant-table-body {
   flex: 1;
+  overflow-y: auto !important;
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-pagination.ant-table-pagination {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.mkbs-mktable-container .ant-pagination-options {
+.mkbs-mktable-container.fix-header.enable-scroll-x .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content {
+  overflow: unset;
+}
+.mkbs-mktable-container.fix-header .ant-pagination-options {
   display: flex;
   align-items: center;
 }
-.mkbs-mktable-container .ant-pagination-options .ant-select-selection__rendered {
+.mkbs-mktable-container.fix-header .ant-pagination-options .ant-select-selection__rendered {
   padding-right: 8px;
   padding-left: 8px;
 }

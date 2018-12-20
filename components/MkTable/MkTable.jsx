@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2018-12-19 15:28:59
+ * @Last Modified time: 2018-12-20 19:20:10
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -42,12 +42,12 @@ let MkTable = (option) => WrapperComponent => {
     }
     option = Object.assign(defaultOption, option);
     let defaultPageSizeOptions = [10, 20, 30, 40];
-    if(option.pageSize){
+    if (option.pageSize) {
         defaultPageSizeOptions.push(option.pageSize);
-        defaultPageSizeOptions.sort((a,b)=>{return a-b});
+        defaultPageSizeOptions.sort((a, b) => { return a - b });
     }
-    _.forEach(defaultPageSizeOptions,(val,index)=>{
-        defaultPageSizeOptions[index] = val+'';
+    _.forEach(defaultPageSizeOptions, (val, index) => {
+        defaultPageSizeOptions[index] = val + '';
     });
     return class extends Component {
         constructor(props) {
@@ -59,8 +59,8 @@ let MkTable = (option) => WrapperComponent => {
                 loading: false,
                 loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
                 pagination: {
-                    pageSize: option && option.pageSize ? option.pageSize : 10,      
-                    defaultPageSize:option && option.pageSize ? option.pageSize : 10,
+                    pageSize: option && option.pageSize ? option.pageSize : 10,
+                    defaultPageSize: option && option.pageSize ? option.pageSize : 10,
                     showTotal: (total) => {
                         return <span>总数{total}条</span>
                     },
@@ -216,24 +216,26 @@ let MkTable = (option) => WrapperComponent => {
         /* 生成table */
         generateTable = (params) => {
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
-            const { rowKey, rowSelection: rowSelectionOption } = params;
-            const { onSelectionChange} = rowSelectionOption || {};
-            this.rowKey = rowKey;            
+            const { rowKey, scroll, rowSelection: rowSelectionOption } = params;
+            const { onSelectionChange } = rowSelectionOption || {};
+            this.rowKey = rowKey;
             let rowSelection = {
                 ...rowSelectionOption,
                 onChange: (selectedRowKeys, selectedRows) => {
                     this.setState({ selectedRows, selectedRowKeys });
                     onSelectionChange && onSelectionChange(selectedRowKeys);
                 },
-                selectedRowKeys: selectedRowKeys,                
+                selectedRowKeys: selectedRowKeys,
             };
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
-            });                     
-            let tableCls = classnames(`${prefix}-mktable-container fix-header`, {
-                'empty': !dataSource || (dataSource && dataSource.length === 0)
+            });
+            let tableCls = classnames(`${prefix}-mktable-container`, {
+                'empty': !dataSource || (dataSource && dataSource.length === 0),
+                'enable-scroll-x': !(scroll && scroll.x),
+                'fix-header': option.isFixHeader
             })
-
+            let tableScroll = _.assign(scroll, option.isFixHeader ? { y: true } : {});            
             return (
                 <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                     <Table
@@ -241,7 +243,7 @@ let MkTable = (option) => WrapperComponent => {
                         rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
                         components={this.components}
                         columns={visibleColumns}
-                        scroll={{ y: true }}
+                        scroll={tableScroll}
                         pagination={option.hidePagination ? false : pagination}
                         dataSource={dataSource}
                         onChange={this.onChange}

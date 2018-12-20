@@ -5,10 +5,24 @@ import { Layout, Menu, Divider } from 'maycur-antd';
 const prefix = 'mkbs';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
-
+function loopPath(menus,pathArr) {
+	let matchedMenu;
+	if(!pathArr) return;
+	_.forEach(menus, menu => {
+		let pathReg = new RegExp('^' + menu.path);
+		if (menu.routes){
+			let childMenu = loopPath(menu.routes,pathArr);			
+			if(childMenu) matchedMenu = childMenu;
+		}else{
+			if (pathReg.test(pathArr.join('/'))) matchedMenu = menu;
+		}			
+	});
+	return matchedMenu;
+}
 const MkSider = (props) => {
-	const { menus, pathArr, collapsed, onToggleCollapsed } = props;
-	const selectedKeys = pathArr.length > 1 ? [`${pathArr.join('/')}`] : [menus[0].path];
+	const { menus, pathArr, collapsed, onToggleCollapsed } = props;	
+	let matchedMenu = loopPath(menus,pathArr)	
+	let selectedKeys = matchedMenu?[matchedMenu.path]:[];	
 	const defaultOpenKeys = pathArr.length > 2 ? [pathArr.slice(0, pathArr.length - 1).join('/')] : [];
 	return (
 		<Sider

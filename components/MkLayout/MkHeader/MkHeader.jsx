@@ -10,9 +10,12 @@ const MkHeader = (props) => {
   const { collapsed, pathArr, onToggleCollapsed, leftMenus, rightMenus } = props;
 
 
-  const menus = leftMenus.concat(rightMenus);
-  const selectedKeys = pathArr.length > 1 ? [`/${pathArr[1]}`] : [menus[0].path];
-
+  const menus = leftMenus.concat(rightMenus);  
+  let matchedMenu = _.find(menus,menu=>{
+    let pathReg = new RegExp('^'+menu.path);
+    return pathReg.test(pathArr.join('/'));
+  });
+  let selectedKeys  = matchedMenu?[matchedMenu.path]:[];
   const formatMenus = (menu) => {
     const menuName = menu.meta && menu.meta.name || '';
     return { ...menu, menuName };

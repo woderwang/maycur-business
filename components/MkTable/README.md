@@ -22,7 +22,7 @@
 #### option
 |name|type|description|default|
 |:--|:--|:--|:--|
-|isFixHeader|boolean|是否固定表头|false|
+|isFixHeader(已失效)|boolean|是否固定表头(已失效)|false|
 |resizeAble|boolean|是否可拖动column的宽度|false|
 |disableLoad|boolean|是否可拖动column的宽度|false|
 |hidePagination|boolean|是否可拖动column的宽度|false|
