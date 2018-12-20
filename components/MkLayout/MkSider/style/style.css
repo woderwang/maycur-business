@@ -114,7 +114,8 @@
 .mkbs-sider .ant-menu-inline-collapsed .ant-menu-item.ant-menu-item-selected {
   border-left-color: #3296FA;
 }
-.mkbs-sider .ant-menu-inline-collapsed .ant-menu-item .fm + span {
+.mkbs-sider .ant-menu-inline-collapsed .ant-menu-item .fm + span,
+.mkbs-sider .ant-menu-inline-collapsed .ant-menu-item .ant-badge {
   max-width: 0;
   display: inline-block;
   opacity: 0;
