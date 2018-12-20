@@ -28,6 +28,7 @@
   border-radius: 50%;
 }
 .mkbs-avatar {
+  display: inline-block;
   flex-shrink: 0;
   text-align: center;
   height: 36px;
@@ -37,11 +38,6 @@
   background-color: #efefef;
   color: #fff;
   font-size: 12px;
-}
-.mkbs-avatar-img -img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
 }
 .mkbs-avatar.c0 {
   color: #3296FA;
