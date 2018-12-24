@@ -4,6 +4,7 @@
 @import '../FilterDropDown/CheckFilter/style/style.less';
 @import '../FilterDropDown/DateFilter/style/style.less';
 @import '../FilterDropDown/FuzzFilter/style/style.less';
+@import '../../Empty/style/empty.less';
 @table-cell-padding: 20px;
 .@{prefix}-mktable-container {
     position: relative;
@@ -17,6 +18,22 @@
         .fm-prompt {
             font-size: 20px;
             margin-right: 8px;
+        }
+    }
+    .ant-table-content{
+        .ant-table-scroll{
+            position: relative;
+            min-height: 400px;
+            .ant-table-placeholder{
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                width:100%;
+                margin:auto 0;
+                height: 300px;
+                border:0;
+            }
         }
     }
     /* 覆盖antd样式 */

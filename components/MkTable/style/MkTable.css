@@ -156,6 +156,30 @@
 .mkbs-fuzz-filter :global .mk-btn {
   margin-left: 10px;
 }
+.mkbs-empty {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mkbs-empty-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mkbs-empty-text {
+  font-size: 14px;
+  color: #bcbcbc;
+  margin-top: 8px;
+}
+.mkbs-empty :global .fm {
+  font-size: 48px;
+  color: #c0c3cc;
+}
 .mkbs-mktable-container {
   position: relative;
   flex: 1;
@@ -171,6 +195,20 @@
 .mkbs-mktable-container .data-emtpy .fm-prompt {
   font-size: 20px;
   margin-right: 8px;
+}
+.mkbs-mktable-container .ant-table-content .ant-table-scroll {
+  position: relative;
+  min-height: 400px;
+}
+.mkbs-mktable-container .ant-table-content .ant-table-scroll .ant-table-placeholder {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: auto 0;
+  height: 300px;
+  border: 0;
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper {
   display: flex;

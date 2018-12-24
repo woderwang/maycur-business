@@ -15,6 +15,7 @@ import classnames from 'classnames';
 import { DateFilter, FuzzFilter, CheckFilter } from './FilterDropDown';
 import FilterStateBar from './FilterStateBar';
 import PopSelect from './PopSelect/PopSelect';
+import Empty from '../Empty';
 import utils from '../utils/utils';
 
 let prefix = utils.prefixCls;
@@ -249,11 +250,8 @@ let MkTable = (option) => WrapperComponent => {
                         onChange={this.onChange}
                         loading={{ ...loadProps, spinning: loading }}
                         locale={
-                            {
-                                emptyText: () => (<div className={'data-emtpy'}>
-                                    <span className={'fm fm-prompt'}></span>
-                                    <span>暂无数据</span>
-                                </div>)
+                            {                                
+                                emptyText: () => (<Empty />)
                             }
                         }
                     />
@@ -438,9 +436,9 @@ let MkTable = (option) => WrapperComponent => {
             })
             this.setState({ hideColumnCodeList });
         }
-        
-        widthMonitor = () => {    
-            /* minColumnWidth表格的最小宽度,用于解决长表格被挤压的情况 */        
+
+        widthMonitor = () => {
+            /* minColumnWidth表格的最小宽度,用于解决长表格被挤压的情况 */
             const { columns } = this.state;
             let tableMinWidth = 0;
             let minColumnWidth = 100;
