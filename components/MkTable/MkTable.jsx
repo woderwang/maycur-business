@@ -235,7 +235,7 @@ let MkTable = (option) => WrapperComponent => {
                 'enable-scroll-x': !(scroll && scroll.x),
                 'fix-header': option.isFixHeader
             })
-            let tableScroll = _.assign(scroll, option.isFixHeader ? { y: true } : {});            
+            let tableScroll = _.assign(scroll, option.isFixHeader ? { y: true } : {});
             return (
                 <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                     <Table
@@ -437,6 +437,21 @@ let MkTable = (option) => WrapperComponent => {
                 }
             })
             this.setState({ hideColumnCodeList });
+        }
+        
+        widthMonitor = () => {    
+            /* minColumnWidth表格的最小宽度,用于解决长表格被挤压的情况 */        
+            const { columns } = this.state;
+            let tableMinWidth = 0;
+            let minColumnWidth = 100;
+            if (columns.length >= 5) {
+                _.forEach(columns, col => {
+                    tableMinWidth += col.width && col.width > 0 ? col.width : minColumnWidth;
+                });
+            }
+            return {
+                tableMinWidth
+            }
         }
 
         render() {
