@@ -1,13 +1,29 @@
 @import '../../../../style/variables.less';
 .@{prefix}-fuzz-filter {
     padding: 10px;
-    background: #fff;
-    border: 1px solid @border-color;
+    background:#fff;
+    border:1px solid @border-color;
     border-radius: 4px;
     display: flex;
+    flex-direction: column;
     :global {
         .mk-btn {
             margin-left: 10px;
+        }
+    }
+
+    .search-list{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li{
+            padding: 10px 0 10px 10px;
+            cursor: pointer;
+        }
+
+        li:hover{
+            background-color: @lighter-background;
         }
     }
 }

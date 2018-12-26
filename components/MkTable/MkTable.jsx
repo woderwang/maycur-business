@@ -105,7 +105,13 @@ let MkTable = (option) => WrapperComponent => {
                     } else if (col.filterOption.type === 'search') {
                         col.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => {
                             return (
-                                <FuzzFilter />
+                                <FuzzFilter 
+                                    {...col}
+                                    setSelectedKeys={setSelectedKeys}
+                                    selectedKeys={selectedKeys}
+                                    confirm={confirm}
+                                    clearFilters={clearFilters}
+                                />
                             )
                         };
                     } else if (col.filterOption.type === 'checkbox') {
@@ -237,6 +243,7 @@ let MkTable = (option) => WrapperComponent => {
                 'fix-header': option.isFixHeader
             })
             let tableScroll = _.assign(scroll, option.isFixHeader ? { y: true } : {});
+            console.log(pagination)
             return (
                 <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                     <Table
