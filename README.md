@@ -16,3 +16,9 @@ module.exports = {
     '/Users/woder/maycur/maycur-form-web/src/mkbs/lib'
 }
 ```
+### 发布说明
+发布的package管理在[maycur-business-package](https://github.com/woderwang/maycur-business-package)
+把当前目录下的lib,es复制到发布项目中,检查maycur-business-package的package.json，它的dependence是否完整，如果要npm发布，需要更改package.json中的version版本号。
+
+### 相关参考
+1. [npm发布流程](https://itnext.io/how-to-package-your-react-component-for-distribution-via-npm-d32d4bf71b4f)
