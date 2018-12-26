@@ -243,7 +243,6 @@ let MkTable = (option) => WrapperComponent => {
                 'fix-header': option.isFixHeader
             })
             let tableScroll = _.assign(scroll, option.isFixHeader ? { y: true } : {});
-            console.log(pagination)
             return (
                 <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                     <Table
