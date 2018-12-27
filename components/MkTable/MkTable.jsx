@@ -69,6 +69,7 @@ let MkTable = (option) => WrapperComponent => {
                     showSizeChanger: true,
                     total: 0,
                 },
+                allSelectedRows: [],
                 selectedRows: [],
                 selectedRowKeys: [],
                 selectAble: false,
@@ -231,6 +232,18 @@ let MkTable = (option) => WrapperComponent => {
                 onChange: (selectedRowKeys, selectedRows) => {
                     this.setState({ selectedRows, selectedRowKeys });
                     onSelectionChange && onSelectionChange(selectedRowKeys);
+                },
+                onSelect: (record, selected, selectedRows, nativeEvent) => {
+                    let { allSelectedRows } = this.state;
+                    if (selected) {
+                        allSelectedRows.push(record);
+                    } else {
+                        let selectIndex = _.findIndex(allSelectedRows, { [`${this.rowKey}`]: record[this.rowKey] });
+                        if (selectIndex > -1) {
+                            allSelectedRows.splice(selectIndex);
+                        }
+                    }
+                    this.setState({ allSelectedRows })
                 },
                 selectedRowKeys: selectedRowKeys,
             };
