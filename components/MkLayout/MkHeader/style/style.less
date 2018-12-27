@@ -71,6 +71,9 @@
     flex-grow: 1;
     background-color: transparent;
     line-height: @header-menu-height;
+    height: @header-menu-height;
+    display: flex;
+    align-items: center;
 
     .ant-menu-item {
       padding: 0 26px;
@@ -97,6 +100,23 @@
 
       .ant-menu-item {
         padding: 0 16px;
+      }
+    }
+  }
+}
+
+.ant-menu-submenu-popup {
+  &.ant-menu-dark {
+    .ant-menu-sub {
+      background-color: #fff;
+      .ant-menu-item {
+        padding: 0;
+        color: rgba(0, 0, 0, .65);
+
+        >span {
+          display: block;
+          padding: 0 16px;
+        }
       }
     }
   }
