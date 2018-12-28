@@ -70,6 +70,12 @@
   width: 50px;
   text-align: center;
 }
+.mkbs-header .right-menu .ant-menu .ant-menu-submenu:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.mkbs-header .right-menu .ant-menu .ant-menu-submenu .ant-menu-submenu-title {
+  font-size: 18px;
+}
 .mkbs-header .ant-menu {
   flex-grow: 1;
   background-color: transparent;
@@ -104,7 +110,11 @@
 }
 .ant-menu-submenu-popup.ant-menu-dark .ant-menu-sub .ant-menu-item {
   padding: 0;
+  margin: 0;
   color: rgba(0, 0, 0, 0.65);
+}
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-sub .ant-menu-item:hover {
+  color: #3296FA;
 }
 .ant-menu-submenu-popup.ant-menu-dark .ant-menu-sub .ant-menu-item > span {
   display: block;
