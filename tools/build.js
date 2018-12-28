@@ -17,10 +17,12 @@ let esDestination = path.resolve(currentCwd, 'es');
 let libDestination = path.resolve(currentCwd, 'lib');
 let mode = yargs.dev === 'true' ? 'dev' : 'build';
 let developDir = bsConfig.developDir;
+let lessPath = path.resolve(currentCwd, `${targeFolderName}/**/*.less`);
+let jsPath = path.resolve(currentCwd, `${targeFolderName}/**/*.{jsx,js}`);
+console.log(developDir);
 gulp.task('less', () => {
     console.log('step1.start to compile .less file');
-
-    gulp.src([path.resolve(currentCwd, `${targeFolderName}/**/*.less`)])
+    return gulp.src([lessPath])
         .pipe(through2.obj(function (file, encoding, next) {
             transformLess(file.path).then((css) => {
                 file.contents = Buffer.from(css);
@@ -41,7 +43,7 @@ gulp.task('less', () => {
 });
 gulp.task('copy', ['less'], () => {
     console.log('step2.copy less,css files to target folder');
-    gulp.src([path.resolve(currentCwd, `${targeFolderName}/**/*.{less,css,md}`)])
+    return gulp.src([path.resolve(currentCwd, `${targeFolderName}/**/*.{less,css,md}`)])
         .pipe(gulp.dest(
             path.resolve(esDestination)
         ))
@@ -55,7 +57,7 @@ gulp.task('copy', ['less'], () => {
 
 gulp.task('babel', ['copy'], () => {
     console.log('step3.start compile jsx')
-    gulp.src([path.resolve(currentCwd, `${targeFolderName}/**/*.{jsx,js}`)])
+    return gulp.src([jsPath])
         .pipe(
             through2.obj(function (file, encoding, next) {
                 let jsContent = babel.transformFileSync(file.path, {});
@@ -64,15 +66,9 @@ gulp.task('babel', ['copy'], () => {
                 next();
             })
         )
-        .pipe(gulp.dest(
-            esDestination
-        ))
-        .pipe(gulp.dest(
-            libDestination
-        ))
-        .pipe(gulp.dest(
-            devDestination
-        ))
+        .pipe(gulp.dest(esDestination))
+        .pipe(gulp.dest(libDestination))
+        .pipe(gulp.dest(devDestination))
         .on('end', function () {
             if (mode === 'dev' && !!developDir) {
                 ncp(devDestination, developDir, function (err) {
@@ -81,11 +77,13 @@ gulp.task('babel', ['copy'], () => {
                     } else {
                         console.log(`${developDir} 目录下的文件已经同步!`);
                     }
+
                 });
             }
-        });
+        })
 });
-(async function () {
+
+async function build() {
     await rmfr(devDestination);
     console.log(`remove ${devDestination}`)
     await rmfr(esDestination);
@@ -93,4 +91,10 @@ gulp.task('babel', ['copy'], () => {
     await rmfr(libDestination);
     console.log(`remove ${libDestination}`)
     gulp.start('babel');
-})()
+};
+build().then(() => {
+    if (mode === 'dev') {
+        gulp.watch([lessPath, jsPath], ['babel']);
+    }
+});
+

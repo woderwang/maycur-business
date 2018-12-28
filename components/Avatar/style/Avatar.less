@@ -1,28 +1,25 @@
 @import '../../style/variables.less';
 @orange: #ff5401;
+@avatar-size: 36px;
 .@{prefix}-avatar-img {
-    width: 36px;
-    height: 36px;
+    width: @avatar-size;
+    height: @avatar-size;
     border-radius: 50%;
 }
 
 .@{prefix}-avatar {
+    display: inline-block;
     flex-shrink: 0;
     text-align: center;
-    height: 36px;
-    width: 36px;
-    line-height: 36px;
+    height: @avatar-size;
+    width: @avatar-size;
+    line-height: @avatar-size;
     border-radius: 50%;
     background-color: #efefef;
     color: #fff;
     font-size: 12px;
-    display: inline-block;
-    &-img{
-        -img {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-        }
+    &.c0 {
+        color: @maycur-color;
     }
     &.c1 {
         color: @maycur-color;

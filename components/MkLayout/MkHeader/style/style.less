@@ -1,12 +1,10 @@
 @import "../../../style/variables.less";
 
-@menu-padding: 40px;
-
 .@{prefix}-header {
   &.ant-layout-header {
     display: flex;
-    height: 56px;
-    padding: 0 @menu-padding 0 0;
+    height: @header-menu-height;
+    padding: 0 16px 0 0;
     background-color: @maycur-color;
   }
 
@@ -15,7 +13,7 @@
     align-items: center;
     justify-content: space-between;
     width: @menu-width;
-    padding-left: @menu-padding;
+    padding-left: @header-menu-left-padding;
     color: #fff;
     font-size: 20px;
     transition: all .2s;
@@ -37,7 +35,7 @@
     }
 
     &-collapsed {
-      width: 56px;
+      width: @menu-collapsed-width;
       justify-content: center;
       padding: 0;
 
@@ -57,15 +55,47 @@
     justify-content: space-between;
   }
 
+  .right-menu {
+    .ant-menu {
+      .ant-menu-item {
+        padding: 0;
+        width: @header-menu-height;
+        text-align: center;
+      }
+
+      .ant-menu-submenu {
+        &:hover {
+          background-color: rgba(0,0,0,.05);
+        }
+
+        .ant-menu-submenu-title {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
   .ant-menu {
     flex-grow: 1;
     background-color: transparent;
-    line-height: 56px;
-    font-size: 16px;
+    line-height: @header-menu-height;
+    height: @header-menu-height;
+    display: flex;
+    align-items: center;
 
     .ant-menu-item {
+      padding: 0 26px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .05);
+      }
+
+      > a {
+        color: #fff;
+      }
+      
       &.ant-menu-item-selected {
-        background-color: #2074D4;
+        background-color: rgba(0, 0, 0, .1);
       }
     }
 
@@ -78,6 +108,28 @@
 
       .ant-menu-item {
         padding: 0 16px;
+      }
+    }
+  }
+}
+
+.ant-menu-submenu-popup {
+  &.ant-menu-dark {
+    .ant-menu-sub {
+      background-color: #fff;
+      .ant-menu-item {
+        padding: 0;
+        margin: 0;
+        color: rgba(0, 0, 0, .65);
+
+        &:hover {
+          color: @maycur-color;
+        }
+
+        >span {
+          display: block;
+          padding: 0 16px;
+        }
       }
     }
   }

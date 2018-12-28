@@ -22,7 +22,7 @@
 #### option
 |name|type|description|default|
 |:--|:--|:--|:--|
-|isFixHeader|boolean|是否固定表头|false|
+|isFixHeader(已失效)|boolean|是否固定表头(已失效)|false|
 |resizeAble|boolean|是否可拖动column的宽度|false|
 |disableLoad|boolean|是否可拖动column的宽度|false|
 |hidePagination|boolean|是否可拖动column的宽度|false|
@@ -34,5 +34,8 @@
 |name|type|description|default|
 |:--|:--|:--|:--|
 |meanLess|boolean|无意义字段,用户放置动作条等信息|false|
+
+#### 关于fix header的特殊说明
+默认的mktable都是开启fix header模式，原antd的table需要指定fix header的scroll height，灵活性不足，所以重新mktable利用display flex特性，然scroll触发机制，根据用户的浏览器窗口高度决定，所以如果想要用flex特性的fixheader，需要包裹table的容器display为flex
 
 

@@ -152,46 +152,52 @@
   border: 1px solid #eee;
   border-radius: 4px;
   display: flex;
+  flex-direction: column;
 }
 .mkbs-fuzz-filter :global .mk-btn {
   margin-left: 10px;
 }
+.mkbs-fuzz-filter .search-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mkbs-fuzz-filter .search-list li {
+  padding: 10px 0 10px 10px;
+  cursor: pointer;
+}
+.mkbs-fuzz-filter .search-list li:hover {
+  background-color: #fafafa;
+}
+.mkbs-empty {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mkbs-empty-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mkbs-empty-text {
+  font-size: 14px;
+  color: #bcbcbc;
+  margin-top: 8px;
+}
+.mkbs-empty :global .fm {
+  font-size: 48px;
+  color: #c0c3cc;
+}
 .mkbs-mktable-container {
   position: relative;
-}
-.mkbs-mktable-container table > thead th {
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 14px !important;
-  font-weight: 200 !important;
-  color: #000 !important;
-}
-.mkbs-mktable-container table > tbody td {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-.mkbs-mktable-container .react-resizable {
-  position: relative;
-}
-.mkbs-mktable-container .react-resizable-handle {
-  position: absolute;
-  width: 10px;
-  height: 100%;
-  bottom: 0;
-  right: -5px;
-  cursor: col-resize;
-}
-.mkbs-mktable-container .mk-table-filter-selected.mkicon-filter-o {
-  color: #3296FA;
-}
-.mkbs-mktable-container .ant-table-empty .ant-table-body {
-  overflow-x: hidden !important;
-}
-.mkbs-mktable-container .ant-spin-nested-loading > div > .ant-spin {
-  height: 360px;
-}
-.mkbs-mktable-container .ant-table-placeholder {
-  border-bottom: none;
+  flex: 1;
+  overflow: auto;
+  /* 覆盖antd样式 */
 }
 .mkbs-mktable-container .data-emtpy {
   height: 300px;
@@ -199,9 +205,82 @@
   justify-content: center;
   align-items: center;
 }
-.mkbs-mktable-container .data-emtpy :global .fm-prompt {
+.mkbs-mktable-container .data-emtpy .fm-prompt {
   font-size: 20px;
   margin-right: 8px;
+}
+.mkbs-mktable-container .ant-table-content .ant-table-scroll {
+  position: relative;
+  min-height: 400px;
+}
+.mkbs-mktable-container .ant-table-content .ant-table-scroll .ant-table-placeholder {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: auto 0;
+  height: 300px;
+  border: 0;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading {
+  height: 100%;
+  display: flex;
+  flex: 1;
+  overflow: auto;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table {
+  flex: 1;
+  display: flex;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table.ant-table-fixed-header {
+  overflow: auto;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content {
+  flex: 1;
+  display: flex;
+  overflow: auto;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll table {
+  width: 100%;
+  table-layout: fixed;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll .ant-table-body {
+  flex: 1;
+  overflow-y: auto !important;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-pagination.ant-table-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.mkbs-mktable-container.fix-header.enable-scroll-x .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content {
+  overflow: unset;
+}
+.mkbs-mktable-container.fix-header .ant-pagination-options {
+  display: flex;
+  align-items: center;
+}
+.mkbs-mktable-container.fix-header .ant-pagination-options .ant-select-selection__rendered {
+  padding-right: 8px;
+  padding-left: 8px;
 }
 .mkbs-mktable-custom-pop {
   padding: 0;

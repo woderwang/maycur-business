@@ -39,11 +39,13 @@ class FilterStateBar extends Component {
                         case 'checkbox':
                             filterName = this.limitLen(filterPlainText.join(','));
                             break;
+                        case 'search':
+                            filterName = filterPlainText.length > 0 ? filterPlainText[0] : filterValue;
+                            break;
                         default:
                             filterName = filterValue;
                             break;
                     }
-
                 } else if (filterColumn.filters && !filterColumn.filterMultiple) {
                     let filterData = _.find(filterColumn.filters, { value: filterValue[0] });
                     filterName = filterData ? filterData.text : filterName;

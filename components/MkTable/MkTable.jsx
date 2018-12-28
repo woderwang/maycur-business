@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2018-11-29 17:55:18
+ * @Last Modified time: 2018-12-20 19:20:10
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -11,11 +11,14 @@ import React, { Component } from 'react';
 import { Table, Icon, Button } from 'maycur-antd';
 import { Resizable } from 'react-resizable';
 import _ from 'lodash';
+import classnames from 'classnames';
 import { DateFilter, FuzzFilter, CheckFilter } from './FilterDropDown';
 import FilterStateBar from './FilterStateBar';
 import PopSelect from './PopSelect/PopSelect';
-// import styles from './MkTable.less';
-let prefix = 'mkbs';
+import Empty from '../Empty';
+import utils from '../utils/utils';
+
+let prefix = utils.prefixCls;
 /* title 宽度变动 */
 const ResizeableTitle = (props) => {
     const { onResize, width, ...restProps } = props;
@@ -39,6 +42,14 @@ let MkTable = (option) => WrapperComponent => {
         firstDisplayColumns: []
     }
     option = Object.assign(defaultOption, option);
+    let defaultPageSizeOptions = [10, 20, 30, 40];
+    if (option.pageSize) {
+        defaultPageSizeOptions.push(option.pageSize);
+        defaultPageSizeOptions.sort((a, b) => { return a - b });
+    }
+    _.forEach(defaultPageSizeOptions, (val, index) => {
+        defaultPageSizeOptions[index] = val + '';
+    });
     return class extends Component {
         constructor(props) {
             super(props);
@@ -50,17 +61,21 @@ let MkTable = (option) => WrapperComponent => {
                 loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
                 pagination: {
                     pageSize: option && option.pageSize ? option.pageSize : 10,
+                    defaultPageSize: option && option.pageSize ? option.pageSize : 10,
                     showTotal: (total) => {
                         return <span>总数{total}条</span>
                     },
+                    pageSizeOptions: defaultPageSizeOptions,
+                    showSizeChanger: true,
                     total: 0,
                 },
+                allSelectedRows: [],
                 selectedRows: [],
                 selectedRowKeys: [],
                 selectAble: false,
                 selectAbleLock: false,
                 sorter: {},
-                hideColumnCodeList: []
+                hideColumnCodeList: [],
             };
             this.components = {
                 header: {
@@ -68,6 +83,7 @@ let MkTable = (option) => WrapperComponent => {
                 },
             };
             this.fetchDataSourceFn = null;
+            this.tableRef = null;
         }
 
         /* column转化，用于自定义的filter dropdown效果 */
@@ -90,7 +106,13 @@ let MkTable = (option) => WrapperComponent => {
                     } else if (col.filterOption.type === 'search') {
                         col.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => {
                             return (
-                                <FuzzFilter />
+                                <FuzzFilter 
+                                    {...col}
+                                    setSelectedKeys={setSelectedKeys}
+                                    selectedKeys={selectedKeys}
+                                    confirm={confirm}
+                                    clearFilters={clearFilters}
+                                />
                             )
                         };
                     } else if (col.filterOption.type === 'checkbox') {
@@ -202,36 +224,53 @@ let MkTable = (option) => WrapperComponent => {
         /* 生成table */
         generateTable = (params) => {
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
-            const { rowKey, rowSelection: rowSelectionOption } = params;
+            const { rowKey, scroll, rowSelection: rowSelectionOption } = params;
+            const { onSelectionChange } = rowSelectionOption || {};
             this.rowKey = rowKey;
             let rowSelection = {
                 ...rowSelectionOption,
                 onChange: (selectedRowKeys, selectedRows) => {
                     this.setState({ selectedRows, selectedRowKeys });
+                    onSelectionChange && onSelectionChange(selectedRowKeys);
                 },
-                selectedRowKeys: selectedRowKeys
+                onSelect: (record, selected, selectedRows, nativeEvent) => {
+                    let { allSelectedRows } = this.state;
+                    if (selected) {
+                        allSelectedRows.push(record);
+                    } else {
+                        let selectIndex = _.findIndex(allSelectedRows, { [`${this.rowKey}`]: record[this.rowKey] });
+                        if (selectIndex > -1) {
+                            allSelectedRows.splice(selectIndex);
+                        }
+                    }
+                    this.setState({ allSelectedRows })
+                },
+                selectedRowKeys: selectedRowKeys,
             };
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
+            });
+            let tableCls = classnames(`${prefix}-mktable-container`, {
+                'empty': !dataSource || (dataSource && dataSource.length === 0),
+                'enable-scroll-x': !(scroll && scroll.x),
+                'fix-header': option.isFixHeader
             })
+            let tableScroll = _.assign(scroll, option.isFixHeader ? { y: true } : {});
             return (
-                <div className={`${prefix}-mktable-container`}>
+                <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                     <Table
                         {...params}
                         rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
                         components={this.components}
                         columns={visibleColumns}
-                        scroll={option.isFixHeader ? { y: 500 } : undefined}
+                        scroll={tableScroll}
                         pagination={option.hidePagination ? false : pagination}
                         dataSource={dataSource}
                         onChange={this.onChange}
                         loading={{ ...loadProps, spinning: loading }}
                         locale={
-                            {
-                                emptyText: () => (<div className={'data-emtpy'}>
-                                    <span className={'fm fm-prompt'}></span>
-                                    <span>暂无数据</span>
-                                </div>)
+                            {                                
+                                emptyText: () => (<Empty />)
                             }
                         }
                     />
@@ -329,6 +368,7 @@ let MkTable = (option) => WrapperComponent => {
                                 selectedRowKeys: rebuildSelectedRowKeys,
                                 pagination: {
                                     ...pagination,
+                                    showQuickJumper: pagination.pageSize < resp.total,
                                     total: resp.total
                                 }
                             }
@@ -404,7 +444,6 @@ let MkTable = (option) => WrapperComponent => {
             )
         }
 
-        /*  */
         setHideColumnCodeList = (data) => {
             const { columns } = this.state;
             let hideColumnCodeList = [];
@@ -415,6 +454,21 @@ let MkTable = (option) => WrapperComponent => {
                 }
             })
             this.setState({ hideColumnCodeList });
+        }
+
+        widthMonitor = () => {
+            /* minColumnWidth表格的最小宽度,用于解决长表格被挤压的情况 */
+            const { columns } = this.state;
+            let tableMinWidth = 0;
+            let minColumnWidth = 100;
+            if (columns.length >= 5) {
+                _.forEach(columns, col => {
+                    tableMinWidth += col.width && col.width > 0 ? col.width : minColumnWidth;
+                });
+            }
+            return {
+                tableMinWidth
+            }
         }
 
         render() {

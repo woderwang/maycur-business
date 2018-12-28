@@ -24,7 +24,7 @@ class MkLayout extends Component {
 
   render() {
     const { collapsed } = this.state;
-    const { location: { pathname }, setMenus, setSiderMenus, renderMenu, renderSiderMenu, renderContent, logoUrl, noSider } = this.props;
+    const { pathArr, setMenus, setSiderMenus, renderMenu, renderSiderMenu, renderContent, noSider } = this.props;
     const menus = setMenus();
     const siderMenus = setSiderMenus();
     return (
@@ -32,17 +32,17 @@ class MkLayout extends Component {
         <MkHeader
           collapsed={collapsed}
           onToggleCollapsed={this.onToggleCollapsed}
-          pathname={pathname}
+          pathArr={pathArr}
           leftMenus={menus.leftMenus}
           rightMenus={menus.rightMenus}
           renderMenu={renderMenu}
-          logoUrl={logoUrl} />
+        />
         <Layout className="section">
           {noSider ? null :
             <MkSider
               collapsed={collapsed}
               onToggleCollapsed={this.onToggleCollapsed}
-              pathname={pathname}
+              pathArr={pathArr}
               menus={siderMenus}
               renderMenu={renderSiderMenu} />}
           <Layout className="content">

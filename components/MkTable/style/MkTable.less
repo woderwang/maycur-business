@@ -4,56 +4,107 @@
 @import '../FilterDropDown/CheckFilter/style/style.less';
 @import '../FilterDropDown/DateFilter/style/style.less';
 @import '../FilterDropDown/FuzzFilter/style/style.less';
+@import '../../Empty/style/empty.less';
 @table-cell-padding: 20px;
 .@{prefix}-mktable-container {
     position: relative;
-    table>thead {
-        th {
-            padding-left: @table-cell-padding;
-            padding-right: @table-cell-padding;
-            font-size: 14px !important;
-            font-weight: 200 !important;
-            color: #000 !important;
-        }
-    }
-    table>tbody {
-        td {
-            padding-left: @table-cell-padding;
-            padding-right: @table-cell-padding;
-        }
-    }
-    .react-resizable {
-        position: relative;
-    }
-    .react-resizable-handle {
-        position: absolute;
-        width: 10px;
-        height: 100%;
-        bottom: 0;
-        right: -5px;
-        cursor: col-resize;
-    }
-    .mk-table-filter-selected.mkicon-filter-o {
-        color: @maycur-color;
-    }
-    .ant-table-empty .ant-table-body {
-        overflow-x: hidden !important;
-    } //固定table loading位置
-    .ant-spin-nested-loading>div>.ant-spin {
-        height: 360px;
-    }
-    .ant-table-placeholder {
-        border-bottom: none;
-    }
+    flex: 1;
+    overflow: auto;
     .data-emtpy {
         height: 300px;
         display: flex;
         justify-content: center;
         align-items: center;
-        :global {
-            .fm-prompt {
-                font-size: 20px;
-                margin-right: 8px;
+        .fm-prompt {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+    }
+    .ant-table-content{
+        .ant-table-scroll{
+            position: relative;
+            min-height: 400px;
+            .ant-table-placeholder{
+                position: absolute;
+                top:0;
+                bottom:0;
+                left:0;
+                width:100%;
+                margin:auto 0;
+                height: 300px;
+                border:0;
+            }
+        }
+    }
+    /* 覆盖antd样式 */
+    &.fix-header {
+        .ant-table-wrapper {
+            display: flex;
+            flex: 1;
+            height: 100%;
+            overflow: auto;
+            .ant-spin-nested-loading {
+                height: 100%;
+                display: flex;
+                flex: 1;
+                overflow: auto;
+                .ant-spin-container {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: auto;
+                    .ant-table {
+                        flex: 1;
+                        display: flex;
+                        &.ant-table-fixed-header {
+                            overflow: auto;
+                        }
+                        .ant-table-content {
+                            flex: 1;
+                            display: flex;
+                            overflow: auto;
+                            .ant-table-scroll {
+                                display: flex;
+                                flex: 1;
+                                flex-direction: column;
+                                table {
+                                    width: 100%;
+                                    table-layout: fixed;
+                                }
+                                .ant-table-body {
+                                    flex: 1;
+                                    overflow-y: auto !important;
+                                }
+                            }
+                        }
+                    }
+                    .ant-pagination.ant-table-pagination {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+        &.enable-scroll-x {
+            .ant-table-wrapper {
+                .ant-spin-nested-loading {
+                    .ant-spin-container {
+                        .ant-table {
+                            .ant-table-content {
+                                overflow: unset;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .ant-pagination-options {
+            display: flex;
+            align-items: center;
+            .ant-select-selection__rendered {
+                padding-right: 8px;
+                padding-left: 8px;
             }
         }
     }

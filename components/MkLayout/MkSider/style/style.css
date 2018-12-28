@@ -34,20 +34,29 @@
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item,
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title {
   width: 100%;
+  height: 44px;
+  line-height: 44px;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a,
-.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a {
-  font-size: 16px;
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > span,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > span {
+  display: flex;
   color: #757575;
+  align-items: center;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a .fm,
-.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a .fm {
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a .fm,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > span .fm,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > span .fm {
   font-size: 18px;
   margin-right: 10px;
   color: #a3abbe;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > a:focus,
-.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a:focus {
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > a:focus,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item > span:focus,
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title > span:focus {
   text-decoration: none;
 }
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-item.ant-menu-item-selected > a,
@@ -62,6 +71,16 @@
 .mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu-title:hover > a .fm {
   color: #3296FA;
 }
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-item-divider {
+  margin: 10px 0;
+}
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu {
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+.mkbs-sider .ant-menu.ant-menu-root .ant-menu-submenu .ant-menu-item {
+  padding-left: 72px !important;
+}
 .mkbs-sider .ant-menu-inline-collapsed {
   width: 56px;
 }
@@ -72,10 +91,11 @@
   color: #3296FA;
 }
 .mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
-  padding: 0 18px !important;
+  padding: 0 16px !important;
   border-left: 3px solid transparent;
 }
-.mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .fm + span {
+.mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .fm + span,
+.mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .ant-badge {
   max-width: 0;
   display: inline-block;
   opacity: 0;
@@ -87,7 +107,8 @@
 .mkbs-sider .ant-menu-inline-collapsed .ant-menu-item.ant-menu-item-selected {
   border-left-color: #3296FA;
 }
-.mkbs-sider .ant-menu-inline-collapsed .ant-menu-item .fm + span {
+.mkbs-sider .ant-menu-inline-collapsed .ant-menu-item .fm + span,
+.mkbs-sider .ant-menu-inline-collapsed .ant-menu-item .ant-badge {
   max-width: 0;
   display: inline-block;
   opacity: 0;
