@@ -5,17 +5,19 @@ import classNames from 'classnames';
 
 const prefix = 'mkbs';
 const { Header } = Layout;
+const { SubMenu } = Menu;
 
 const MkHeader = (props) => {
   const { collapsed, pathArr, onToggleCollapsed, leftMenus, rightMenus } = props;
+  const menus = leftMenus.concat(rightMenus);
 
-
-  const menus = leftMenus.concat(rightMenus);  
-  let matchedMenu = _.find(menus,menu=>{
-    let pathReg = new RegExp('^'+menu.path);
+  let matchedMenu = _.find(menus, menu => {
+    let pathReg = new RegExp('^' + menu.path);
     return pathReg.test(pathArr.join('/'));
   });
-  let selectedKeys  = matchedMenu?[matchedMenu.path]:[];
+
+  let selectedKeys = matchedMenu ? [matchedMenu.path] : [];
+
   const formatMenus = (menu) => {
     const menuName = menu.meta && menu.meta.name || '';
     return { ...menu, menuName };
@@ -30,6 +32,10 @@ const MkHeader = (props) => {
   const logoAreaClassName = classNames(`${prefix}-header-logo`, {
     [`${prefix}-header-logo-collapsed`]: collapsed
   });
+
+  const onOpenChange = (openKeys) => {
+    // debugger
+  }
 
   return (
     <Header className={`${prefix}-header`}>
@@ -53,7 +59,7 @@ const MkHeader = (props) => {
             defaultSelectedKeys={[menus[0].path]}
             selectedKeys={selectedKeys}
           >
-            {leftMenus.map((menu, index) => {
+            {leftMenus.map((menu) => {
               const formattedMenus = formatMenus(menu);
               const content = props.renderMenu(formattedMenus);
               if (!content) {
@@ -76,14 +82,23 @@ const MkHeader = (props) => {
               mode="horizontal"
               defaultSelectedKeys={[menus[0].path]}
               selectedKeys={selectedKeys}
+              onOpenChange={onOpenChange}
             >
-              {rightMenus.map((menu, index) => {
+              {rightMenus.map((menu) => {
                 const formattedMenus = formatMenus(menu);
-                return (
-                  <Menu.Item key={menu.path}>
-                    {props.renderMenu(formattedMenus)}
-                  </Menu.Item>
-                )
+                const MenuContent = menu.hasSub ? (
+                  <SubMenu key={menu.path} title={<span className={`fm ${menu.icon}`}></span>}>
+                    {menu.routes.map((route) => {
+                      route.menuName = route.meta.name;
+                      return <Menu.Item key={route.path}>{props.renderMenu(route)}</Menu.Item>
+                    })}
+                  </SubMenu>
+                ) : (
+                    <Menu.Item key={menu.path}>
+                      {props.renderMenu(formattedMenus)}
+                    </Menu.Item>
+                  )
+                return MenuContent;
               })}
             </Menu>
           </div>

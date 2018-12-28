@@ -88,11 +88,11 @@ class Avatar extends Component {
             <React.Fragment>
                 {avatarUrl ?
                     <img className={`${prefix}-avatar-img`} src={avatarUrl} alt="头像" style={{ ...customStyle }}></img> :
-                    <span onClick={this.onClickAvatar} className={`${prefix}-avatar ${this.state.color||'c0'}`} style={{ ...customStyle }}>
-                        <span>{this.state.abbrName||'无'}</span>
+                    <span onClick={this.onClickAvatar} className={`${prefix}-avatar ${this.state.color || 'c0'}`} style={{ ...customStyle }}>
+                        <span>{this.state.abbrName || '头像'}</span>
                     </span>}
             </React.Fragment>
-        )
+        );
     }
 }
 
