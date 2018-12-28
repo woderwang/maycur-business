@@ -8,7 +8,7 @@ class ScrollBar extends Component {
     }
     render() {
         return (
-            <PerfectScrollbar>
+            <PerfectScrollbar {...this.props}>
                 {this.props.children}
             </PerfectScrollbar>
         )
