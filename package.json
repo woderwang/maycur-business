@@ -67,6 +67,7 @@
     "maycur-antd": "^1.1.2",
     "moment": "^2.22.2",
     "rc-calendar": "^9.7.11",
-    "rc-time-picker": "^3.4.0"
+    "rc-time-picker": "^3.4.0",
+    "react-perfect-scrollbar": "^1.4.2"
   }
 }
