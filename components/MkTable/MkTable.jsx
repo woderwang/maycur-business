@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2018-12-28 18:08:52
+ * @Last Modified time: 2018-12-29 10:49:19
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -75,7 +75,7 @@ let MkTable = (option) => WrapperComponent => {
                 selectAble: false,
                 selectAbleLock: false,
                 sorter: {},
-                hideColumnCodeList: [],
+                hideColumnCodeList: []                
             };
             this.components = {
                 header: {
@@ -225,7 +225,7 @@ let MkTable = (option) => WrapperComponent => {
 
         /* 生成table */
         generateTable = (params) => {
-            const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
+            const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;            
             const { rowKey, scroll, rowSelection: rowSelectionOption } = params;
             const { onSelectionChange, selectedRowKeys: inSelectedRowKeys } = rowSelectionOption || {};
             this.rowKey = rowKey;
@@ -248,8 +248,9 @@ let MkTable = (option) => WrapperComponent => {
                 'enable-scroll-x': !(scroll && scroll.x),
                 'fix-header': option.isFixHeader
             })
+
             /* 当前不支持列冻结的功能 */
-            let tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
+            let tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});            
             return (
                 <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                     <Table
@@ -485,7 +486,21 @@ let MkTable = (option) => WrapperComponent => {
                 tableMinWidth
             }
         }
+        // windowResize = () => {
+        //     console.log('window resize');
+        //     if (this.tableRef) {
+        //         const parentNode = this.tableRef.parentNode;
+        //         console.log({ width: parentNode.clientWidth, height: parentNode.clientHeight });
+        //         this.setState({ wrapperSize: { width: parentNode.clientWidth, height: parentNode.clientHeight } });
+        //     }
+        // }
 
+        // componentDidMount() {
+        //     window.addEventListener('resize', this.windowResize);
+        // }
+        // componentWillUnmount() {
+        //     window.removeEventListener('resize', this.windowResize);
+        // }
         render() {
             return <WrapperComponent
                 generateTable={this.generateTable}

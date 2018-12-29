@@ -264,7 +264,6 @@
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll .ant-table-body {
   flex: 1;
-  overflow-y: auto !important;
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-pagination.ant-table-pagination {
   display: flex;
