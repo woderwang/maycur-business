@@ -75,7 +75,7 @@ let MkTable = (option) => WrapperComponent => {
                 selectAble: false,
                 selectAbleLock: false,
                 sorter: {},
-                hideColumnCodeList: []                
+                hideColumnCodeList: []
             };
             this.components = {
                 header: {
@@ -84,6 +84,7 @@ let MkTable = (option) => WrapperComponent => {
             };
             this.fetchDataSourceFn = null;
             this.tableRef = null;
+            this.tableId;
         }
 
         /* column转化，用于自定义的filter dropdown效果 */
@@ -225,8 +226,9 @@ let MkTable = (option) => WrapperComponent => {
 
         /* 生成table */
         generateTable = (params) => {
-            const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;            
-            const { rowKey, scroll, rowSelection: rowSelectionOption } = params;
+            /* 当前不支持列冻结的功能 */
+            const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
+            const { rowKey, scroll, rowSelection: rowSelectionOption, tableId = 'tableId' } = params;
             const { onSelectionChange, selectedRowKeys: inSelectedRowKeys } = rowSelectionOption || {};
             this.rowKey = rowKey;
             let rowSelection = {
@@ -248,29 +250,35 @@ let MkTable = (option) => WrapperComponent => {
                 'enable-scroll-x': !(scroll && scroll.x),
                 'fix-header': option.isFixHeader
             })
-
-            /* 当前不支持列冻结的功能 */
             let tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});            
-            return (
-                <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
-                    <Table
-                        {...params}
-                        rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
-                        components={this.components}
-                        columns={visibleColumns}
-                        scroll={tableScroll}
-                        pagination={option.hidePagination ? false : pagination}
-                        dataSource={dataSource}
-                        onChange={this.onChange}
-                        loading={{ ...loadProps, spinning: loading }}
-                        locale={
-                            {
-                                emptyText: () => (<Empty />)
+            if (this.tableId && this.tableId !== tableId) {
+                this.tableReset();
+                this.tableId = tableId;
+                return null;
+            } else {
+                this.tableId = tableId;
+                return (
+                    <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
+                        <Table
+                            {...params}
+                            key={tableId}
+                            rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
+                            components={this.components}
+                            columns={visibleColumns}
+                            scroll={tableScroll}
+                            pagination={option.hidePagination ? false : pagination}
+                            dataSource={dataSource}
+                            onChange={this.onChange}
+                            loading={{ ...loadProps, spinning: loading }}
+                            locale={
+                                {
+                                    emptyText: () => (<Empty />)
+                                }
                             }
-                        }
-                    />
-                </div>
-            );
+                        />
+                    </div>
+                );
+            }
         }
 
         /* 生成筛选条件 */
@@ -485,6 +493,35 @@ let MkTable = (option) => WrapperComponent => {
             return {
                 tableMinWidth
             }
+        }
+
+        tableReset = () => {
+            this.setState(() => {
+                return {
+                    // columns: [],
+                    filters: {},
+                    dataSource: [],
+                    loading: false,
+                    loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
+                    pagination: {
+                        pageSize: option && option.pageSize ? option.pageSize : 10,
+                        defaultPageSize: option && option.pageSize ? option.pageSize : 10,
+                        showTotal: (total) => {
+                            return <span>总数{total}条</span>
+                        },
+                        pageSizeOptions: defaultPageSizeOptions,
+                        showSizeChanger: true,
+                        total: 0,
+                    },
+                    allSelectedRows: [],//所有选中过的data列，支持跨页选取
+                    selectedRows: [],
+                    selectedRowKeys: [],
+                    selectAble: false,
+                    selectAbleLock: false,
+                    sorter: {},
+                    hideColumnCodeList: []
+                }
+            });
         }
         // windowResize = () => {
         //     console.log('window resize');
