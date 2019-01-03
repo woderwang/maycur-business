@@ -223,6 +223,10 @@
   height: 300px;
   border: 0;
 }
+.mkbs-mktable-container .ant-pagination-options .ant-select-selection__rendered {
+  padding-right: 8px;
+  padding-left: 8px;
+}
 .mkbs-mktable-container.fix-header .ant-table-wrapper {
   display: flex;
   flex: 1;

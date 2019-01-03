@@ -42,6 +42,9 @@
           }
         }
       }
+      &.ant-tooltip-open {
+
+      }
     }
 
     .ant-menu-item-divider {
@@ -75,6 +78,10 @@
         padding: 0 16px !important;
         border-left: 3px solid transparent;
 
+        >span {
+          padding-left: 3px;
+        }
+
         .fm+span,
         .ant-badge {
           max-width: 0;
@@ -99,5 +106,13 @@
         opacity: 0;
       }
     }
+  }
+}
+
+.ant-menu-inline-collapsed-tooltip,
+.ant-menu-submenu-popup {
+  .fm,
+  .ant-badge {
+    display: none;
   }
 }

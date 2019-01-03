@@ -42,8 +42,8 @@ let MkTable = (option) => WrapperComponent => {
         firstDisplayColumns: []
     }
     option = Object.assign(defaultOption, option);
-    let defaultPageSizeOptions = [10, 20, 30, 40];
-    if (option.pageSize) {
+    let defaultPageSizeOptions = [20, 50, 100];
+    if (option.pageSize && defaultPageSizeOptions.indexOf(option.pageSize) < 0) {
         defaultPageSizeOptions.push(option.pageSize);
         defaultPageSizeOptions.sort((a, b) => { return a - b });
     }
@@ -60,8 +60,8 @@ let MkTable = (option) => WrapperComponent => {
                 loading: false,
                 loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
                 pagination: {
-                    pageSize: option && option.pageSize ? option.pageSize : 10,
-                    defaultPageSize: option && option.pageSize ? option.pageSize : 10,
+                    pageSize: option && option.pageSize ? option.pageSize : 20,
+                    defaultPageSize: option && option.pageSize ? option.pageSize : 20,
                     showTotal: (total) => {
                         return <span>总数{total}条</span>
                     },
@@ -250,13 +250,14 @@ let MkTable = (option) => WrapperComponent => {
                 'enable-scroll-x': !(scroll && scroll.x),
                 'fix-header': option.isFixHeader
             })
-            let tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});            
+            let tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
             if (this.tableId && this.tableId !== tableId) {
                 this.tableReset();
                 this.tableId = tableId;
                 return null;
             } else {
                 this.tableId = tableId;
+
                 return (
                     <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                         <Table
@@ -504,8 +505,8 @@ let MkTable = (option) => WrapperComponent => {
                     loading: false,
                     loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
                     pagination: {
-                        pageSize: option && option.pageSize ? option.pageSize : 10,
-                        defaultPageSize: option && option.pageSize ? option.pageSize : 10,
+                        pageSize: option && option.pageSize ? option.pageSize : 20,
+                        defaultPageSize: option && option.pageSize ? option.pageSize : 20,
                         showTotal: (total) => {
                             return <span>总数{total}条</span>
                         },
