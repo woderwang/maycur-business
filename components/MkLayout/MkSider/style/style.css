@@ -94,6 +94,9 @@
   padding: 0 16px !important;
   border-left: 3px solid transparent;
 }
+.mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title > span {
+  padding-left: 3px;
+}
 .mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .fm + span,
 .mkbs-sider .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .ant-badge {
   max-width: 0;
@@ -112,4 +115,10 @@
   max-width: 0;
   display: inline-block;
   opacity: 0;
+}
+.ant-menu-inline-collapsed-tooltip .fm,
+.ant-menu-submenu-popup .fm,
+.ant-menu-inline-collapsed-tooltip .ant-badge,
+.ant-menu-submenu-popup .ant-badge {
+  display: none;
 }
