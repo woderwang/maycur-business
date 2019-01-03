@@ -42,7 +42,7 @@ let MkTable = (option) => WrapperComponent => {
         firstDisplayColumns: []
     }
     option = Object.assign(defaultOption, option);
-    let defaultPageSizeOptions = [15, 20, 50, 100];
+    let defaultPageSizeOptions = [20, 50, 100];
     if (option.pageSize && defaultPageSizeOptions.indexOf(option.pageSize) < 0) {
         defaultPageSizeOptions.push(option.pageSize);
         defaultPageSizeOptions.sort((a, b) => { return a - b });
@@ -60,8 +60,8 @@ let MkTable = (option) => WrapperComponent => {
                 loading: false,
                 loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
                 pagination: {
-                    pageSize: option && option.pageSize ? option.pageSize : 15,
-                    defaultPageSize: option && option.pageSize ? option.pageSize : 15,
+                    pageSize: option && option.pageSize ? option.pageSize : 20,
+                    defaultPageSize: option && option.pageSize ? option.pageSize : 20,
                     showTotal: (total) => {
                         return <span>总数{total}条</span>
                     },
@@ -505,8 +505,8 @@ let MkTable = (option) => WrapperComponent => {
                     loading: false,
                     loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
                     pagination: {
-                        pageSize: option && option.pageSize ? option.pageSize : 15,
-                        defaultPageSize: option && option.pageSize ? option.pageSize : 15,
+                        pageSize: option && option.pageSize ? option.pageSize : 20,
+                        defaultPageSize: option && option.pageSize ? option.pageSize : 20,
                         showTotal: (total) => {
                             return <span>总数{total}条</span>
                         },
