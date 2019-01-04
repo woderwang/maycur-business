@@ -8,7 +8,7 @@
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
 import React, { Component } from 'react';
-import { Table,Icon, Button } from 'maycur-antd';
+import { Icon, Button } from 'maycur-antd';
 import { FlexTable } from 'maycur-antd/lib/table';
 // import 'maycur-antd/lib/table/style';
 import { Resizable } from 'react-resizable';
@@ -78,7 +78,10 @@ let MkTable = (option) => WrapperComponent => {
                 selectAble: false,
                 selectAbleLock: false,
                 sorter: {},
-                hideColumnCodeList: []
+                hideColumnCodeList: [],
+                allFlag: false,
+                canceledRows: [],
+                canceledRowKeys: []
             };
             this.components = {
                 header: {
@@ -243,6 +246,9 @@ let MkTable = (option) => WrapperComponent => {
                     if (selectedRows.length > 0) this.modifySelectRows({ type: 'update', rows: selectedRows, rowKeys: selectedRowKeys });
                     if (unSelectedRows.length > 0) this.modifySelectRows({ type: 'delete', rows: unSelectedRows, rowKeys: unSelectedRowKeys });
                 },
+                onSelect: (record, selected, selectedRows, nativeEvent) => {
+                    this.onSelect(record, selected);
+                },
                 selectedRowKeys: _.union(selectedRowKeys, inSelectedRowKeys)
             };
             let visibleColumns = _.filter(columns, col => {
@@ -348,7 +354,7 @@ let MkTable = (option) => WrapperComponent => {
         dataFetch = (params = {}) => {
             const { isFilterChange } = params;
             if (typeof this.fetchDataSourceFn !== 'function') return;
-            let { filters, pagination, sorter } = this.state;
+            let { filters, pagination, sorter, allFlag, canceledRowKeys } = this.state;
             let fnExe = this.fetchDataSourceFn(filters,
                 { pageSize: pagination.pageSize, current: pagination.current ? pagination.current : 1 },
                 { field: sorter.field, order: sorter.order === 'descend' ? 'desc' : 'asc' });
@@ -360,10 +366,20 @@ let MkTable = (option) => WrapperComponent => {
                     if (resp.code === 'success') {
                         dataSource = resp.data;
                         this.setState(({ pagination, selectedRows, selectedRowKeys }) => {
+                            let _newSelectedRowKeys = _.cloneDeep(selectedRowKeys);
+                            if (allFlag) {
+                                if (dataSource.length > 0) {
+                                    dataSource.forEach(item => {
+                                        _newSelectedRowKeys.push(item[this.rowKey]);
+                                    });
+                                    _newSelectedRowKeys = Array.from(new Set(_newSelectedRowKeys));
+                                    _newSelectedRowKeys = _.differenceBy(_newSelectedRowKeys, canceledRowKeys);
+                                }
+                            }
                             return {
                                 dataSource,
                                 selectedRows: isFilterChange ? [] : selectedRows,
-                                selectedRowKeys: isFilterChange ? [] : selectedRowKeys,
+                                selectedRowKeys: isFilterChange ? [] : _newSelectedRowKeys,
                                 pagination: {
                                     ...pagination,
                                     showQuickJumper: pagination.pageSize < resp.total,
@@ -413,6 +429,58 @@ let MkTable = (option) => WrapperComponent => {
             setTimeout(() => {
                 this.setState({ selectAbleLock: false })
             }, 100)
+        }
+
+        // 设置全选
+        setAllFlag = (isAll) => {
+            let { dataSource } = this.state;
+            let _newSelectedRowKeys = [];
+            let _newSelectedRows = [];
+            if (isAll) {
+                dataSource.forEach(item => {
+                    _newSelectedRowKeys.push(item[this.rowKey]);
+                    _newSelectedRows.push(item);
+                });
+            }
+            this.setState({
+                selectedRowKeys: _newSelectedRowKeys,
+                selectedRows: _newSelectedRows,
+                allSelectedRows: [],
+                allFlag: isAll
+            });
+        }
+
+        onSelect = (record, selected) => {
+            let { allSelectedRows, selectedRowKeys, allFlag, canceledRowKeys, canceledRows } = this.state;
+            if (selected) {
+                // 如果是全选状态下
+                if (allFlag) {
+                    canceledRows = this.removeFromCollection(record, canceledRows, this.rowKey);
+                    let cancelKeyIndex = _.findIndex(canceledRowKeys, o => o === record[this.rowKey]);
+                    if (cancelKeyIndex > -1) {
+                        canceledRowKeys.splice(cancelKeyIndex, 1);
+                    }
+                } else {
+                    allSelectedRows.push(record);
+                }
+            } else {
+                if (allFlag) {
+                    canceledRowKeys.push(record[this.rowKey]);
+                    canceledRows.push(record);
+                    // selectedRowKeys = this.remove
+                } else {
+                    allSelectedRows = this.removeFromCollection(record, allSelectedRows, this.rowKey);
+                }
+            }
+            this.setState({ allSelectedRows, canceledRowKeys, canceledRows });
+        }
+
+        removeFromCollection = (record, collection, rowKey) => {
+            let index = _.findIndex(collection, { [`${rowKey}`]: record[rowKey] });
+            if (index > -1) {
+                collection.splice(index, 1);
+            }
+            return collection;
         }
 
         /* clear SelectRows */
@@ -524,7 +592,10 @@ let MkTable = (option) => WrapperComponent => {
                     selectAble: false,
                     selectAbleLock: false,
                     sorter: {},
-                    hideColumnCodeList: []
+                    hideColumnCodeList: [],
+                    allFlag: false,
+                    canceledRows: [],
+                    canceledRowKeys: []
                 }
             });
         }
@@ -553,6 +624,7 @@ let MkTable = (option) => WrapperComponent => {
                 setDataFetchFn={this.setDataFetchFn}
                 resetSelectRows={this.resetSelectRows}
                 customColumns={this.customColumns}
+                setAllFlag={this.setAllFlag}
                 {...this.state}
                 {...this.props}
             />
