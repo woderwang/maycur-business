@@ -23,7 +23,7 @@
   line-height: 50px;
 }
 .mkbs-sider {
-  box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, 0.6);
+  box-shadow: 0 0 4px 0 rgba(150, 150, 150, 0.6);
   z-index: 10;
   background-color: #fff;
 }
