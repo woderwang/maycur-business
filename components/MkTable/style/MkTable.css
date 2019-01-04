@@ -211,7 +211,6 @@
 }
 .mkbs-mktable-container .ant-table-content .ant-table-scroll {
   position: relative;
-  min-height: 400px;
 }
 .mkbs-mktable-container .ant-table-content .ant-table-scroll .ant-table-placeholder {
   position: absolute;
@@ -273,9 +272,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
-.mkbs-mktable-container.fix-header.enable-scroll-x .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content {
-  overflow: unset;
 }
 .mkbs-mktable-container.fix-header .ant-pagination-options {
   display: flex;

@@ -3,22 +3,25 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2018-12-29 10:49:19
+ * @Last Modified time: 2019-01-03 19:24:44
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
 import React, { Component } from 'react';
-import { Table, Icon, Button } from 'maycur-antd';
+import { Table,Icon, Button } from 'maycur-antd';
+import { FlexTable } from 'maycur-antd/lib/table';
+// import 'maycur-antd/lib/table/style';
 import { Resizable } from 'react-resizable';
 import _ from 'lodash';
 import classnames from 'classnames';
 import { DateFilter, FuzzFilter, CheckFilter } from './FilterDropDown';
 import FilterStateBar from './FilterStateBar';
 import PopSelect from './PopSelect/PopSelect';
+import RcTable from '../lib/RcTable';
 import Empty from '../Empty';
 import utils from '../utils/utils';
-
 let prefix = utils.prefixCls;
+// console.log(Table,FlexTable);
 /* title 宽度变动 */
 const ResizeableTitle = (props) => {
     const { onResize, width, ...restProps } = props;
@@ -266,7 +269,7 @@ let MkTable = (option) => WrapperComponent => {
 
                 return (
                     <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
-                        <Table
+                        <FlexTable
                             {...params}
                             key={tableId}
                             rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
@@ -282,6 +285,7 @@ let MkTable = (option) => WrapperComponent => {
                                     emptyText: () => (<Empty />)
                                 }
                             }
+                            OptionTable={RcTable}
                         />
                     </div>
                 );
