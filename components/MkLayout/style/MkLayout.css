@@ -70,11 +70,15 @@
   width: 50px;
   text-align: center;
 }
+.mkbs-header .right-menu .ant-menu .ant-menu-submenu.ant-menu-submenu-active,
 .mkbs-header .right-menu .ant-menu .ant-menu-submenu:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
 .mkbs-header .right-menu .ant-menu .ant-menu-submenu .ant-menu-submenu-title {
   font-size: 18px;
+}
+.mkbs-header .right-menu .ant-menu .ant-menu-submenu .ant-menu-submenu-title .fm {
+  color: #fff;
 }
 .mkbs-header .ant-menu {
   flex-grow: 1;

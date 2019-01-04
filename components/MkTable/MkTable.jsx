@@ -8,7 +8,7 @@
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
 import React, { Component } from 'react';
-import { Table,Icon, Button } from 'maycur-antd';
+import { Icon, Button } from 'maycur-antd';
 import { FlexTable } from 'maycur-antd/lib/table';
 // import 'maycur-antd/lib/table/style';
 import { Resizable } from 'react-resizable';
