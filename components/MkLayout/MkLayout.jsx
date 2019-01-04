@@ -37,7 +37,7 @@ class MkLayout extends Component {
           rightMenus={menus.rightMenus}
           renderMenu={renderMenu}
         />
-        <Layout className="section">
+        <Layout className={`${prefix}-section`}>
           {noSider ? null :
             <MkSider
               collapsed={collapsed}
@@ -45,7 +45,7 @@ class MkLayout extends Component {
               pathArr={pathArr}
               menus={siderMenus}
               renderMenu={renderSiderMenu} />}
-          <Layout className="content">
+          <Layout className={`${prefix}-content`}>
             {renderContent()}
           </Layout>
         </Layout>
