@@ -35,6 +35,13 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   background-clip: padding-box;
 }
+.mkbs-dropdown-test {
+  background-color: transparent !important;
+}
+.mkbs-dropdown-test ul,
+.mkbs-dropdown-test li {
+  background-color: transparent !important;
+}
 .mkbs-dropdown ul {
   font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
