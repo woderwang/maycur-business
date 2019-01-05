@@ -27,22 +27,23 @@
   align-items: center;
   min-height: 30px;
 }
-.mkbs-mktable-filterbar .filter-wrapper {
+.mkbs-mktable-filterbar-filter-wrapper {
   display: flex;
+  align-items: center;
 }
-.mkbs-mktable-filterbar .filter-wrapper .filter {
+.mkbs-mktable-filterbar-filter-wrapper .filter {
   padding: 3px 25px 3px 10px;
   border: 1px solid #eee;
   border-radius: 4px;
   background: #f7f7f7;
   position: relative;
 }
-.mkbs-mktable-filterbar .filter-wrapper .filter-label {
+.mkbs-mktable-filterbar-filter-wrapper .filter-label {
   color: #999;
   margin-right: 5px;
   font-weight: normal;
 }
-.mkbs-mktable-filterbar .filter-wrapper .filter-close {
+.mkbs-mktable-filterbar-filter-wrapper .filter-close {
   position: absolute;
   cursor: pointer;
   width: 20px;
@@ -56,6 +57,9 @@
   font-size: 10px;
   text-align: center;
 }
-.mkbs-mktable-filterbar .filter-wrapper .filter + .filter {
+.mkbs-mktable-filterbar-filter-wrapper .filter + .filter {
+  margin-left: 10px;
+}
+.mkbs-mktable-filterbar-filter-wrapper .filter-clear {
   margin-left: 10px;
 }
