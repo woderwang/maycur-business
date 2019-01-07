@@ -200,6 +200,7 @@
 .mkbs-mktable-container {
   position: relative;
   flex: 1;
+  display: flex;
   overflow: auto;
   flex-direction: column;
   /* 覆盖antd样式 */
@@ -227,7 +228,6 @@
   left: 0;
   width: 100%;
   margin: auto 0;
-  height: 300px;
   border: 0;
 }
 .mkbs-mktable-container .ant-pagination-options .ant-select-selection__rendered {
@@ -271,12 +271,6 @@
   flex: 1;
   flex-direction: column;
 }
-.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll .ant-table-header {
-  padding-bottom: 0;
-  margin-bottom: 0;
-  position: relative;
-  z-index: 99;
-}
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll table {
   width: 100%;
   table-layout: fixed;
@@ -288,6 +282,12 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+.mkbs-mktable-container.fix-header .ant-table-empty .ant-table-header {
+  position: relative;
+  z-index: 99;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 .mkbs-mktable-container.fix-header .ant-pagination-options {
   display: flex;
