@@ -10,6 +10,7 @@
     position: relative;
     flex: 1;
     overflow: auto;
+    flex-direction: column;
     .data-emtpy {
         height: 300px;
         display: flex;
@@ -20,19 +21,22 @@
             margin-right: 8px;
         }
     }
-    .ant-table-content{        
-        .ant-table-scroll{
-            position: relative;            
-            .ant-table-placeholder{
+    .ant-table {
+        font-size: 13px;
+    }
+    .ant-table-content {
+        .ant-table-scroll {
+            position: relative;
+            .ant-table-placeholder {
                 position: absolute;
-                top:0;
-                bottom:0;
-                left:0;
-                width:100%;
-                margin:auto 0;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                margin: auto 0;
                 height: 300px;
-                border:0;
-            }            
+                border: 0;
+            }
         }
     }
     .ant-pagination-options {
@@ -46,6 +50,7 @@
         .ant-table-wrapper {
             display: flex;
             flex: 1;
+            flex-direction: column;
             height: 100%;
             overflow: auto;
             .ant-spin-nested-loading {
@@ -67,17 +72,24 @@
                         .ant-table-content {
                             flex: 1;
                             display: flex;
+                            flex-direction: column;
                             overflow: auto;
                             .ant-table-scroll {
                                 display: flex;
                                 flex: 1;
                                 flex-direction: column;
+                                .ant-table-header {
+                                    padding-bottom: 0;
+                                    margin-bottom: 0;
+                                    position: relative;
+                                    z-index: 99;
+                                }
                                 table {
                                     width: 100%;
                                     table-layout: fixed;
                                 }
                                 .ant-table-body {
-                                    flex: 1;                                    
+                                    flex: 1;
                                 }
                             }
                         }
@@ -90,19 +102,6 @@
                 }
             }
         }
-        // &.enable-scroll-x {
-        //     .ant-table-wrapper {
-        //         .ant-spin-nested-loading {
-        //             .ant-spin-container {
-        //                 .ant-table {
-        //                     .ant-table-content {
-        //                         // overflow: unset;
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
         .ant-pagination-options {
             display: flex;
             align-items: center;
@@ -110,6 +109,11 @@
                 padding-right: 8px;
                 padding-left: 8px;
             }
+        }
+    }
+    &.row-clickable {
+        table tbody tr {
+            cursor: pointer;
         }
     }
 }

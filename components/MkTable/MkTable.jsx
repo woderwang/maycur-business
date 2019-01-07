@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2019-01-03 19:24:44
+ * @Last Modified time: 2019-01-05 13:53:05
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -71,6 +71,7 @@ let MkTable = (option) => WrapperComponent => {
                     pageSizeOptions: defaultPageSizeOptions,
                     showSizeChanger: true,
                     total: 0,
+                    size: 'small',
                 },
                 allSelectedRows: [],//所有选中过的data列，支持跨页选取
                 selectedRows: [],
@@ -91,6 +92,7 @@ let MkTable = (option) => WrapperComponent => {
             this.fetchDataSourceFn = null;
             this.tableRef = null;
             this.tableId;
+            this.originState = _.cloneDeep(this.state);
         }
 
         /* column转化，用于自定义的filter dropdown效果 */
@@ -222,11 +224,17 @@ let MkTable = (option) => WrapperComponent => {
         }
 
         /* 移除单独的筛选条件 */
-        removeSingleFilter = (filterKey) => {
+        removeSingleFilter = (filterKeys) => {
             let { filters, pagination, sorter } = this.state;
             let newFilter = _.cloneDeep(filters);
             /* 不要直接对state中的属性做delete操作（会导致无法正常render组件），clone一个来处理*/
-            newFilter[filterKey] = [];
+            if (_.isArray(filterKeys)) {
+                _.forEach(filterKeys, key => {
+                    newFilter[key] = [];
+                });
+            } else {
+                newFilter[filterKeys] = [];
+            }
             this.onChange(pagination, newFilter, sorter);
         }
 
@@ -234,7 +242,7 @@ let MkTable = (option) => WrapperComponent => {
         generateTable = (params) => {
             /* 当前不支持列冻结的功能 */
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
-            const { rowKey, scroll, rowSelection: rowSelectionOption, tableId = 'tableId' } = params;
+            const { rowKey, scroll, rowSelection: rowSelectionOption, tableId = 'tableId', onRow } = params;
             const { onSelectionChange, selectedRowKeys: inSelectedRowKeys } = rowSelectionOption || {};
             this.rowKey = rowKey;
             let rowSelection = {
@@ -260,8 +268,9 @@ let MkTable = (option) => WrapperComponent => {
             let tableCls = classnames(`${prefix}-mktable-container`, {
                 'empty': !dataSource || (dataSource && dataSource.length === 0),
                 'enable-scroll-x': !(scroll && scroll.x),
-                'fix-header': option.isFixHeader
-            })
+                'fix-header': option.isFixHeader,
+                'row-clickable': typeof onRow === 'function'
+            });
             let tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
             if (this.tableId && this.tableId !== tableId) {
                 this.tableReset();
@@ -602,50 +611,10 @@ let MkTable = (option) => WrapperComponent => {
 
         tableReset = () => {
             this.setState(() => {
-                return {
-                    // columns: [],
-                    filters: {},
-                    dataSource: [],
-                    loading: false,
-                    loadProps: { indicator: <Icon type="loading-3-quarters" style={{ fontSize: 24 }} spin /> },
-                    pagination: {
-                        pageSize: option && option.pageSize ? option.pageSize : 20,
-                        defaultPageSize: option && option.pageSize ? option.pageSize : 20,
-                        showTotal: (total) => {
-                            return <span>总数{total}条</span>
-                        },
-                        pageSizeOptions: defaultPageSizeOptions,
-                        showSizeChanger: true,
-                        total: 0,
-                    },
-                    allSelectedRows: [],//所有选中过的data列，支持跨页选取
-                    selectedRows: [],
-                    selectedRowKeys: [],
-                    selectAble: false,
-                    selectAbleLock: false,
-                    sorter: {},
-                    hideColumnCodeList: [],
-                    allFlag: false,
-                    canceledRows: [],
-                    canceledRowKeys: []
-                }
+                return this.originState;                
             });
         }
-        // windowResize = () => {
-        //     console.log('window resize');
-        //     if (this.tableRef) {
-        //         const parentNode = this.tableRef.parentNode;
-        //         console.log({ width: parentNode.clientWidth, height: parentNode.clientHeight });
-        //         this.setState({ wrapperSize: { width: parentNode.clientWidth, height: parentNode.clientHeight } });
-        //     }
-        // }
 
-        // componentDidMount() {
-        //     window.addEventListener('resize', this.windowResize);
-        // }
-        // componentWillUnmount() {
-        //     window.removeEventListener('resize', this.windowResize);
-        // }
         render() {
             return <WrapperComponent
                 generateTable={this.generateTable}

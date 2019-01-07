@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
+import { Button } from 'maycur-antd';
 let prefix = 'mkbs';
 class FilterStateBar extends Component {
     constructor(props) {
@@ -17,13 +18,13 @@ class FilterStateBar extends Component {
     convertFilter(filters) {
         const { columns } = this.props;
         let newFilters = [];
-        _.forEach(filters, (filterValue, key) => {            
+        _.forEach(filters, (filterValue, key) => {
             let filterColumn = _.find(columns, { dataIndex: key });
             let filterLabel = filterColumn ? filterColumn.title : '无标题';
             let filterName = '';
             if (filterColumn && filterValue && !_.isEmpty(filterValue)) {
                 let filterOption = filterColumn.filterOption;
-                let filterPlainText = [];                
+                let filterPlainText = [];
                 if (filterColumn.filters) {
                     _.forEach(filterColumn.filters, item => {
                         if (filterValue.includes(item.value)) {
@@ -69,15 +70,27 @@ class FilterStateBar extends Component {
         }
         return result;
     }
+
+    /* 清空所有filter条件 */
+    clear = (allFilters) => {
+        const { removeFilter } = this.props;
+        let filterKeys = [];
+        _.forEach(allFilters, filter => {
+            filterKeys.push(filter.key);
+        });
+        if (typeof removeFilter === 'function') removeFilter(filterKeys);
+    }
+
     render() {
         const { filters } = this.props;
         let theFilters = this.convertFilter(filters)
+        let componentCls = 'mkbs-mktable-filterbar';
         let node = null;
         node = (
-            <div className={`mkbs-mktable-filterbar`}>
-                <span className={'filter-label'}>筛选条件：</span>
+            <div className={componentCls}>
+                <span>筛选条件：</span>
                 <div className={'flex-1'}>
-                    <div className={'filter-wrapper'}>
+                    <div className={`${componentCls}-filter-wrapper`}>
                         {theFilters.map((filter) => {
                             return (
                                 <div className={'filter'} key={filter.key}>
@@ -87,6 +100,11 @@ class FilterStateBar extends Component {
                                 </div>
                             )
                         })}
+                        {theFilters.length > 0 ? (
+                            <div className={'filter-clear'}>
+                                <Button type="primary" size="small" onClick={() => { this.clear(theFilters) }}>重置</Button>
+                            </div>
+                        ) : null}
                     </div>
                 </div>
             </div>
