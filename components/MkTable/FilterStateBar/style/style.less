@@ -1,11 +1,12 @@
 @import '../../../style/variables.less';
+@filter-gap: 10px;
 .@{prefix}-mktable-filterbar {
     display: flex;
     align-items: center;
     min-height: 30px;
-    .filter-wrapper {
+    &-filter-wrapper {
         display: flex;
-        
+        align-items: center;
         .filter {
             padding: 3px 25px 3px 10px;
             border: 1px solid @border-color;
@@ -33,7 +34,10 @@
             }
         }
         .filter+.filter {
-            margin-left: 10px;
+            margin-left: @filter-gap;
+        }
+        .filter-clear {
+            margin-left: @filter-gap;
         }
     }
 }
