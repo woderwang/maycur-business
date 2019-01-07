@@ -215,6 +215,9 @@
   font-size: 20px;
   margin-right: 8px;
 }
+.mkbs-mktable-container .ant-table {
+  font-size: 13px;
+}
 .mkbs-mktable-container .ant-table-content .ant-table-scroll {
   position: relative;
 }

@@ -45,9 +45,9 @@ class MkLayout extends Component {
               pathArr={pathArr}
               menus={siderMenus}
               renderMenu={renderSiderMenu} />}
-          <Layout className={`${prefix}-content`}>
+          <div className={`${prefix}-content`}>
             {renderContent()}
-          </Layout>
+          </div>
         </Layout>
       </Layout>
     )
