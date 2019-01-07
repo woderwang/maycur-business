@@ -249,6 +249,9 @@ let MkTable = (option) => WrapperComponent => {
                 onSelect: (record, selected, selectedRows, nativeEvent) => {
                     this.onSelect(record, selected);
                 },
+                onSelectAll: (selected, selectedRows, changeRows) => {
+                    this.onSelectAll(selected, selectedRows, changeRows);
+                },
                 selectedRowKeys: _.union(selectedRowKeys, inSelectedRowKeys)
             };
             let visibleColumns = _.filter(columns, col => {
@@ -455,11 +458,8 @@ let MkTable = (option) => WrapperComponent => {
             if (selected) {
                 // 如果是全选状态下
                 if (allFlag) {
-                    canceledRows = this.removeFromCollection(record, canceledRows, this.rowKey);
-                    let cancelKeyIndex = _.findIndex(canceledRowKeys, o => o === record[this.rowKey]);
-                    if (cancelKeyIndex > -1) {
-                        canceledRowKeys.splice(cancelKeyIndex, 1);
-                    }
+                    canceledRows = this.removeFromCollection(record, canceledRows, this.rowKey, 'object');
+                    canceledRowKeys = this.removeFromCollection(record, canceledRowKeys, this.rowKey, 'string');
                 } else {
                     allSelectedRows.push(record);
                 }
@@ -467,16 +467,48 @@ let MkTable = (option) => WrapperComponent => {
                 if (allFlag) {
                     canceledRowKeys.push(record[this.rowKey]);
                     canceledRows.push(record);
-                    // selectedRowKeys = this.remove
                 } else {
-                    allSelectedRows = this.removeFromCollection(record, allSelectedRows, this.rowKey);
+                    allSelectedRows = this.removeFromCollection(record, allSelectedRows, this.rowKey, 'object');
                 }
             }
             this.setState({ allSelectedRows, canceledRowKeys, canceledRows });
         }
 
-        removeFromCollection = (record, collection, rowKey) => {
-            let index = _.findIndex(collection, { [`${rowKey}`]: record[rowKey] });
+        onSelectAll = (selected, selectedRows, changeRows) => {
+            let { allSelectedRows, selectedRowKeys, allFlag, canceledRowKeys, canceledRows } = this.state;
+            if (selected) {
+                // 如果是全选状态下
+                if (allFlag) {
+                    // canceledRows = _.difference(canceledRows, changeRows);
+                    changeRows.forEach(item => {
+                        canceledRows = this.removeFromCollection(item, canceledRows, this.rowKey, 'object');
+                        canceledRowKeys = this.removeFromCollection(item, canceledRowKeys, this.rowKey, 'string');
+                    })
+                } else {
+                    allSelectedRows = allSelectedRows.concat(changeRows);
+                }
+            } else {
+                if (allFlag) {
+                    changeRows.forEach(item => {
+                        canceledRows.push(item);
+                        canceledRowKeys.push(item[this.rowKey]);
+                    });
+                } else {
+                    changeRows.forEach(item => {
+                        allSelectedRows = this.removeFromCollection(item, allSelectedRows, this.rowKey, 'object');
+                    });
+                }
+            }
+            this.setState({ allSelectedRows, canceledRows, canceledRows });
+        }
+
+        removeFromCollection = (record, collection, rowKey, type) => {
+            let index = -1;
+            if (type === 'object') {
+                index = _.findIndex(collection, { [`${rowKey}`]: record[rowKey] });                
+            } else if (type === 'string') {
+                index = _.findIndex(collection, o => o === record[rowKey]);
+            }
             if (index > -1) {
                 collection.splice(index, 1);
             }
