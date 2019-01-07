@@ -214,6 +214,9 @@
   font-size: 20px;
   margin-right: 8px;
 }
+.mkbs-mktable-container .ant-table {
+  font-size: 13px;
+}
 .mkbs-mktable-container .ant-table-content .ant-table-scroll {
   position: relative;
 }
@@ -267,6 +270,12 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+}
+.mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll .ant-table-header {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 99;
 }
 .mkbs-mktable-container.fix-header .ant-table-wrapper .ant-spin-nested-loading .ant-spin-container .ant-table .ant-table-content .ant-table-scroll table {
   width: 100%;
