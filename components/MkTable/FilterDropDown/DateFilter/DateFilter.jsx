@@ -4,8 +4,8 @@ import 'rc-calendar/assets/index.css';
 import 'rc-time-picker/assets/index.css';
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import _ from 'lodash';
-
-let prefix = 'mkbs';
+import utils from '../../../utils/utils';
+const prefix = utils.prefixCls;
 class DateFilter extends Component {
     constructor(props) {
         super(props);

@@ -2,8 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import { Layout, Menu, Icon } from 'maycur-antd';
 import classNames from 'classnames';
-
-const prefix = 'mkbs';
+import utils from '../../utils/utils';
+const prefix = utils.prefixCls;
 const { Header } = Layout;
 const { SubMenu } = Menu;
 

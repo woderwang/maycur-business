@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-
-const prefix = 'mkbs';
+import utils from '../utils/utils';
+const prefix = utils.prefixCls;
 class Empty extends Component {
     constructor(props) {
         super(props);
