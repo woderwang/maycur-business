@@ -172,6 +172,9 @@ let MkTable = (option) => WrapperComponent => {
             let { columns } = this.state;
             const { filters: currentFilters } = this.state;
             let isFilterChange = !_.isEqual(currentFilters, filters);
+            if (isFilterChange) {
+                this.setAllFlag(false);
+            }
             _.forEach(filters, (value, key) => {
                 if (value) {
                     let column = _.find(columns, { key });
@@ -463,7 +466,7 @@ let MkTable = (option) => WrapperComponent => {
         }
 
         onSelect = (record, selected) => {
-            let { allSelectedRows, selectedRowKeys, allFlag, canceledRowKeys, canceledRows } = this.state;
+            let { allSelectedRows, allFlag, canceledRowKeys, canceledRows } = this.state;
             if (selected) {
                 // 如果是全选状态下
                 if (allFlag) {
@@ -484,7 +487,7 @@ let MkTable = (option) => WrapperComponent => {
         }
 
         onSelectAll = (selected, selectedRows, changeRows) => {
-            let { allSelectedRows, selectedRowKeys, allFlag, canceledRowKeys, canceledRows } = this.state;
+            let { allSelectedRows, allFlag, canceledRowKeys, canceledRows } = this.state;
             if (selected) {
                 // 如果是全选状态下
                 if (allFlag) {
