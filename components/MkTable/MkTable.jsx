@@ -153,19 +153,6 @@ let MkTable = (option) => WrapperComponent => {
             });
         }
 
-        /* 设置行属性，比如click mouseMove等 */
-        onRow = (record, index) => {
-            const { rowClick } = this.props;
-            return {
-                /* 行点击事件 */
-                onClick: (e) => {
-                    if (typeof rowClick === 'function') {
-                        rowClick(record);
-                    }
-                }
-            }
-        }
-
         /* table筛选属性的变化 */
         onChange = (pagination, filters, sorter) => {
             let { columns } = this.state;
@@ -257,27 +244,40 @@ let MkTable = (option) => WrapperComponent => {
                     }
                 }
             }
-            const { onSelectionChange, selectedRowKeys: inSelectedRowKeys } = rowSelectionOption;
+            const { onSelectionChange } = rowSelectionOption;
             this.rowKey = rowKey;
             let rowSelection = {
                 ...rowSelectionOption,
                 onChange: (selectedRowKeys, selectedRows) => {
                     /* 注意：onChange中的selectedRows，因为antd不支持跨页选取，所以selectedRows只包含当前页选中的数据 */
+                    let currentSelectRows = [], currentSelectedRowKeys = [];
                     if (!rowSelectionOption.type || (rowSelectionOption.type && rowSelectionOption.type !== 'radio')) {
                         let unSelectedRows = _.differenceWith(dataSource, selectedRows, _.isEqual);
                         let unSelectedRowKeys = _.map(unSelectedRows, row => { return row[rowKey] });
-                        if (selectedRows.length > 0) this.modifySelectRows({ type: 'update', rows: selectedRows, rowKeys: selectedRowKeys });
-                        if (unSelectedRows.length > 0) this.modifySelectRows({ type: 'delete', rows: unSelectedRows, rowKeys: unSelectedRowKeys });
-                    } else {                        
-                        this.setState({ selectedRows, selectedRowKeys });
+                        currentSelectRows = _.cloneDeep(this.state.selectedRows);
+                        if (selectedRows.length > 0) {
+                            currentSelectRows = this.modifySelectRows({ currentSelectRows, type: 'update', rows: selectedRows, rowKeys: selectedRowKeys });
+                        }
+                        if (unSelectedRows.length > 0) {
+                            currentSelectRows = this.modifySelectRows({ currentSelectRows, type: 'delete', rows: unSelectedRows, rowKeys: unSelectedRowKeys });
+                        }
+                        _.forEach(currentSelectRows, row => {
+                            currentSelectedRowKeys.push(row[rowKey]);
+                        });
+
+                    } else {
+                        currentSelectRows = selectedRows;
+                        currentSelectedRowKeys = selectedRowKeys;
                     }
+                    this.setState({ selectedRows: currentSelectRows, selectedRowKeys: currentSelectedRowKeys }, () => {
+                        if (typeof onSelectionChange === 'function') {
+                            onSelectionChange(currentSelectedRowKeys, currentSelectRows);
+                        }
+                    })
                 },
-                // onSelect: (record, selected, selectedRows, nativeEvent) => {                    
-                //     this.onSelect(record, selected);
-                // },
-                // selectedRowKeys: _.union(selectedRowKeys, inSelectedRowKeys)
                 selectedRowKeys
             };
+            console.log(rowSelection);
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
             });
@@ -512,25 +512,17 @@ let MkTable = (option) => WrapperComponent => {
         }
 
         modifySelectRows = (operate) => {
-            let { type, rowKeys, rows } = operate;
+            let { type, rows, currentSelectRows } = operate;
+            let result = null;
             let _update = () => {
-                this.setState(({ selectedRows, selectedRowKeys }) => {
-                    let rebuildSelectedRowKeys = _.union(selectedRowKeys, rowKeys);
-                    let rebuildSelectRows = _.unionWith(selectedRows, rows, _.isEqual);
-                    return { selectedRows: rebuildSelectRows, selectedRowKeys: rebuildSelectedRowKeys }
-                });
+                let rebuildSelectRows = _.unionWith(currentSelectRows, rows, _.isEqual);
+                result = rebuildSelectRows;
             }
             let _delete = () => {
-                this.setState(({ selectedRows, selectedRowKeys }) => {
-                    let rebuildSelectedRowKeys = _.difference(selectedRowKeys, rowKeys);
-                    let rebuildSelectRows = _.differenceWith(selectedRows, rows, _.isEqual);
-                    return { selectedRows: rebuildSelectRows, selectedRowKeys: rebuildSelectedRowKeys };
-                })
+                let rebuildSelectRows = _.differenceWith(currentSelectRows, rows, _.isEqual);
+                result = rebuildSelectRows;
             }
             switch (type) {
-                case 'clear':
-                    this.resetSelectRows();
-                    break;
                 case 'update':
                     _update();
                     break;
@@ -540,6 +532,7 @@ let MkTable = (option) => WrapperComponent => {
                 default:
                     break;
             }
+            return result;
         }
 
         customColumns = () => {
