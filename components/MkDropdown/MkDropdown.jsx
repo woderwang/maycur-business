@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
-const prefix = 'mkbs';
-
-
+import utils from '../utils/utils';
+const prefix = utils.prefixCls;
 class MkDropdown extends Component {
     constructor(props) {
         super(props);

@@ -8,8 +8,9 @@
 import React, { Component } from 'react';
 import { Checkbox, Radio, Input } from 'maycur-antd';
 import _ from 'lodash';
+import utils from '../../../utils/utils';
+const prefix = utils.prefixCls;
 const Search = Input.Search;
-let prefix='mkbs';
 class CheckFilter extends Component {
     constructor(props) {
         super(props);

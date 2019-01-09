@@ -10,6 +10,7 @@ const through2 = require('through2');
 const path = require('path');
 const transformLess = require('./transformLess');
 const bsConfig = require('./tool.config');
+const fileReplace = require('replace-in-file');
 let currentCwd = process.cwd();
 let targeFolderName = 'components';
 let devDestination = path.resolve(currentCwd, 'libdev/lib');
@@ -84,6 +85,11 @@ gulp.task('babel', ['copy'], () => {
 });
 
 async function build() {
+    // await fileReplace({
+    //     files: [`${targeFolderName}/style/variables.less`, `${targeFolderName}/utils/utils.js`],
+    //     from: '$[mkbs]',
+    //     to: mode === 'dev' ? 'mkbs-dev' : 'mkbs'
+    // });
     await rmfr(devDestination);
     console.log(`remove ${devDestination}`)
     await rmfr(esDestination);
@@ -97,4 +103,5 @@ build().then(() => {
         gulp.watch([lessPath, jsPath], ['babel']);
     }
 });
+
 

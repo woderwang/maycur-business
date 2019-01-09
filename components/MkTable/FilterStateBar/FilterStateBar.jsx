@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 import { Button } from 'maycur-antd';
-let prefix = 'mkbs';
+import utils from '../../utils/utils';
+const prefix = utils.prefixCls;
 class FilterStateBar extends Component {
     constructor(props) {
         super(props);
@@ -84,7 +85,7 @@ class FilterStateBar extends Component {
     render() {
         const { filters } = this.props;
         let theFilters = this.convertFilter(filters)
-        let componentCls = 'mkbs-mktable-filterbar';
+        let componentCls = `${prefix}-mktable-filterbar`;
         let node = null;
         node = (
             <div className={componentCls}>

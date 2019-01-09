@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2019-01-05 13:53:05
+ * @Last Modified time: 2019-01-08 21:33:19
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -21,7 +21,6 @@ import RcTable from '../lib/RcTable';
 import Empty from '../Empty';
 import utils from '../utils/utils';
 let prefix = utils.prefixCls;
-// console.log(Table,FlexTable);
 /* title 宽度变动 */
 const ResizeableTitle = (props) => {
     const { onResize, width, ...restProps } = props;
@@ -154,19 +153,6 @@ let MkTable = (option) => WrapperComponent => {
             });
         }
 
-        /* 设置行属性，比如click mouseMove等 */
-        onRow = (record, index) => {
-            const { rowClick } = this.props;
-            return {
-                /* 行点击事件 */
-                onClick: (e) => {
-                    if (typeof rowClick === 'function') {
-                        rowClick(record);
-                    }
-                }
-            }
-        }
-
         /* table筛选属性的变化 */
         onChange = (pagination, filters, sorter) => {
             let { columns } = this.state;
@@ -245,26 +231,59 @@ let MkTable = (option) => WrapperComponent => {
         generateTable = (params) => {
             /* 当前不支持列冻结的功能 */
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
-            const { rowKey, scroll, rowSelection: rowSelectionOption, tableId = 'tableId', onRow } = params;
-            const { onSelectionChange, selectedRowKeys: inSelectedRowKeys } = rowSelectionOption || {};
+            const { rowKey, scroll, rowSelection: rowSelectionOption = {}, tableId = 'tableId', onRow } = params;
+            let wrapOnRow = (record) => {
+                return {
+                    onClick: (e) => {
+                        if (rowSelectionOption.type && rowSelectionOption.type === 'radio') {
+                            this.setState({ selectedRows: [record], selectedRowKeys: [record[rowKey]] });
+                        }
+                        if (typeof onRow === 'function') {
+                            let instanceOnRow = onRow(record);
+                            if (instanceOnRow && typeof instanceOnRow.onClick) {
+                                instanceOnRow.onClick(e);
+                            }
+                        }
+                    }
+                }
+            }
+            const { onSelectionChange } = rowSelectionOption;
             this.rowKey = rowKey;
             let rowSelection = {
                 ...rowSelectionOption,
                 onChange: (selectedRowKeys, selectedRows) => {
                     /* 注意：onChange中的selectedRows，因为antd不支持跨页选取，所以selectedRows只包含当前页选中的数据 */
-                    let unSelectedRows = _.differenceWith(dataSource, selectedRows, _.isEqual);
-                    let unSelectedRowKeys = _.map(unSelectedRows, row => { return row[rowKey] });
-                    if (selectedRows.length > 0) this.modifySelectRows({ type: 'update', rows: selectedRows, rowKeys: selectedRowKeys });
-                    if (unSelectedRows.length > 0) this.modifySelectRows({ type: 'delete', rows: unSelectedRows, rowKeys: unSelectedRowKeys });
-                },
-                onSelect: (record, selected, selectedRows, nativeEvent) => {
-                    this.onSelect(record, selected);
+                    let currentSelectRows = [], currentSelectedRowKeys = [];
+                    if (!rowSelectionOption.type || (rowSelectionOption.type && rowSelectionOption.type !== 'radio')) {
+                        let unSelectedRows = _.differenceWith(dataSource, selectedRows, _.isEqual);
+                        let unSelectedRowKeys = _.map(unSelectedRows, row => { return row[rowKey] });
+                        currentSelectRows = _.cloneDeep(this.state.selectedRows);
+                        if (selectedRows.length > 0) {
+                            currentSelectRows = this.modifySelectRows({ currentSelectRows, type: 'update', rows: selectedRows, rowKeys: selectedRowKeys });
+                        }
+                        if (unSelectedRows.length > 0) {
+                            currentSelectRows = this.modifySelectRows({ currentSelectRows, type: 'delete', rows: unSelectedRows, rowKeys: unSelectedRowKeys });
+                        }
+                        _.forEach(currentSelectRows, row => {
+                            currentSelectedRowKeys.push(row[rowKey]);
+                        });
+
+                    } else {
+                        currentSelectRows = selectedRows;
+                        currentSelectedRowKeys = selectedRowKeys;
+                    }
+                    this.setState({ selectedRows: currentSelectRows, selectedRowKeys: currentSelectedRowKeys }, () => {
+                        if (typeof onSelectionChange === 'function') {
+                            onSelectionChange(currentSelectedRowKeys, currentSelectRows);
+                        }
+                    })
                 },
                 onSelectAll: (selected, selectedRows, changeRows) => {
                     this.onSelectAll(selected, selectedRows, changeRows);
                 },
                 selectedRowKeys: _.union(selectedRowKeys, inSelectedRowKeys)
             };
+            console.log(rowSelection);
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
             });
@@ -281,11 +300,11 @@ let MkTable = (option) => WrapperComponent => {
                 return null;
             } else {
                 this.tableId = tableId;
-
                 return (
                     <div className={tableCls} ref={(ref) => { this.tableRef = ref; }} >
                         <FlexTable
                             {...params}
+                            onRow={wrapOnRow}
                             key={tableId}
                             rowSelection={selectAble ? rowSelection : (selectAbleLock ? { selectedRowKeys } : null)}
                             components={this.components}
@@ -428,16 +447,11 @@ let MkTable = (option) => WrapperComponent => {
 
         /* 设置table可选与否 */
         setSelectAble = (val) => {
-            const { selectAble } = this.state;
-            this.setState(() => {
-                if (selectAble !== val) {
-                    return {
-                        selectedRowKeys: [],
-                        selectAble: val ? true : false,
-                        selectAbleLock: true,
-                    }
-                } else {
-                    return {};
+            this.setState(({ selectAbleLock, selectedRowKeys, selectAble }) => {
+                return {
+                    selectAble: val ? true : false,
+                    selectedRowKeys: selectAble !== val ? [] : selectedRowKeys,
+                    selectAbleLock: selectAble !== val ? true : selectAbleLock
                 }
             });
             /* selectedRowKeys在table组件中需要延后执行,antd的table组件当前在移除checkbox行选择的时候，是无法移除选中状态 */
@@ -533,25 +547,17 @@ let MkTable = (option) => WrapperComponent => {
         }
 
         modifySelectRows = (operate) => {
-            let { type, rowKeys, rows } = operate;
+            let { type, rows, currentSelectRows } = operate;
+            let result = null;
             let _update = () => {
-                this.setState(({ selectedRows, selectedRowKeys }) => {
-                    let rebuildSelectedRowKeys = _.union(selectedRowKeys, rowKeys);
-                    let rebuildSelectRows = _.unionWith(selectedRows, rows, _.isEqual);
-                    return { selectedRows: rebuildSelectRows, selectedRowKeys: rebuildSelectedRowKeys }
-                });
+                let rebuildSelectRows = _.unionWith(currentSelectRows, rows, _.isEqual);
+                result = rebuildSelectRows;
             }
             let _delete = () => {
-                this.setState(({ selectedRows, selectedRowKeys }) => {
-                    let rebuildSelectedRowKeys = _.difference(selectedRowKeys, rowKeys);
-                    let rebuildSelectRows = _.differenceWith(selectedRows, rows, _.isEqual);
-                    return { selectedRows: rebuildSelectRows, selectedRowKeys: rebuildSelectedRowKeys };
-                })
+                let rebuildSelectRows = _.differenceWith(currentSelectRows, rows, _.isEqual);
+                result = rebuildSelectRows;
             }
             switch (type) {
-                case 'clear':
-                    this.resetSelectRows();
-                    break;
                 case 'update':
                     _update();
                     break;
@@ -561,6 +567,7 @@ let MkTable = (option) => WrapperComponent => {
                 default:
                     break;
             }
+            return result;
         }
 
         customColumns = () => {
@@ -614,7 +621,7 @@ let MkTable = (option) => WrapperComponent => {
 
         tableReset = () => {
             this.setState(() => {
-                return this.originState;                
+                return this.originState;
             });
         }
 

@@ -3,9 +3,8 @@ import { Layout } from 'maycur-antd';
 import MkHeader from './MkHeader';
 import MkSider from './MkSider';
 import PropTypes from 'prop-types';
-
-const prefix = 'mkbs';
-
+import utils from '../utils/utils';
+const prefix = utils.prefixCls;
 class MkLayout extends Component {
   constructor(props) {
     super(props);
@@ -45,9 +44,9 @@ class MkLayout extends Component {
               pathArr={pathArr}
               menus={siderMenus}
               renderMenu={renderSiderMenu} />}
-          <Layout className={`${prefix}-content`}>
+          <div className={`${prefix}-content`}>
             {renderContent()}
-          </Layout>
+          </div>
         </Layout>
       </Layout>
     )

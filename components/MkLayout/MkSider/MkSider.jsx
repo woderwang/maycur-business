@@ -1,8 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 import { Layout, Menu } from 'maycur-antd';
-
-const prefix = 'mkbs';
+import utils from '../../utils/utils';
+const prefix = utils.prefixCls;
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 

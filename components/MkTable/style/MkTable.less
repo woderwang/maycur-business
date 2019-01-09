@@ -9,6 +9,7 @@
 .@{prefix}-mktable-container {
     position: relative;
     flex: 1;
+    display: flex;
     overflow: auto;
     flex-direction: column;
     .data-emtpy {
@@ -33,8 +34,7 @@
                 bottom: 0;
                 left: 0;
                 width: 100%;
-                margin: auto 0;
-                height: 300px;
+                margin: auto 0; // height: 300px;
                 border: 0;
             }
         }
@@ -77,13 +77,11 @@
                             .ant-table-scroll {
                                 display: flex;
                                 flex: 1;
-                                flex-direction: column;
-                                .ant-table-header {
-                                    padding-bottom: 0;
-                                    margin-bottom: 0;
-                                    position: relative;
-                                    z-index: 99;
-                                }
+                                flex-direction: column; // .ant-table-header {
+                                //     position: relative;
+                                //     z-index: 99;
+                                //     overflow: hidden;
+                                // }
                                 table {
                                     width: 100%;
                                     table-layout: fixed;
@@ -100,6 +98,14 @@
                         align-items: center;
                     }
                 }
+            }
+        }
+        .ant-table-empty {
+            .ant-table-header {
+                position: relative;
+                z-index: 99;
+                padding-bottom: 0;
+                margin-bottom: 0;
             }
         }
         .ant-pagination-options {

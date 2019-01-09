@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Popover, Checkbox } from 'maycur-antd';
+import utils from '../../utils/utils';
 import _ from 'lodash';
-const prefix = 'mkbs';
+const prefix = utils.prefixCls;
 class PopContent extends Component {
     constructor(props) {
         super(props);

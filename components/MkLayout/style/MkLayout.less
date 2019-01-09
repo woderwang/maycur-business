@@ -1,22 +1,21 @@
 @import '../../style/variables.less';
 @import '../MkHeader/style/style.less';
 @import '../MkSider/style/style.less';
-
 .@{prefix}-page-container {
-  .@{prefix}-section {
-    flex: 1;        
-    display: flex;
-    align-items: stretch;
-
-    .@{prefix}-content {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      &>.ant-layout{
-        &>*{
-          overflow: auto;
+    .@{prefix}-section {
+        flex: 1;
+        display: flex;
+        align-items: stretch;
+        .@{prefix}-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: auto;
+            &>.ant-layout {
+                &>* {
+                    overflow: auto;
+                }
+            }
         }
-      }
     }
-  }
 }
