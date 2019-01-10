@@ -1,6 +1,6 @@
 @import '../../../../style/variables.less';
 .@{prefix}-check-filter {
-    width: 160px;
+    width: 200px;
     background: #fff;
     border: 1px solid @border-color;
     border-radius: 4px;
@@ -27,8 +27,15 @@
         overflow: hidden;
         display: block;
     }
-    .pin-item:hover {
-        background-color: @lighter-background;
+    .pin-item {
+        display: flex;
+        &:hover{
+            background-color: @lighter-background;
+        }
+        span + span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
     .pin-footer {
         display: flex;

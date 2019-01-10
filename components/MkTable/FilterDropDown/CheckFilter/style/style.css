@@ -23,7 +23,7 @@
   line-height: 50px;
 }
 .mkbs-check-filter {
-  width: 160px;
+  width: 200px;
   background: #fff;
   border: 1px solid #eee;
   border-radius: 4px;
@@ -51,8 +51,15 @@
   overflow: hidden;
   display: block;
 }
+.mkbs-check-filter .pin-item {
+  display: flex;
+}
 .mkbs-check-filter .pin-item:hover {
   background-color: #fafafa;
+}
+.mkbs-check-filter .pin-item span + span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .mkbs-check-filter .pin-footer {
   display: flex;

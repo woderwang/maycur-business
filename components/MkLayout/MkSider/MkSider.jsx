@@ -2,10 +2,12 @@ import React from 'react';
 import _ from 'lodash';
 import { Layout, Menu } from 'maycur-antd';
 import utils from '../../utils/utils';
-import { ScrollBar } from '../../ScrollBar';
+import ScrollBar from '../../ScrollBar';
 const prefix = utils.prefixCls;
 const { Sider } = Layout;
 const { SubMenu } = Menu;
+
+console.log(ScrollBar);
 
 function loopPath(menus, pathArr) {
 	let matchedMenu;
@@ -28,7 +30,7 @@ const MkSider = (props) => {
 	let selectedKeys = matchedMenu ? [matchedMenu.path] : [];
 	const defaultOpenKeys = pathArr.length > 2 ? [pathArr.slice(0, pathArr.length - 1).join('/')] : [];
 	return (
-		<ScrollBar>
+		
 			<Sider
 				breakpoint="xl"
 				theme="light"
@@ -39,6 +41,7 @@ const MkSider = (props) => {
 				collapsed={collapsed}
 				collapsedWidth={56}
 				onCollapse={onToggleCollapsed}>
+				<ScrollBar>
 				<Menu
 					theme="light"
 					mode="inline"
@@ -77,8 +80,9 @@ const MkSider = (props) => {
 						return MenuContent;
 					})}
 				</Menu>
+				</ScrollBar>
 			</Sider>
-		</ScrollBar>
+		
 	);
 };
 
