@@ -281,7 +281,7 @@ let MkTable = (option) => WrapperComponent => {
                 onSelectAll: (selected, selectedRows, changeRows) => {
                     this.onSelectAll(selected, selectedRows, changeRows);
                 },
-                selectedRowKeys: _.union(selectedRowKeys, inSelectedRowKeys)
+                selectedRowKeys
             };
             console.log(rowSelection);
             let visibleColumns = _.filter(columns, col => {
@@ -531,7 +531,7 @@ let MkTable = (option) => WrapperComponent => {
         removeFromCollection = (record, collection, rowKey, type) => {
             let index = -1;
             if (type === 'object') {
-                index = _.findIndex(collection, { [`${rowKey}`]: record[rowKey] });                
+                index = _.findIndex(collection, { [`${rowKey}`]: record[rowKey] });
             } else if (type === 'string') {
                 index = _.findIndex(collection, o => o === record[rowKey]);
             }
