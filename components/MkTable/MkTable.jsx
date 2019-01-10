@@ -283,7 +283,6 @@ let MkTable = (option) => WrapperComponent => {
                 },
                 selectedRowKeys
             };
-            console.log(rowSelection);
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
             });

@@ -20,7 +20,6 @@ let mode = yargs.dev === 'true' ? 'dev' : 'build';
 let developDir = bsConfig.developDir;
 let lessPath = path.resolve(currentCwd, `${targeFolderName}/**/*.less`);
 let jsPath = path.resolve(currentCwd, `${targeFolderName}/**/*.{jsx,js}`);
-console.log(developDir);
 gulp.task('less', () => {
     console.log('step1.start to compile .less file');
     return gulp.src([lessPath])

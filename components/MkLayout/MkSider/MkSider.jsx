@@ -7,8 +7,6 @@ const prefix = utils.prefixCls;
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-console.log(ScrollBar);
-
 function loopPath(menus, pathArr) {
 	let matchedMenu;
 	if (!pathArr) return;
