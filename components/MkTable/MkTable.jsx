@@ -278,6 +278,9 @@ let MkTable = (option) => WrapperComponent => {
                         }
                     })
                 },
+                onSelect: (record, selected, selectedRows, nativeEvent) => {
+                    this.onSelect(record, selected);
+                },
                 onSelectAll: (selected, selectedRows, changeRows) => {
                     this.onSelectAll(selected, selectedRows, changeRows);
                 },
@@ -504,7 +507,6 @@ let MkTable = (option) => WrapperComponent => {
             if (selected) {
                 // 如果是全选状态下
                 if (allFlag) {
-                    // canceledRows = _.difference(canceledRows, changeRows);
                     changeRows.forEach(item => {
                         canceledRows = this.removeFromCollection(item, canceledRows, this.rowKey, 'object');
                         canceledRowKeys = this.removeFromCollection(item, canceledRowKeys, this.rowKey, 'string');
