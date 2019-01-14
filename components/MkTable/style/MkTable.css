@@ -130,6 +130,7 @@
 }
 .mkbs-check-filter .pin-item {
   display: flex;
+  align-items: center;
 }
 .mkbs-check-filter .pin-item:hover {
   background-color: #fafafa;
@@ -137,6 +138,9 @@
 .mkbs-check-filter .pin-item span + span {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.mkbs-check-filter .pin-item .ant-checkbox {
+  top: -0.06em;
 }
 .mkbs-check-filter .pin-footer {
   display: flex;

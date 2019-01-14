@@ -29,12 +29,16 @@
     }
     .pin-item {
         display: flex;
+        align-items: center;
         &:hover{
             background-color: @lighter-background;
         }
         span + span {
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        .ant-checkbox {
+            top: -.06em;
         }
     }
     .pin-footer {
