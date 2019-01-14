@@ -5,6 +5,7 @@
 /* tab-bar */
 /* 提示颜色 */
 /* fee type color 引用自主版本 */
+/* table相关 */
 /* mix-in class */
 #mixin-ios-scroll {
   overflow-y: scroll;
