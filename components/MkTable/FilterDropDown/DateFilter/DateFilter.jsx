@@ -4,6 +4,7 @@ import 'rc-calendar/assets/index.css';
 import 'rc-time-picker/assets/index.css';
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import _ from 'lodash';
+import moment from 'moment';
 import utils from '../../../utils/utils';
 const prefix = utils.prefixCls;
 class DateFilter extends Component {
@@ -15,6 +16,10 @@ class DateFilter extends Component {
     }
 
     dateChange = (nextValue) => {
+        if (moment(nextValue[0]).isSame(nextValue[1])) {
+            nextValue[0] = moment(nextValue[0]).startOf('day');
+            nextValue[1] = moment(nextValue[1]).endOf('day')
+        }
         const { setSelectedKeys } = this.props;
         this.setState({ selectedValue: nextValue }, () => {
             setSelectedKeys(nextValue);
