@@ -35,7 +35,7 @@
 .mkbs-mktable-filterbar-filter-wrapper .filter {
   padding: 3px 25px 3px 10px;
   border: 1px solid #eee;
-  border-radius: 4px;
+  border-radius: 0px;
   background: #f7f7f7;
   position: relative;
 }

@@ -23,10 +23,68 @@
   color: #3296FA;
   line-height: 50px;
 }
+.mkbs-date-filter .rc-calendar {
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
 .mkbs-date-filter .mk-btn {
   margin-left: 10px;
 }
 .mkbs-date-filter table.rc-calendar-table > tbody td,
 .mkbs-date-filter table.rc-calendar-table > thead th {
   padding: 0;
+}
+.mkbs-date-filter .rc-calendar-date {
+  border-radius: 0px;
+}
+.mkbs-date-filter .rc-calendar-selected-day .rc-calendar-date {
+  background: #1890ff;
+  color: #fff;
+  border: 1px solid transparent;
+}
+.mkbs-date-filter .rc-calendar-selected-date .rc-calendar-date {
+  background: #1890ff;
+}
+.mkbs-date-filter .rc-calendar-year-panel-year,
+.mkbs-date-filter .rc-calendar-decade-panel-decade,
+.mkbs-date-filter .rc-calendar-month-panel-month {
+  border-radius: 0px;
+}
+.mkbs-date-filter .rc-calendar-year-panel-year:hover,
+.mkbs-date-filter .rc-calendar-decade-panel-decade:hover,
+.mkbs-date-filter .rc-calendar-month-panel-month:hover {
+  background: #e6f7ff;
+  color: #40a9ff;
+}
+.mkbs-date-filter .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade {
+  background: #1890ff;
+}
+.mkbs-date-filter .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
+  background: #1890ff;
+}
+.mkbs-date-filter .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
+  background: #1890ff;
+}
+.mkbs-date-filter .rc-calendar-range .rc-calendar-in-range-cell {
+  background: #e6f7ff;
+  border-radius: 0;
+}
+.mkbs-date-filter .rc-calendar-today-btn,
+.mkbs-date-filter .rc-calendar-ok-btn,
+.mkbs-date-filter .rc-calendar-time-picker-btn {
+  color: #1890ff;
+}
+.mkbs-date-filter .rc-calendar-month-panel-header > a:hover {
+  color: #40a9ff;
+}
+.mkbs-date-filter .rc-calendar-year-panel-header > a:hover {
+  color: #40a9ff;
+}
+.mkbs-date-filter .rc-calendar-year-select:hover,
+.mkbs-date-filter .rc-calendar-month-select:hover,
+.mkbs-date-filter .rc-calendar-day-select:hover {
+  color: #40a9ff;
+}
+.mkbs-date-filter .rc-calendar-today .rc-calendar-date {
+  border: 1px solid #40a9ff;
 }
