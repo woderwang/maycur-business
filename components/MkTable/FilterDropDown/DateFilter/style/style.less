@@ -1,5 +1,9 @@
 @import '../../../../style/variables.less';
 .@{prefix}-date-filter {
+    .rc-calendar {
+        -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
     .mk-btn {
         margin-left: 10px;
     }
@@ -7,4 +11,62 @@
     table.rc-calendar-table>thead th {
         padding: 0;
     }
+    .rc-calendar-date {
+        border-radius: 0px;
+    }
+    .rc-calendar-selected-day .rc-calendar-date {
+        background: #1890ff;
+        color: #fff;
+        border: 1px solid transparent;
+    }
+
+    .rc-calendar-selected-date .rc-calendar-date {
+        background: #1890ff;
+    }
+
+    .rc-calendar-year-panel-year, .rc-calendar-decade-panel-decade, .rc-calendar-month-panel-month,{
+        &:hover {
+            background: #e6f7ff;
+            color: #40a9ff;
+        }
+        border-radius: 0px;
+    }
+
+    .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade {
+        background: #1890ff;
+    }
+
+    .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
+        background: #1890ff;
+    }
+
+    .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
+        background: #1890ff;
+    }
+
+    .rc-calendar-range .rc-calendar-in-range-cell {
+        background: #e6f7ff;
+        border-radius: 0;
+    }
+
+    .rc-calendar-today-btn, .rc-calendar-ok-btn, .rc-calendar-time-picker-btn {
+        color: #1890ff;
+    }
+
+    .rc-calendar-month-panel-header > a:hover {
+        color: #40a9ff;
+    }
+
+    .rc-calendar-year-panel-header > a:hover {
+        color: #40a9ff;
+    }
+
+    .rc-calendar-year-select:hover, .rc-calendar-month-select:hover, .rc-calendar-day-select:hover {
+        color: #40a9ff;
+    }
+
+    .rc-calendar-today .rc-calendar-date {
+        border: 1px solid #40a9ff;
+    }
+
 }
