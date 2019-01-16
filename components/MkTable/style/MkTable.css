@@ -100,6 +100,13 @@
 .mkbs-mktable-filterbar-filter-wrapper .filter-clear {
   margin-left: 10px;
 }
+.mkbs-mktable-filterbar-filter-wrapper .filter-data-state {
+  margin-left: 4px;
+}
+.mkbs-mktable-filterbar-filter-wrapper .filter-data-state_num {
+  color: #3296FA;
+  margin: 0 4px;
+}
 .mkbs-check-filter {
   width: 200px;
   background: #fff;
@@ -243,6 +250,19 @@
   margin: auto 0;
   border: 0;
 }
+.mkbs-mktable-container .ant-table-selection-column {
+  position: relative;
+}
+.mkbs-mktable-container .ant-table-selection-column .ant-checkbox-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .mkbs-mktable-container .ant-pagination-options .ant-select-selection__rendered {
   padding-right: 8px;
   padding-left: 8px;
@@ -312,6 +332,9 @@
 }
 .mkbs-mktable-container.row-clickable table tbody tr {
   cursor: pointer;
+}
+.mkbs-mktable-container.table-empty table {
+  table-layout: auto !important;
 }
 .mkbs-mktable-custom-pop {
   padding: 0;

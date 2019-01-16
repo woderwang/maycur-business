@@ -41,7 +41,8 @@ let MkTable = (option) => WrapperComponent => {
         resizeAble: false,
         disableLoad: false,
         hidePagination: false,
-        firstDisplayColumns: []
+        firstDisplayColumns: [],
+        isCrossPageSelect: false
     }
     option = Object.assign(defaultOption, option);
     let defaultPageSizeOptions = [20, 50, 100];
@@ -64,9 +65,9 @@ let MkTable = (option) => WrapperComponent => {
                 pagination: {
                     pageSize: option && option.pageSize ? option.pageSize : 20,
                     defaultPageSize: option && option.pageSize ? option.pageSize : 20,
-                    showTotal: (total) => {
-                        return <span>总数{total}条</span>
-                    },
+                    // showTotal: (total) => {
+                    //     return <span>总数{total}条</span>
+                    // },
                     pageSizeOptions: defaultPageSizeOptions,
                     showSizeChanger: true,
                     total: 0,
@@ -156,8 +157,12 @@ let MkTable = (option) => WrapperComponent => {
         /* table筛选属性的变化 */
         onChange = (pagination, filters, sorter) => {
             let { columns } = this.state;
-            const { filters: currentFilters } = this.state;
+            const { filters: currentFilters, pagination: CurrentPagination } = this.state;
+            const { isCrossPageSelect } = option;
             let isFilterChange = !_.isEqual(currentFilters, filters);
+            if (!isCrossPageSelect && !isFilterChange && !_.isEqual(CurrentPagination, pagination)) {
+                isFilterChange = true;
+            }
             if (isFilterChange) {
                 this.setAllFlag(false);
             }
@@ -232,6 +237,7 @@ let MkTable = (option) => WrapperComponent => {
             /* 当前不支持列冻结的功能 */
             const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
             const { rowKey, scroll, rowSelection: rowSelectionOption = {}, tableId = 'tableId', onRow } = params;
+            const { isCrossPageSelect } = option;
             let wrapOnRow = (record) => {
                 return {
                     onClick: (e) => {
@@ -254,24 +260,33 @@ let MkTable = (option) => WrapperComponent => {
                 onChange: (selectedRowKeys, selectedRows) => {
                     /* 注意：onChange中的selectedRows，因为antd不支持跨页选取，所以selectedRows只包含当前页选中的数据 */
                     let currentSelectRows = [], currentSelectedRowKeys = [];
-                    if (!rowSelectionOption.type || (rowSelectionOption.type && rowSelectionOption.type !== 'radio')) {
-                        let unSelectedRows = _.differenceWith(dataSource, selectedRows, _.isEqual);
-                        let unSelectedRowKeys = _.map(unSelectedRows, row => { return row[rowKey] });
-                        currentSelectRows = _.cloneDeep(this.state.selectedRows);
-                        if (selectedRows.length > 0) {
-                            currentSelectRows = this.modifySelectRows({ currentSelectRows, type: 'update', rows: selectedRows, rowKeys: selectedRowKeys });
-                        }
-                        if (unSelectedRows.length > 0) {
-                            currentSelectRows = this.modifySelectRows({ currentSelectRows, type: 'delete', rows: unSelectedRows, rowKeys: unSelectedRowKeys });
-                        }
-                        _.forEach(currentSelectRows, row => {
-                            currentSelectedRowKeys.push(row[rowKey]);
-                        });
+                    if (isCrossPageSelect) {
+                        /* 跨页选取 */
+                        if (!rowSelectionOption.type || (rowSelectionOption.type && rowSelectionOption.type !== 'radio')) {
+                            let unSelectedRows = _.differenceWith(dataSource, selectedRows, _.isEqual);
+                            let unSelectedRowKeys = _.map(unSelectedRows, row => { return row[rowKey] });
+                            currentSelectRows = _.cloneDeep(this.state.selectedRows);
+                            if (selectedRows.length > 0) {
+                                currentSelectRows = this.modifySelectRows({ currentSelectRows, type: 'update', rows: selectedRows, rowKeys: selectedRowKeys });
+                            }
+                            if (unSelectedRows.length > 0) {
+                                currentSelectRows = this.modifySelectRows({ currentSelectRows, type: 'delete', rows: unSelectedRows, rowKeys: unSelectedRowKeys });
+                            }
+                            _.forEach(currentSelectRows, row => {
+                                currentSelectedRowKeys.push(row[rowKey]);
+                            });
 
+                        } else {
+                            currentSelectRows = selectedRows;
+                            currentSelectedRowKeys = selectedRowKeys;
+                        }
                     } else {
+                        /* 非跨页选取 */
                         currentSelectRows = selectedRows;
                         currentSelectedRowKeys = selectedRowKeys;
+                        console.log(currentSelectRows, currentSelectedRowKeys);
                     }
+
                     this.setState({ selectedRows: currentSelectRows, selectedRowKeys: currentSelectedRowKeys }, () => {
                         if (typeof onSelectionChange === 'function') {
                             onSelectionChange(currentSelectedRowKeys, currentSelectRows);
@@ -286,19 +301,22 @@ let MkTable = (option) => WrapperComponent => {
                 },
                 selectedRowKeys
             };
+            console.log(selectedRowKeys);
             let visibleColumns = _.filter(columns, col => {
                 return !hideColumnCodeList.includes(col.dataIndex);
             });
             let tableCls = classnames(`${prefix}-mktable-container`, {
-                'empty': !dataSource || (dataSource && dataSource.length === 0),
+                'table-empty': !dataSource || (dataSource && dataSource.length === 0),
                 'enable-scroll-x': !(scroll && scroll.x),
-                'row-clickable': typeof onRow === 'function'
+                'row-clickable': typeof onRow === 'function',
+                'fix-header': option.isFixHeader
             });
             let tableScroll = {};
-            if (dataSource && dataSource.length > 0) {
-                tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
-                tableCls = classnames(tableCls, { 'fix-header': option.isFixHeader })
-            }
+            tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
+            // if (dataSource && dataSource.length > 0) {
+            //     tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
+            //     tableCls = classnames(tableCls, { 'fix-header': option.isFixHeader })
+            // }
             if (this.tableId && this.tableId !== tableId) {
                 this.tableReset();
                 this.tableId = tableId;
@@ -333,13 +351,14 @@ let MkTable = (option) => WrapperComponent => {
 
         /* 生成筛选条件 */
         generateFilter = (props = {}) => {
-            const { filters, columns } = this.state;
+            const { filters, columns, dataSource } = this.state;
             const { filterConfig } = props;
             return (
                 <FilterStateBar
                     filters={filters}
                     filterConfig={filterConfig}
                     columns={columns}
+                    totalCount={dataSource.length}
                     removeFilter={this.removeSingleFilter}
                 />
             )
@@ -380,13 +399,6 @@ let MkTable = (option) => WrapperComponent => {
         setLoadStatus = (status) => {
             let loading = option.disableLoad ? false : status;
             this.setState({ loading });
-        }
-
-        /* 显示数据总数 */
-        showTotal = () => {
-            return (
-                <span>总数19条</span>
-            )
         }
 
         /* 更新数据源 */

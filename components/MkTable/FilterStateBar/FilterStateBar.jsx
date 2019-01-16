@@ -83,7 +83,7 @@ class FilterStateBar extends Component {
     }
 
     render() {
-        const { filters } = this.props;
+        const { filters, totalCount } = this.props;
         let theFilters = this.convertFilter(filters)
         let componentCls = `${prefix}-mktable-filterbar`;
         let node = null;
@@ -101,6 +101,9 @@ class FilterStateBar extends Component {
                                 </div>
                             )
                         })}
+                        <div className={'filter-data-state'}>
+                            共<span className={'filter-data-state_num'}>{totalCount || 0}</span>条记录
+                        </div>
                         {theFilters.length > 0 ? (
                             <div className={'filter-clear'}>
                                 <Button type="primary" size="small" onClick={() => { this.clear(theFilters) }}>重置</Button>
