@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2019-01-08 21:33:19
+ * @Last Modified time: 2019-01-17 19:49:29
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -161,14 +161,6 @@ let MkTable = (option) => WrapperComponent => {
             const { isCrossPageSelect } = option;
             let isClearSelection = false;
             if (!_.isEqual(currentFilters, filters)) isClearSelection = true;
-            console.log(pagination);
-            // if (!isCrossPageSelect && !isFilterChange && !_.isEqual(CurrentPagination, pagination)) {
-            //     console.log('page change');
-            //     isFilterChange = true;
-            // }
-            // if (isClearSelection) {
-            //     this.setAllFlag(false);
-            // }
             _.forEach(filters, (value, key) => {
                 if (value) {
                     let column = _.find(columns, { key });
@@ -287,7 +279,6 @@ let MkTable = (option) => WrapperComponent => {
                         /* 非跨页选取 */
                         currentSelectRows = selectedRows;
                         currentSelectedRowKeys = selectedRowKeys;
-                        console.log('rowSelection change:', currentSelectRows, currentSelectedRowKeys);
                     }
 
                     this.setState({ selectedRows: currentSelectRows, selectedRowKeys: currentSelectedRowKeys }, () => {
@@ -315,10 +306,7 @@ let MkTable = (option) => WrapperComponent => {
             });
             let tableScroll = {};
             tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
-            // if (dataSource && dataSource.length > 0) {
-            //     tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
-            //     tableCls = classnames(tableCls, { 'fix-header': option.isFixHeader })
-            // }
+            console.log('rowSelection:', rowSelection);
             if (this.tableId && this.tableId !== tableId) {
                 this.tableReset();
                 this.tableId = tableId;
@@ -369,7 +357,13 @@ let MkTable = (option) => WrapperComponent => {
         /* 设置columns */
         setColumns = (originColumns) => {
             let columns = [], hideColumnCodeList = [];
+            originColumns = _.cloneDeep(originColumns);
             if (originColumns) {
+                originColumns.push({
+                    title: '',
+                    key: 'table-extend-cell',
+                    render: () => <div></div>,
+                })
                 let initSorter = {}, initFilter = {};
                 _.forEach(originColumns, (column) => {
                     if (column.sortOrder) {
