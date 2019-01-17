@@ -475,8 +475,7 @@ var Table = function (_React$Component) {
       var hasLeftFixed = this.columnManager.isAnyColumnsLeftFixed();
       var hasRightFixed = this.columnManager.isAnyColumnsRightFixed();
       var dataAndAriaProps = getDataAndAriaProps(props);
-      let tableNode = _this2['tableNode'];
-      // console.log(tableNode && tableNode.clientWidth);
+      let tableNode = _this2['tableNode'];      
       return React.createElement(
         Provider,
         { store: this.store },

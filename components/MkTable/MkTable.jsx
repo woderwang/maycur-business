@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2019-01-17 19:49:29
+ * @Last Modified time: 2019-01-17 20:17:57
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -305,8 +305,7 @@ let MkTable = (option) => WrapperComponent => {
                 'fix-header': option.isFixHeader
             });
             let tableScroll = {};
-            tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});
-            console.log('rowSelection:', rowSelection);
+            tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});            
             if (this.tableId && this.tableId !== tableId) {
                 this.tableReset();
                 this.tableId = tableId;
