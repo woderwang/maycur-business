@@ -23,8 +23,14 @@
   color: #3296FA;
   line-height: 50px;
 }
-.mkbs-sider {
+.mkbs-sider-scroll.scrollbar-container {
+  height: auto;
   box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, 0.6);
+}
+.mkbs-sider-scroll.scrollbar-container .ps__rail-y {
+  z-index: 99;
+}
+.mkbs-sider {
   z-index: 10;
   background-color: #fff;
 }

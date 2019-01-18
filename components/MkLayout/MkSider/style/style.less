@@ -1,7 +1,16 @@
 @import "../../../style/variables.less";
 
-.@{prefix}-sider {
+.@{prefix}-sider-scroll.scrollbar-container {
+  height: auto;
   box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, .6);
+
+  .ps__rail-y {
+    z-index: 99;
+  }
+}
+
+.@{prefix}-sider {
+  // box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, .6);
   z-index: 10;
   background-color: #fff;
 
