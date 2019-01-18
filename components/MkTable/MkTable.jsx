@@ -3,7 +3,7 @@
  * @desc: maycur-antd 业务包装
  * @Date: 2018-11-27 15:18:53 
  * @Last Modified by: woder.wang
- * @Last Modified time: 2019-01-17 20:17:57
+ * @Last Modified time: 2019-01-18 11:36:40
  */
 /* resizeable注意事项，在table中，需要至少有一列是非resizeable的，这一列是用来给调整宽度的时候，留给其他列的空间变动的，没有这样的列，交互会异常 */
 /* scroll属性指定了fixed header触发的条件 */
@@ -82,7 +82,8 @@ let MkTable = (option) => WrapperComponent => {
                 hideColumnCodeList: [],
                 allFlag: false,
                 canceledRows: [],
-                canceledRowKeys: []
+                canceledRowKeys: [],
+                tableMinWidth: 0,
             };
             this.components = {
                 header: {
@@ -230,7 +231,7 @@ let MkTable = (option) => WrapperComponent => {
         /* 生成table */
         generateTable = (params) => {
             /* 当前不支持列冻结的功能 */
-            const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList } = this.state;
+            const { columns, loading, pagination, dataSource, selectedRowKeys, selectAble, selectAbleLock, loadProps, hideColumnCodeList, tableMinWidth } = this.state;
             const { rowKey, scroll, rowSelection: rowSelectionOption = {}, tableId = 'tableId', onRow } = params;
             const { isCrossPageSelect } = option;
             let wrapOnRow = (record) => {
@@ -305,7 +306,7 @@ let MkTable = (option) => WrapperComponent => {
                 'fix-header': option.isFixHeader
             });
             let tableScroll = {};
-            tableScroll = _.assign({}, option.isFixHeader ? { y: true } : {});            
+            tableScroll = _.assign({}, option.isFixHeader ? { y: true, x: tableMinWidth } : {});
             if (this.tableId && this.tableId !== tableId) {
                 this.tableReset();
                 this.tableId = tableId;
@@ -356,13 +357,9 @@ let MkTable = (option) => WrapperComponent => {
         /* 设置columns */
         setColumns = (originColumns) => {
             let columns = [], hideColumnCodeList = [];
+            let tableMinWidth = 0;
             originColumns = _.cloneDeep(originColumns);
             if (originColumns) {
-                originColumns.push({
-                    title: '',
-                    key: 'table-extend-cell',
-                    render: () => <div></div>,
-                })
                 let initSorter = {}, initFilter = {};
                 _.forEach(originColumns, (column) => {
                     if (column.sortOrder) {
@@ -375,6 +372,10 @@ let MkTable = (option) => WrapperComponent => {
                     if (option.firstDisplayColumns.length > 0 && !option.firstDisplayColumns.includes(column.dataIndex)) {
                         hideColumnCodeList.push(column.dataIndex);
                     }
+                    if (column.fixed && !column.width) {
+                        column.fixed = false;
+                    }
+                    tableMinWidth += Number(column.width || column.minWidth || 100);
                 })
                 columns = this.columnConvert(originColumns);
                 if (option.resizeAble) {
@@ -386,7 +387,7 @@ let MkTable = (option) => WrapperComponent => {
                         }),
                     }));
                 }
-                this.setState({ columns, sorter: initSorter, filters: initFilter, hideColumnCodeList });
+                this.setState({ columns, sorter: initSorter, filters: initFilter, hideColumnCodeList, tableMinWidth });
             }
         }
 
@@ -619,20 +620,20 @@ let MkTable = (option) => WrapperComponent => {
             this.setState({ hideColumnCodeList });
         }
 
-        widthMonitor = () => {
-            /* minColumnWidth表格的最小宽度,用于解决长表格被挤压的情况 */
-            const { columns } = this.state;
-            let tableMinWidth = 0;
-            let minColumnWidth = 100;
-            if (columns.length >= 5) {
-                _.forEach(columns, col => {
-                    tableMinWidth += col.width && col.width > 0 ? col.width : minColumnWidth;
-                });
-            }
-            return {
-                tableMinWidth
-            }
-        }
+        // widthMonitor = () => {
+        //     /* minColumnWidth表格的最小宽度,用于解决长表格被挤压的情况 */
+        //     const { columns } = this.state;
+        //     let tableMinWidth = 0;
+        //     let minColumnWidth = 100;
+        //     if (columns.length >= 5) {
+        //         _.forEach(columns, col => {
+        //             tableMinWidth += col.width && col.width > 0 ? col.width : minColumnWidth;
+        //         });
+        //     }
+        //     return {
+        //         tableMinWidth
+        //     }
+        // }
 
         tableReset = () => {
             this.setState(() => {
