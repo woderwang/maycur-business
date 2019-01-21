@@ -16,10 +16,9 @@ class DateFilter extends Component {
     }
 
     dateChange = (nextValue) => {
-        if (moment(nextValue[0]).isSame(nextValue[1])) {
-            nextValue[0] = moment(nextValue[0]).startOf('day');
-            nextValue[1] = moment(nextValue[1]).endOf('day')
-        }
+        nextValue[0] = moment(nextValue[0]).startOf('day');
+        nextValue[1] = moment(nextValue[1]).endOf('day');
+        
         const { setSelectedKeys } = this.props;
         this.setState({ selectedValue: nextValue }, () => {
             setSelectedKeys(nextValue);
