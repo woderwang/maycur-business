@@ -28,7 +28,7 @@ const MkSider = (props) => {
 	let selectedKeys = matchedMenu ? [matchedMenu.path] : [];
 	const defaultOpenKeys = pathArr.length > 2 ? [pathArr.slice(0, pathArr.length - 1).join('/')] : [];
 	return (
-		
+		<ScrollBar className={`${prefix}-sider-scroll`}>
 			<Sider
 				breakpoint="xl"
 				theme="light"
@@ -39,7 +39,7 @@ const MkSider = (props) => {
 				collapsed={collapsed}
 				collapsedWidth={56}
 				onCollapse={onToggleCollapsed}>
-				<ScrollBar>
+
 				<Menu
 					theme="light"
 					mode="inline"
@@ -78,9 +78,10 @@ const MkSider = (props) => {
 						return MenuContent;
 					})}
 				</Menu>
-				</ScrollBar>
+				{/* </ScrollBar> */}
 			</Sider>
-		
+		</ScrollBar>
+
 	);
 };
 

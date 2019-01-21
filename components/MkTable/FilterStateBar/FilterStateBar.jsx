@@ -82,6 +82,10 @@ class FilterStateBar extends Component {
         if (typeof removeFilter === 'function') removeFilter(filterKeys);
     }
 
+    componentDidMount() {
+        this.props.onRefFilterBar(this);
+    }
+
     render() {
         const { filters, totalCount } = this.props;
         let theFilters = this.convertFilter(filters)
