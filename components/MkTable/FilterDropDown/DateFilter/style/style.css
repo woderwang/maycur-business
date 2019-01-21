@@ -88,3 +88,22 @@
 .mkbs-date-filter .rc-calendar-today .rc-calendar-date {
   border: 1px solid #40a9ff;
 }
+.mkbs-date-filter .tabs {
+  display: flex;
+  padding: 0 10px;
+}
+.mkbs-date-filter .tabs .tab {
+  background-color: #e6f7ff;
+  border-radius: 2px;
+  border: 1px solid #91d5ff;
+  padding: 0 10px;
+  cursor: pointer;
+  color: #3296FA;
+  margin-right: 5px;
+}
+.mkbs-date-filter .tabs .tab:hover {
+  color: #3296FA;
+}
+.mkbs-date-filter .rc-calendar-range .rc-calendar-footer-btn {
+  height: 44px;
+}

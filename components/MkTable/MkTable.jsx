@@ -20,6 +20,8 @@ import PopSelect from './PopSelect/PopSelect';
 import RcTable from '../lib/RcTable';
 import Empty from '../Empty';
 import utils from '../utils/utils';
+
+
 let prefix = utils.prefixCls;
 /* title 宽度变动 */
 const ResizeableTitle = (props) => {
@@ -105,6 +107,7 @@ let MkTable = (option) => WrapperComponent => {
                         col.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => {
                             return (
                                 <DateFilter
+                                    {...col}
                                     setSelectedKeys={setSelectedKeys}
                                     selectedKeys={selectedKeys}
                                     confirm={confirm}
@@ -208,13 +211,8 @@ let MkTable = (option) => WrapperComponent => {
 
         /* 清空所有筛选条件 */
         clearAll = () => {
-            let { columns } = this.state;
-            _.forEach(columns, col => {
-                if (col.filteredValue !== undefined) {
-                    col.filteredValue = null;
-                }
-            })
-            this.setState({ columns });
+            let theFilters = this.$filterBar.convertFilter(this.state.filters);
+            this.$filterBar.clear(theFilters);
         }
 
         /* 移除单独的筛选条件 */
@@ -360,8 +358,13 @@ let MkTable = (option) => WrapperComponent => {
                     columns={columns}
                     totalCount={dataSource.length}
                     removeFilter={this.removeSingleFilter}
+                    onRefFilterBar={this.onRefFilterBar}
                 />
             )
+        }
+
+        onRefFilterBar = (ref) => {
+            this.$filterBar = ref;
         }
 
         /* 设置columns */
@@ -652,6 +655,7 @@ let MkTable = (option) => WrapperComponent => {
                 resetSelectRows={this.resetSelectRows}
                 customColumns={this.customColumns}
                 setAllFlag={this.setAllFlag}
+                clearAll={this.clearAll}
                 {...this.state}
                 {...this.props}
             />
