@@ -88,7 +88,7 @@ class FilterStateBar extends Component {
 
     render() {
         const { filters, totalCount } = this.props;
-        let theFilters = this.convertFilter(filters)
+        let theFilters = this.convertFilter(filters);
         let componentCls = `${prefix}-mktable-filterbar`;
         let node = null;
         node = (

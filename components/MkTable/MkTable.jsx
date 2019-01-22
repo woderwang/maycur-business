@@ -164,7 +164,7 @@ let MkTable = (option) => WrapperComponent => {
             const { isCrossPageSelect } = option;
             let isClearSelection = false;
             if (!_.isEqual(currentFilters, filters)) isClearSelection = true;
-            console.log(pagination);
+            // console.log(pagination);
             // if (!isCrossPageSelect && !isFilterChange && !_.isEqual(CurrentPagination, pagination)) {
             //     console.log('page change');
             //     isFilterChange = true;
@@ -661,6 +661,7 @@ let MkTable = (option) => WrapperComponent => {
                 resetSelectRows={this.resetSelectRows}
                 customColumns={this.customColumns}
                 setAllFlag={this.setAllFlag}
+                onChange={this.onChange}
                 clearAll={this.clearAll}
                 {...this.state}
                 {...this.props}
