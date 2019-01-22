@@ -27,12 +27,9 @@ class DateFilter extends Component {
     }
 
     dateChange = (nextValue) => {
-        const { confirm } = this.props;
-        if (moment(nextValue[0]).isSame(nextValue[1])) {
-            nextValue[0] = moment(nextValue[0]).startOf('day');
-            nextValue[1] = moment(nextValue[1]).endOf('day')
-        }
-        const { setSelectedKeys } = this.props;
+        const { confirm, setSelectedKeys } = this.props;
+        nextValue[0] = moment(nextValue[0]).startOf('day');
+        nextValue[1] = moment(nextValue[1]).endOf('day')
         this.setState({ selectedValue: nextValue }, () => {
             setSelectedKeys(nextValue);
             if (nextValue.length > 1) {
@@ -48,7 +45,7 @@ class DateFilter extends Component {
         this.setState({
             range: value
         }, () => {
-            switch(value) {
+            switch (value) {
                 case 'recentThree':
                     this.setState({
                         selectedValue: [moment(now).subtract(3, 'months'), moment()]
@@ -103,7 +100,7 @@ class DateFilter extends Component {
                                 <div className="tabs">
                                     {
                                         rangeOptions.map((item, index) => (
-                                            <div 
+                                            <div
                                                 className={'tab' + (range === item.value ? ' active' : '')}
                                                 onClick={this.onChoose.bind(this, item.value)}
                                                 key={index}
@@ -131,7 +128,7 @@ class DateFilter extends Component {
 }
 
 DateFilter.defaultProps ={
-    isNeedSideBar: true
+    isNeedSideBar: false
 }
 
 export default DateFilter;
