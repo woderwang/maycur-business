@@ -127,7 +127,7 @@ class DateFilter extends Component {
     }
 }
 
-DateFilter.defaultProps = {
+DateFilter.defaultProps ={
     isNeedSideBar: false
 }
 

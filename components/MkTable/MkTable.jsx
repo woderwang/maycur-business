@@ -164,7 +164,7 @@ let MkTable = (option) => WrapperComponent => {
             const { filters: currentFilters, pagination: CurrentPagination } = this.state;
             const { isCrossPageSelect } = option;
             let isClearSelection = false;
-            if (!_.isEqual(currentFilters, filters)) isClearSelection = true;
+            if (!_.isEqual(currentFilters, filters)) isClearSelection = true;            
             _.forEach(filters, (value, key) => {
                 if (value) {
                     let column = _.find(columns, { key });
@@ -655,6 +655,7 @@ let MkTable = (option) => WrapperComponent => {
                 resetSelectRows={this.resetSelectRows}
                 customColumns={this.customColumns}
                 setAllFlag={this.setAllFlag}
+                onChange={this.onChange}
                 clearAll={this.clearAll}
                 {...this.state}
                 {...this.props}
