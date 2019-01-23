@@ -13,14 +13,11 @@ const bsConfig = require('./tool.config');
 let currentCwd = process.cwd();
 let targeFolderName = 'components';
 let devDestination = path.resolve(currentCwd, 'libdev/lib');
-let esDestination = path.resolve(currentCwd, 'es');
-let libDestination = path.resolve(currentCwd, 'lib');
 let packageDestination = path.resolve(currentCwd, 'package');
 let mode = yargs.dev === 'true' ? 'dev' : 'build';
 let developDir = bsConfig.developDir;
 let lessPath = path.resolve(currentCwd, `${targeFolderName}/**/*.less`);
 let jsPath = path.resolve(currentCwd, `${targeFolderName}/**/*.{jsx,js}`);
-console.log(packageDestination)
 gulp.task('less', () => {
     console.log('step1.start to compile .less file');
     return gulp.src([lessPath])
@@ -89,9 +86,9 @@ async function build() {
     await rmfr(devDestination);
     console.log(`remove ${devDestination}`)
     await rmfr(`${packageDestination}/lib`);
-    console.log(`remove ${esDestination}`)
+    console.log(`remove ${packageDestination}/lib`)
     await rmfr(`${packageDestination}/es`);
-    console.log(`remove ${libDestination}`)
+    console.log(`remove ${packageDestination}/es`)
     gulp.start('babel');
 };
 build().then(() => {
