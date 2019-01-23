@@ -8,16 +8,16 @@ import BaseTable from './BaseTable';
 export default function BodyTable(props, _ref) {
   var table = _ref.table;
   var _table$props = table.props,
-      prefixCls = _table$props.prefixCls,
-      scroll = _table$props.scroll;
+    prefixCls = _table$props.prefixCls,
+    scroll = _table$props.scroll;
   var columns = props.columns,
-      fixed = props.fixed,
-      tableClassName = props.tableClassName,
-      getRowKey = props.getRowKey,
-      handleBodyScroll = props.handleBodyScroll,
-      handleWheel = props.handleWheel,
-      expander = props.expander,
-      isAnyColumnsFixed = props.isAnyColumnsFixed;
+    fixed = props.fixed,
+    tableClassName = props.tableClassName,
+    getRowKey = props.getRowKey,
+    handleBodyScroll = props.handleBodyScroll,
+    handleWheel = props.handleWheel,
+    expander = props.expander,
+    isAnyColumnsFixed = props.isAnyColumnsFixed;
   var saveRef = table.saveRef;
   var useFixedHeader = table.props.useFixedHeader;
 
@@ -83,7 +83,8 @@ export default function BodyTable(props, _ref) {
             saveRef(refName)(_ref2 && _ref2._container);
           }
           // onWheel={handleWheel}
-          , onScrollY: handleBodyScroll
+          , onScrollY: handleBodyScroll,
+          onScrollX: handleBodyScroll
         },
         baseTable
       )
@@ -91,7 +92,8 @@ export default function BodyTable(props, _ref) {
   }
   return React.createElement(
     PerfectScrollbar,
-    { key: 'bodyTable',
+    {
+      key: 'bodyTable',
       className: prefixCls + '-body'
       // style={bodyStyle}
       , ref: function ref(_ref3) {

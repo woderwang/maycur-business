@@ -78,9 +78,9 @@ var Table = function (_React$Component) {
       // const target = e.target;
       var target = e;
       var _this$props$scroll = _this.props.scroll,
-          scroll = _this$props$scroll === undefined ? {} : _this$props$scroll;
+        scroll = _this$props$scroll === undefined ? {} : _this$props$scroll;
       var headTable = _this.headTable,
-          bodyTable = _this.bodyTable;
+        bodyTable = _this.bodyTable;
 
       if (target === bodyTable && headTable) {
         headTable.scrollLeft = target.scrollLeft;
@@ -107,11 +107,11 @@ var Table = function (_React$Component) {
       //   return;
       // }
       var _this$props$scroll2 = _this.props.scroll,
-          scroll = _this$props$scroll2 === undefined ? {} : _this$props$scroll2;
+        scroll = _this$props$scroll2 === undefined ? {} : _this$props$scroll2;
       var headTable = _this.headTable,
-          bodyTable = _this.bodyTable,
-          fixedColumnsBodyLeft = _this.fixedColumnsBodyLeft,
-          fixedColumnsBodyRight = _this.fixedColumnsBodyRight;
+        bodyTable = _this.bodyTable,
+        fixedColumnsBodyLeft = _this.fixedColumnsBodyLeft,
+        fixedColumnsBodyRight = _this.fixedColumnsBodyRight;
 
       var scrollTop = target.scrollTop;
       if (target !== fixedColumnsBodyLeft && fixedColumnsBodyLeft) {
@@ -142,19 +142,20 @@ var Table = function (_React$Component) {
     _this.handleBodyScroll = function (e) {
       _this.handleBodyScrollLeft(e);
       _this.handleBodyScrollTop(e);
+      _this.setScrollPositionClassName();
     };
 
     _this.handleWheel = function (event) {
       var _this$props$scroll3 = _this.props.scroll,
-          scroll = _this$props$scroll3 === undefined ? {} : _this$props$scroll3;
+        scroll = _this$props$scroll3 === undefined ? {} : _this$props$scroll3;
 
       if (window.navigator.userAgent.match(/Trident\/7\./) && scroll.y) {
         event.preventDefault();
         var wd = event.deltaY;
         var target = event.target;
         var bodyTable = _this.bodyTable,
-            fixedColumnsBodyLeft = _this.fixedColumnsBodyLeft,
-            fixedColumnsBodyRight = _this.fixedColumnsBodyRight;
+          fixedColumnsBodyLeft = _this.fixedColumnsBodyLeft,
+          fixedColumnsBodyRight = _this.fixedColumnsBodyRight;
 
         var scrollTop = 0;
 
@@ -310,7 +311,7 @@ var Table = function (_React$Component) {
     key: 'hasScrollX',
     value: function hasScrollX() {
       var _props$scroll = this.props.scroll,
-          scroll = _props$scroll === undefined ? {} : _props$scroll;
+        scroll = _props$scroll === undefined ? {} : _props$scroll;
 
       return 'x' in scroll;
     }
@@ -318,8 +319,8 @@ var Table = function (_React$Component) {
     key: 'renderMainTable',
     value: function renderMainTable() {
       var _props = this.props,
-          scroll = _props.scroll,
-          prefixCls = _props.prefixCls;
+        scroll = _props.scroll,
+        prefixCls = _props.prefixCls;
 
       var isAnyColumnsFixed = this.columnManager.isAnyColumnsFixed();
       var scrollable = isAnyColumnsFixed || scroll.x || scroll.y;
@@ -369,12 +370,12 @@ var Table = function (_React$Component) {
     key: 'renderTable',
     value: function renderTable(options) {
       var columns = options.columns,
-          fixed = options.fixed,
-          isAnyColumnsFixed = options.isAnyColumnsFixed;
+        fixed = options.fixed,
+        isAnyColumnsFixed = options.isAnyColumnsFixed;
       var _props2 = this.props,
-          prefixCls = _props2.prefixCls,
-          _props2$scroll = _props2.scroll,
-          scroll = _props2$scroll === undefined ? {} : _props2$scroll;
+        prefixCls = _props2.prefixCls,
+        _props2$scroll = _props2.scroll,
+        scroll = _props2$scroll === undefined ? {} : _props2$scroll;
 
       var tableClassName = scroll.x || fixed ? prefixCls + '-fixed' : '';
 
@@ -405,8 +406,8 @@ var Table = function (_React$Component) {
     key: 'renderTitle',
     value: function renderTitle() {
       var _props3 = this.props,
-          title = _props3.title,
-          prefixCls = _props3.prefixCls;
+        title = _props3.title,
+        prefixCls = _props3.prefixCls;
 
       return title ? React.createElement(
         'div',
@@ -418,8 +419,8 @@ var Table = function (_React$Component) {
     key: 'renderFooter',
     value: function renderFooter() {
       var _props4 = this.props,
-          footer = _props4.footer,
-          prefixCls = _props4.prefixCls;
+        footer = _props4.footer,
+        prefixCls = _props4.prefixCls;
 
       return footer ? React.createElement(
         'div',
@@ -431,9 +432,9 @@ var Table = function (_React$Component) {
     key: 'renderEmptyText',
     value: function renderEmptyText() {
       var _props5 = this.props,
-          emptyText = _props5.emptyText,
-          prefixCls = _props5.prefixCls,
-          data = _props5.data;
+        emptyText = _props5.emptyText,
+        prefixCls = _props5.prefixCls,
+        data = _props5.data;
 
       if (data.length) {
         return null;
@@ -474,6 +475,7 @@ var Table = function (_React$Component) {
       var hasLeftFixed = this.columnManager.isAnyColumnsLeftFixed();
       var hasRightFixed = this.columnManager.isAnyColumnsRightFixed();
       var dataAndAriaProps = getDataAndAriaProps(props);
+      let tableNode = _this2['tableNode'];      
       return React.createElement(
         Provider,
         { store: this.store },
@@ -574,8 +576,8 @@ Table.defaultProps = {
   rowClassName: function rowClassName() {
     return '';
   },
-  onRow: function onRow() {},
-  onHeaderRow: function onHeaderRow() {},
+  onRow: function onRow() { },
+  onHeaderRow: function onHeaderRow() { },
 
   prefixCls: 'rc-table',
   bodyStyle: {},
