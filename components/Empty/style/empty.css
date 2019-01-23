@@ -29,6 +29,11 @@
   justify-content: center;
   align-items: center;
 }
+.mkbs-empty-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .mkbs-empty-circle {
   width: 100px;
   height: 100px;
@@ -42,7 +47,6 @@
   font-size: 14px;
   color: #bcbcbc;
   margin-top: 8px;
-  text-align: center;
 }
 .mkbs-empty :global .fm {
   font-size: 48px;
