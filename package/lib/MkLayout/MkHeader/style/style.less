@@ -1,0 +1,141 @@
+@import "../../../style/variables.less";
+
+.@{prefix}-header {
+  &.ant-layout-header {
+    display: flex;
+    height: @header-menu-height;
+    padding: 0 16px 0 0;
+    background-color: @maycur-color;
+  }
+
+  &-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: @menu-width;
+    padding-left: @header-menu-left-padding;
+    color: #fff;
+    font-size: 20px;
+    transition: all .2s;
+
+    .logo-content {
+      >span {
+        display: flex;
+        align-items: center;
+      }
+
+      img {
+        height: 22px;
+      }
+    }
+
+    .anticon {
+      margin-right: 22px;
+      cursor: pointer;
+    }
+
+    &-collapsed {
+      width: @menu-collapsed-width;
+      justify-content: center;
+      padding: 0;
+
+      .logo-content {
+        display: none;
+      }
+
+      .anticon {
+        margin: 0;
+      }
+    }
+  }
+
+  &-menus {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  .right-menu {
+    .ant-menu {
+      .ant-menu-item {
+        padding: 0;
+        width: @header-menu-height;
+        text-align: center;
+      }
+
+      .ant-menu-submenu {
+        &.ant-menu-submenu-active,
+        &:hover {
+          background-color: rgba(0,0,0,.05);
+        }
+
+        .ant-menu-submenu-title {
+          font-size: 18px;
+
+          .fm {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .ant-menu {
+    flex-grow: 1;
+    background-color: transparent;
+    line-height: @header-menu-height;
+    height: @header-menu-height;
+    display: flex;
+    align-items: center;
+
+    .ant-menu-item {
+      padding: 0 26px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .05);
+      }
+
+      > a {
+        color: #fff;
+      }
+      
+      &.ant-menu-item-selected {
+        background-color: rgba(0, 0, 0, .1);
+      }
+    }
+
+    .ant-menu-item-group-title {
+      display: none;
+    }
+
+    .ant-menu-item-group-list {
+      display: flex;
+
+      .ant-menu-item {
+        padding: 0 16px;
+      }
+    }
+  }
+}
+
+.ant-menu-submenu-popup {
+  &.ant-menu-dark {
+    .ant-menu-sub {
+      background-color: #fff;
+      .ant-menu-item {
+        padding: 0;
+        margin: 0;
+        color: rgba(0, 0, 0, .65);
+
+        &:hover {
+          color: @maycur-color;
+        }
+
+        >span {
+          display: block;
+          padding: 0 16px;
+        }
+      }
+    }
+  }
+}

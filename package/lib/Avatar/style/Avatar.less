@@ -1,0 +1,51 @@
+@import '../../style/variables.less';
+@orange: #ff5401;
+@avatar-size: 36px;
+.@{prefix}-avatar-img {
+    width: @avatar-size;
+    height: @avatar-size;
+    border-radius: 50%;
+}
+
+.@{prefix}-avatar {
+    display: inline-block;
+    flex-shrink: 0;
+    text-align: center;
+    height: @avatar-size;
+    width: @avatar-size;
+    line-height: @avatar-size;
+    border-radius: 50%;
+    background-color: #efefef;
+    color: #fff;
+    font-size: 12px;
+    &.c0 {
+        color: @maycur-color;
+    }
+    &.c1 {
+        color: @maycur-color;
+    }
+    &.c2 {
+        color: darken(@orange, 10%);
+    }
+    &.c3 {
+        color: @orange;
+    }
+    &.c4 {
+        color: @icon-fee-blue-light3;
+    }
+    &.c5 {
+        color: darken(@icon-fee-green-light1, 10%);
+    }
+    &.c6 {
+        color: darken(@icon-fee-blue-light3, 20%);
+    }
+    &.c7 {
+        color: @icon-fee-green-light1;
+    }
+    &.c8 {
+        color: @icon-fee-orange;
+    }
+    &.c9 {
+        color: darken(@icon-fee-orange, 20%);
+    }
+}

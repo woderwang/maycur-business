@@ -1,8 +1,6 @@
 # dependencies
 .DS_Store
 /node_modules
-/es
-/lib
 /style
 /libdev
 /tools/tool.config.js

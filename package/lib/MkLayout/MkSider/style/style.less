@@ -1,0 +1,133 @@
+@import "../../../style/variables.less";
+
+.@{prefix}-sider-scroll.scrollbar-container {
+  height: auto;
+  box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, .6);
+  background-color: #fff;
+  z-index: 9;
+
+  .ps__rail-y {
+    z-index: 99;
+  }
+}
+
+.@{prefix}-sider {
+  // box-shadow: 0 0 4px 0 hsla(0, 0%, 59%, .6);
+  z-index: 10;
+  background-color: #fff;
+
+  .ant-menu.ant-menu-root {
+    padding: 20px 0;
+    // overflow: auto;
+
+    .ant-menu-item,
+    .ant-menu-submenu-title {
+      width: 100%;
+      height: @sider-menu-height;
+      line-height: @sider-menu-height;
+
+      >a,
+      >span {
+        display: flex;
+        color: #757575;
+        align-items: center;
+
+        .fm {
+          font-size: 18px;
+          margin-right: 10px;
+          color: #a3abbe;
+        }
+
+        &:focus {
+          text-decoration: none;
+        }
+      }
+
+      &.ant-menu-item-selected,
+      &:hover {
+        >a {
+          color: @maycur-color;
+
+          .fm {
+            color: @maycur-color;
+          }
+        }
+      }
+    }
+
+    .ant-menu-item {
+      &:after {
+        border-right: none;
+        border-left: 3px solid @maycur-color;
+        left: 0;
+      }
+    }
+
+    .ant-menu-item-divider {
+      margin: 10px 0;
+    }
+
+    .ant-menu-submenu {
+      margin-top: 4px;
+      margin-bottom: 8px;
+
+      .ant-menu-item {
+        padding-left: @header-menu-left-padding + 18 + 10 !important;
+      }
+    }
+  }
+
+  .ant-menu-inline-collapsed {
+    width: @menu-collapsed-width;
+
+    >.ant-menu-submenu {
+      &.ant-menu-submenu-selected {
+        >.ant-menu-submenu-title {
+          border-left-color: @maycur-color;
+          .fm {
+            color: @maycur-color;
+          }
+        }
+      }
+
+      >.ant-menu-submenu-title {
+        padding: 0 16px !important;
+
+        >span {
+          padding-left: 3px;
+        }
+
+        .fm+span,
+        .ant-badge {
+          max-width: 0;
+          display: inline-block;
+          opacity: 0;
+        }
+      }
+    }
+    
+    .ant-menu-item {
+      padding: 0 18px !important;
+
+      &.ant-menu-item-selected:after {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+
+      .fm+span,
+      .ant-badge {
+        max-width: 0;
+        display: inline-block;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.ant-menu-inline-collapsed-tooltip,
+.ant-menu-submenu-popup {
+  .fm,
+  .ant-badge {
+    display: none;
+  }
+}

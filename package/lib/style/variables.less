@@ -1,0 +1,100 @@
+/* base variables */
+
+@maycur-color: #3296FA;
+@border-color: #eee;
+@box-padding: 16px;
+@line-color: #ddd;
+@prefix: mkbs;
+/* text-color */
+
+@main-text-color: #191f25;
+@secondary-text-color: #666;
+@weak-text-color: #999;
+@gray-text-color: #ccc;
+@primary-font-color: #191f25;
+@default-font-color: #666;
+@secondary-font-color: #999;
+@report-label-color: #999;
+/* pin */
+
+@pin-bg-color: #f0f2f5;
+@pin-radius: 1px;
+@picker-radius: 3px;
+/* 字体大小 */
+
+@theme-font-size: 17px;
+@primary-font-size: 16px;
+@default-font-size: 14px;
+@secondary-font-size: 12px;
+/* tab-bar */
+
+@tab-bar-height: 50px;
+@draft-color: #efbc23;
+@page-background: #f7f7f7;
+@selected-background: #f0faff;
+@lighter-background: #fafafa;
+@form-label-size: 16px;
+@form-label-color: #191f25;
+@form-input-size: 16px;
+@form-input-color: #191f25;
+@form-input-placeholder: #bbb;
+/* 提示颜色 */
+
+@warning-color: #FF8931;
+@alert-color: #F00000;
+@success-color: #00B600;
+@completed-color: #a9b8c6;
+/* fee type color 引用自主版本 */
+
+@icon-fee-red: #f11212;
+@icon-fee-red-light: #e23376;
+@icon-fee-purple: #952fad;
+@icon-fee-blue: #3f51b5;
+@icon-fee-blue-light1: #047bb7;
+@icon-fee-blue-light2: #3296FA;
+@icon-fee-blue-light3: #03a9f4;
+@icon-fee-blue-light4: #00bcd4;
+@icon-fee-green: #009688;
+@icon-fee-green-light1: #1eaa39;
+@icon-fee-green-light2: #afbc2b;
+@icon-fee-yellow: #f7b52c;
+@icon-fee-brown: #795548;
+@icon-fee-brown-light: #c5a179;
+@icon-fee-orange: #ff9800;
+@icon-fee-gray: #607d8b;
+@draft-color: #efbc23;
+@confirming-color: #ff9802;
+@pay-color: #00b600;
+@approve-color: #3296FA;
+@audit-color: #1255ad;
+@reject-color: #f00000;
+@completed-color: #a3abbe;
+@me-icon-color: #c0c3cc;
+@menu-width: 220px;
+@menu-collapsed-width: 56px;
+@sider-menu-height: 44px;
+@header-menu-height: 50px;
+@header-menu-left-padding: 44px;
+@header-menu-right-padding: 16px;
+/* table相关 */
+
+@table-rowhover-color: #f0faff;
+/* mix-in class */
+
+#mixin-ios-scroll {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+#mixin-pick-bar {
+    display: flex;
+    background: #fff;
+    font-weight: normal;
+    font-size: @form-input-size;
+    &>div {
+        flex: 1;
+        text-align: center;
+        color: @maycur-color;
+        line-height: 50px;
+    }
+}
