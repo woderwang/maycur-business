@@ -128,7 +128,7 @@ class DateFilter extends Component {
 }
 
 DateFilter.defaultProps ={
-    isNeedSideBar: false
+    isNeedSideBar: true
 }
 
 export default DateFilter;
